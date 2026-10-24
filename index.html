@@ -116,6 +116,14 @@ h3 { font-size: 21px; line-height: 1.2; }
 .year.with-link a { font: 600 13.5px var(--body); letter-spacing: 0; text-transform: none; text-decoration: none; }
 .year.with-link a:hover { text-decoration: underline; }
 
+/* Season 3 practice: one flight from the side of the track and from the drone, side by side at the same height */
+.practice { display: grid; gap: 10px; }
+.pair { display: grid; grid-template-columns: minmax(0, 1.778fr) minmax(0, 0.93fr); gap: 14px; align-items: start; }
+.clip { margin: 0; display: grid; gap: 6px; min-width: 0; }
+.clip video { display: block; width: 100%; height: auto; background: var(--frame); border-radius: 6px; }
+.clip figcaption { font-size: 14.5px; font-weight: 600; }
+.practice .note { font-size: 14px; color: var(--muted); max-width: 80ch; }
+
 /* Education: one card per degree, its Spanish name under the English one */
 .edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
 .degree { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
@@ -174,7 +182,7 @@ footer a { color: inherit; }
   .flow li + li::before { content: none; }
 }
 @media (max-width: 560px) {
-  .vgrid.two { grid-template-columns: minmax(0, 1fr); }
+  .vgrid.two, .pair { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 420px) {
   .flow { grid-template-columns: minmax(0, 1fr); }
@@ -302,6 +310,22 @@ footer a { color: inherit; }
         <li class="mine"><span class="me">My part</span><b>State estimation</b><span>Where the drone is and how it's moving, from the gates it sees (PnP, several at once) and the IMU.</span></li>
         <li><b>Control</b><span>MPCC flies the racing line.</span></li>
       </ol>
+      <div class="practice">
+        <div class="year">Getting ready for Season 3 · 21 October 2026</div>
+        <div class="pair">
+          <figure class="clip">
+            <video controls playsinline preload="none" poster="img/s3-practice-outside.jpg" width="1280" height="720"><source src="video/s3-practice-outside.mp4" type="video/mp4"></video>
+            <figcaption>From the side of the track</figcaption>
+          </figure>
+          <figure class="clip">
+            <video controls playsinline preload="none" poster="img/s3-practice-onboard.jpg" width="960" height="1032"><source src="video/s3-practice-onboard.mp4" type="video/mp4"></video>
+            <figcaption>From the drone, with its gate detections</figcaption>
+          </figure>
+        </div>
+        <p class="note">The same practice flight from both sides. On the drone's camera every gate it finds gets a white box,
+        its outer corners in blue and its inner corners in red; an X marks a corner scored under 0.5. The top line shows
+        each frame's latency, around 40 ms.</p>
+      </div>
       <div class="year with-link">Our team's videos <a href="https://vimeo.com/cvarupm">More on Vimeo ↗</a></div>
       <div class="vgrid two">
         <figure class="vid">
@@ -418,7 +442,7 @@ footer a { color: inherit; }
 
   <footer>
     <p>Race videos and the background picture by A2RL, the race videos played from YouTube; our team's videos by
-    CVAR-UPM, played from Vimeo. Results from
+    CVAR-UPM. Results from
     <a href="https://a2rl.io/autonomous-drone-race">A2RL</a> and <a href="https://cvar-upm.es/drone_team_web/competitions/A2RL">the team</a>.</p>
   </footer>
 </div>
