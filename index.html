@@ -181,9 +181,9 @@ footer a { color: inherit; }
   .shots { height: 132px; }
 }
 @media (min-width: 1240px) {
-  body { padding: 0; background: #0b0d14; }
-  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: linear-gradient(rgba(6, 8, 14, 0.3), rgba(6, 8, 14, 0.3)), url("img/a2rl-arena.jpg") center / cover no-repeat; }
-  .wrap { box-sizing: border-box; max-width: 1096px; min-height: 100vh; padding: 40px 48px 64px; background: var(--bg); box-shadow: 0 0 48px rgba(0, 0, 0, 0.5); }
+  body { padding: 0; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: url("img/a2rl-arena.jpg") center / cover no-repeat; opacity: var(--arena, 0.5); }
+  .wrap { box-sizing: border-box; max-width: 1096px; min-height: 100vh; padding: 40px 48px 64px; background: var(--bg); box-shadow: 0 0 32px rgba(0, 0, 0, 0.18); }
 }
 </style>
 </head>
