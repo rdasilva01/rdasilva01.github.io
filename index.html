@@ -21,6 +21,9 @@
   --frame: #1d2630;
   --firered: #c8352b;
   --heartgold: #a87a10;
+  --black: #2b3442;
+  --black-done: #184f95;
+  --black-matched: #86b6ef;
   --done: #23804a;
   --display: "Pixelify Sans", "Courier New", monospace;
   --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -31,6 +34,7 @@
     --bg: #10141a; --panel: #19202a; --ink: #e5e9ef; --muted: #9aa5b4; --line: #2b3440; --frame: #080b0f;
     --accent: #5cc4f0; --accent-soft: #16303f;
     --firered: #ff6b5c; --heartgold: #e7b84a; --done: #63d08b;
+    --black: #c6cfdb; --black-done: #6da7ec; --black-matched: #1c5cab;
     color-scheme: dark;
   }
 }
@@ -38,6 +42,7 @@
   --bg: #10141a; --panel: #19202a; --ink: #e5e9ef; --muted: #9aa5b4; --line: #2b3440; --frame: #080b0f;
   --accent: #5cc4f0; --accent-soft: #16303f;
   --firered: #ff6b5c; --heartgold: #e7b84a; --done: #63d08b;
+    --black: #c6cfdb; --black-done: #6da7ec; --black-matched: #1c5cab;
   color-scheme: dark;
 }
 body {
@@ -158,6 +163,14 @@ a.player:hover .play { background: var(--accent); }
 .project { --c: var(--accent); background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 6px; padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
 .project.firered { --c: var(--firered); }
 .project.heartgold { --c: var(--heartgold); }
+.project.black { --c: var(--black); }
+/* pokeblack's picture: its modules as squares, coloured by how much is matching C (drawn from its data) */
+.minimap { display: flex; flex-wrap: wrap; gap: 3px; align-content: center; align-items: flex-end; height: 168px; overflow: hidden; padding: 8px; box-sizing: border-box; background: var(--frame); border-radius: 4px; }
+.minimap i { display: block; border-radius: 2px; }
+.bar.split { display: flex; gap: 2px; background: transparent; }
+.bar.split span:first-child { background: var(--black-done); }
+.bar.split span:nth-child(2) { background: var(--black-matched); }
+.bar.split span:last-child { background: var(--line); flex: 1; }
 .shots { display: flex; gap: 8px; align-items: center; height: 168px; }
 .shots img { display: block; height: 100%; width: auto; max-width: 100%; min-width: 0; object-fit: contain; image-rendering: pixelated; border: 3px solid var(--frame); border-radius: 4px; background: var(--frame); }
 .shots .arrow { color: var(--muted); flex: none; }
@@ -412,7 +425,8 @@ footer a { color: inherit; }
   <section class="part" aria-labelledby="projects">
     <div class="part-head">
       <h2 class="part-title" id="projects">Personal projects</h2>
-      <p>Pokémon games ported to run natively, with things the originals never had.</p>
+      <p>Pokémon games ported to run natively, with things the originals never had, and one being decompiled so it can
+      be.</p>
     </div>
     <div class="projects">
       <article class="project firered">
@@ -436,6 +450,15 @@ footer a { color: inherit; }
         splits over its two screens is drawn again for one.</p>
         <div class="stat" id="heartgold-stat"></div>
         <a class="go" href="pokeheartgold-x/">The progress, screen by screen →</a>
+      </article>
+      <article class="project black">
+        <div class="minimap" id="black-map" role="img" aria-label="The game's modules, coloured by how much of each is matching C"></div>
+        <h3>pokeblack</h3>
+        <div class="what">Pokémon Black · matching decompilation</div>
+        <p>Pokémon Black's source code written again in C, one function at a time, until it rebuilds the very same
+        game byte for byte; then a port like the other two.</p>
+        <div class="stat" id="black-stat"></div>
+        <a class="go" href="pokeblack/">The progress, part by part →</a>
       </article>
     </div>
   </section>
@@ -464,7 +487,7 @@ document.addEventListener("click", e => {
   a.replaceWith(box);
 });
 
-// Each project's own page data: FireRed's current version, HeartGold's screens done
+// Each project's own page data: FireRed's current version, HeartGold's screens done, Black's code matched
 function getJSON(url) {
   return fetch(url, { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
 }
@@ -490,6 +513,39 @@ getJSON("pokeheartgold-x/progress.json").then(d => {
   bar.setAttribute("aria-label", done + " of " + total + " screens done");
   bar.appendChild(Object.assign(document.createElement("span"), { style: "width:" + (100 * done / total) + "%" }));
   stat.append(line, bar);
+}).catch(() => {});
+getJSON("pokeblack/progress.json").then(d => {
+  const t = d.total, share = 100 * t.code_matched / t.code, done = 100 * t.code_complete / t.code;
+  const stat = document.getElementById("black-stat");
+  const line = document.createElement("span");
+  line.append(Object.assign(document.createElement("b"), { textContent: share.toFixed(1) + "%" }), " of the code is matching C");
+  const bar = document.createElement("div");
+  bar.className = "bar split";
+  bar.setAttribute("role", "img");
+  bar.setAttribute("aria-label", share.toFixed(1) + "% of the code matching C, " + done.toFixed(1) + "% in complete files");
+  bar.append(Object.assign(document.createElement("span"), { style: "width:" + done + "%" }),
+    Object.assign(document.createElement("span"), { style: "width:" + (share - done) + "%" }), document.createElement("span"));
+  stat.append(line, bar);
+  // The minimap: each module a square as large as its code, coloured from the blue ramp by its share
+  const ramp = ["#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"];
+  const map = document.getElementById("black-map");
+  const biggest = Math.max(...d.modules.filter(m => m.id.startsWith("ov")).map(m => m.code));
+  const squares = d.modules.map(m => {
+    const sq = document.createElement("i");
+    const p = m.code ? m.code_matched / m.code : 0;
+    sq.style.background = p ? ramp[Math.min(ramp.length - 1, Math.floor(p * ramp.length))] : "rgba(255, 255, 255, 0.12)";
+    map.appendChild(sq);
+    return [sq, Math.max(7, Math.min(m.id === "main" ? 46 : 34, 7 + 27 * Math.sqrt(m.code / biggest)))];
+  });
+  // Shrunk until they all fit the picture's box, again whenever the card's width changes
+  const fit = () => {
+    for (let k = 1; k > 0.3; k *= 0.92) {
+      for (const [sq, s] of squares) sq.style.width = sq.style.height = Math.max(4, Math.round(s * k)) + "px";
+      if (map.scrollHeight <= map.clientHeight) break;
+    }
+  };
+  fit();
+  new ResizeObserver(fit).observe(map);
 }).catch(() => {});
 </script>
 </body>
