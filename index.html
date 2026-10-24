@@ -45,7 +45,7 @@ body {
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 36px 64px;
 }
-.wrap { max-width: 1000px; margin: 0 auto; display: grid; gap: 56px; }
+.wrap { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px; }
 h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
 p { margin: 0; }
 a { color: var(--accent); }
@@ -120,6 +120,7 @@ h3 { font-size: 21px; line-height: 1.2; }
 .year { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
 .vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px 14px; }
 .vgrid.three { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.vgrid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
 .vid { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
 .vid figcaption { font-size: 14.5px; line-height: 1.35; font-weight: 600; }
 .player { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--frame); border-radius: 6px; overflow: hidden; }
@@ -156,6 +157,9 @@ footer a { color: inherit; }
   .flow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
   .flow li + li::before { content: none; }
 }
+@media (max-width: 560px) {
+  .vgrid.two { grid-template-columns: minmax(0, 1fr); }
+}
 @media (max-width: 420px) {
   .flow { grid-template-columns: minmax(0, 1fr); }
   .shots { height: 132px; }
@@ -168,13 +172,14 @@ footer a { color: inherit; }
   <header>
     <div class="eyebrow">rdasilva01 · Aerial robotics</div>
     <h1>Rodrigo Da Silva</h1>
-    <p class="lede">I work on autonomous drones with CVAR-UPM, the Computer Vision and Aerial Robotics group of the
-    Universidad Politécnica de Madrid. Our software is Aerostack2, and we race it at A2RL in Abu Dhabi. In my own
-    time I port Pokémon games to run natively, no emulator needed.</p>
+    <p class="lede">I work on state estimation for autonomous drones in the CVAR-UPM Drone Team, part of the Computer
+    Vision and Aerial Robotics group of the Universidad Politécnica de Madrid. Our software is Aerostack2, and we race
+    it at A2RL in Abu Dhabi. In my own time I port Pokémon games to run natively, no emulator needed.</p>
     <nav class="sections" aria-label="On this page">
       <a href="#aerostack2">Aerostack2</a>
       <a href="#a2rl">A2RL drone racing</a>
       <a href="#projects">Personal projects</a>
+      <a class="out" href="https://cvar-upm.es/drone_team_web/">CVAR-UPM Drone Team ↗</a>
       <a class="out" href="https://github.com/rdasilva01">GitHub ↗</a>
     </nav>
   </header>
@@ -235,7 +240,7 @@ footer a { color: inherit; }
         <div class="when">11–12 April 2025 · ADNEC Marina Hall · $1M prize · 14 teams</div>
         <p>Billed as the first race for AI drones only. MAVLab from TU Delft won the AI Grand Challenge, two laps in 17
         seconds, and its drone beat top human pilots head to head.</p>
-        <p class="us"><b>CVAR-UPM:</b> one of the eight AI teams in the final, and second in our multi-drone race,
+        <p class="us"><b>CVAR-UPM:</b> one of the top eight finalists, and second in our multi-drone race,
         flying both laps on its own with only the camera and the IMU.</p>
       </article>
       <article class="season">
@@ -252,16 +257,26 @@ footer a { color: inherit; }
     <div class="team">
       <h3>Our team: CVAR-UPM</h3>
       <p>We race with Aerostack2, the same framework pushed to racing speed. For 2026 the drone got a new MPCC
-      controller and pose estimation from several gates at once, which I worked on.</p>
+      controller and positioning from several gates at once. I work on state estimation: knowing where the drone is
+      and how it's moving, with nothing but the camera and the IMU to go on.</p>
       <ol class="flow" aria-label="How our drone flies">
         <li><b>Camera and IMU</b><span>All the drone has to go on.</span></li>
         <li><b>Gate detection</b><span>Finds the gates in the picture.</span></li>
-        <li class="mine"><span class="me">My part</span><b>Pose estimation</b><span>Where the drone is, from the gates it sees (PnP, several gates at once).</span></li>
+        <li class="mine"><span class="me">My part</span><b>State estimation</b><span>Where the drone is and how it's moving, from the gates it sees (PnP, several at once) and the IMU.</span></li>
         <li><b>Control</b><span>MPCC flies the racing line.</span></li>
       </ol>
-      <p class="credits">The 2026 team: Pascual Campoy (director), Rafael Pérez-Seguí (coordinator), Rodrigo Da Silva
-      (pose estimation), Javier Melero (gate detection), Francisco Anguita (control and sensing), Carmen Rojas
-      (control), Alejandro Rodríguez (machine learning). <a href="https://vimeo.com/1079143067/22126ae9a6">Our 2025 video ↗</a></p>
+      <div class="year">Our team's videos</div>
+      <div class="vgrid two">
+        <figure class="vid">
+          <a class="player" href="https://vimeo.com/1162806489/7bf1efb1bb" data-embed="https://player.vimeo.com/video/1162806489?h=7bf1efb1bb&amp;autoplay=1" aria-label="Play: 2026 A2RL, by CVAR-UPM (2:10)"><img src="https://i.vimeocdn.com/video/2118733787-3f707e9a6c026aecabfd71331b530ca4173a583935479d583e04d42cc9b9befe-d_1280?region=us" alt="" width="1280" height="720" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">2:10</span></a>
+          <figcaption>2026 A2RL</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://vimeo.com/1079143067/22126ae9a6" data-embed="https://player.vimeo.com/video/1079143067?h=22126ae9a6&amp;autoplay=1" aria-label="Play: CVAR-UPM among the top teams at A2RL (1:22)"><img src="https://i.vimeocdn.com/video/2117961897-5c6d470f5a542f9219bcd6e9ca0566472191b1998940baec7dfed405f56f51a5-d_1280?region=us" alt="" width="1280" height="720" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:22</span></a>
+          <figcaption>CVAR-UPM among the top teams at A2RL (2025)</figcaption>
+        </figure>
+      </div>
+      <p class="credits">The team, its members and its other competitions: <a href="https://cvar-upm.es/drone_team_web/">CVAR-UPM Drone Team ↗</a></p>
     </div>
 
     <div class="videos">
@@ -271,7 +286,7 @@ footer a { color: inherit; }
       </div>
 
       <div class="featured">
-        <a class="player" href="https://www.youtube.com/watch?v=P25BwtepmUk" data-id="P25BwtepmUk" aria-label="Play: Full Race Replay, A2RL Drone Championship 2026 (37:45)">
+        <a class="player" href="https://www.youtube.com/watch?v=P25BwtepmUk" data-embed="https://www.youtube-nocookie.com/embed/P25BwtepmUk?autoplay=1&amp;rel=0" aria-label="Play: Full Race Replay, A2RL Drone Championship 2026 (37:45)">
           <img src="https://i.ytimg.com/vi/P25BwtepmUk/maxresdefault.jpg" alt="" width="1280" height="720">
           <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
           <span class="len">37:45</span>
@@ -286,27 +301,27 @@ footer a { color: inherit; }
       <div class="year">2026 · Season 2</div>
       <div class="vgrid three">
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=9AW6YG5OmsM" data-id="9AW6YG5OmsM" aria-label="Play: The Speed Race That Changed the Championship (2:15)"><img src="https://i.ytimg.com/vi/9AW6YG5OmsM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">2:15</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=9AW6YG5OmsM" data-embed="https://www.youtube-nocookie.com/embed/9AW6YG5OmsM?autoplay=1&amp;rel=0" aria-label="Play: The Speed Race That Changed the Championship (2:15)"><img src="https://i.ytimg.com/vi/9AW6YG5OmsM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">2:15</span></a>
           <figcaption>The Speed Race That Changed the Championship</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=QFU3Oh_AHOU" data-id="QFU3Oh_AHOU" aria-label="Play: Human vs AI: Who Won the Ultimate Drone Race? (6:31)"><img src="https://i.ytimg.com/vi/QFU3Oh_AHOU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:31</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=QFU3Oh_AHOU" data-embed="https://www.youtube-nocookie.com/embed/QFU3Oh_AHOU?autoplay=1&amp;rel=0" aria-label="Play: Human vs AI: Who Won the Ultimate Drone Race? (6:31)"><img src="https://i.ytimg.com/vi/QFU3Oh_AHOU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:31</span></a>
           <figcaption>Human vs AI: Who Won the Ultimate Drone Race?</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=FCSTBm3eY3Y" data-id="FCSTBm3eY3Y" aria-label="Play: Code vs Instinct: The Race Continues (10:20)"><img src="https://i.ytimg.com/vi/FCSTBm3eY3Y/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">10:20</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=FCSTBm3eY3Y" data-embed="https://www.youtube-nocookie.com/embed/FCSTBm3eY3Y?autoplay=1&amp;rel=0" aria-label="Play: Code vs Instinct: The Race Continues (10:20)"><img src="https://i.ytimg.com/vi/FCSTBm3eY3Y/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">10:20</span></a>
           <figcaption>Code vs Instinct: The Race Continues</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=qtRUoYxZnjE" data-id="qtRUoYxZnjE" aria-label="Play: The Fastest Multi-Drone Race Yet (6:18)"><img src="https://i.ytimg.com/vi/qtRUoYxZnjE/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:18</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=qtRUoYxZnjE" data-embed="https://www.youtube-nocookie.com/embed/qtRUoYxZnjE?autoplay=1&amp;rel=0" aria-label="Play: The Fastest Multi-Drone Race Yet (6:18)"><img src="https://i.ytimg.com/vi/qtRUoYxZnjE/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:18</span></a>
           <figcaption>The Fastest Multi-Drone Race Yet</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=ezjJdfEUg0I" data-id="ezjJdfEUg0I" aria-label="Play: Chaos, Crashes and Split-Second Decisions, Multi-Drone Race (6:43)"><img src="https://i.ytimg.com/vi/ezjJdfEUg0I/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:43</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=ezjJdfEUg0I" data-embed="https://www.youtube-nocookie.com/embed/ezjJdfEUg0I?autoplay=1&amp;rel=0" aria-label="Play: Chaos, Crashes and Split-Second Decisions, Multi-Drone Race (6:43)"><img src="https://i.ytimg.com/vi/ezjJdfEUg0I/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:43</span></a>
           <figcaption>Chaos, Crashes &amp; Split-Second Decisions | Multi-Drone Race</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=0hRglNtqLko" data-id="0hRglNtqLko" aria-label="Play: How Fast Can Racing Drones Go? (4:22)"><img src="https://i.ytimg.com/vi/0hRglNtqLko/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">4:22</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=0hRglNtqLko" data-embed="https://www.youtube-nocookie.com/embed/0hRglNtqLko?autoplay=1&amp;rel=0" aria-label="Play: How Fast Can Racing Drones Go? (4:22)"><img src="https://i.ytimg.com/vi/0hRglNtqLko/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">4:22</span></a>
           <figcaption>How Fast Can Racing Drones Go?</figcaption>
         </figure>
       </div>
@@ -314,19 +329,19 @@ footer a { color: inherit; }
       <div class="year">2025 · Season 1</div>
       <div class="vgrid">
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=AvyI58mnyo4" data-id="AvyI58mnyo4" aria-label="Play: AI Grand Challenge: MAVLAB Takes the Win at A2RL (8:29)"><img src="https://i.ytimg.com/vi/AvyI58mnyo4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">8:29</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=AvyI58mnyo4" data-embed="https://www.youtube-nocookie.com/embed/AvyI58mnyo4?autoplay=1&amp;rel=0" aria-label="Play: AI Grand Challenge: MAVLAB Takes the Win at A2RL (8:29)"><img src="https://i.ytimg.com/vi/AvyI58mnyo4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">8:29</span></a>
           <figcaption>AI Grand Challenge: MAVLAB Takes the Win at A2RL</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=iw79WXzigRA" data-id="iw79WXzigRA" aria-label="Play: AI Beats Human in Autonomous Drone Race Championship Final (1:14)"><img src="https://i.ytimg.com/vi/iw79WXzigRA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:14</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=iw79WXzigRA" data-embed="https://www.youtube-nocookie.com/embed/iw79WXzigRA?autoplay=1&amp;rel=0" aria-label="Play: AI Beats Human in Autonomous Drone Race Championship Final (1:14)"><img src="https://i.ytimg.com/vi/iw79WXzigRA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:14</span></a>
           <figcaption>AI Beats Human in Autonomous Drone Race Championship Final</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=SOfx5WvG-tI" data-id="SOfx5WvG-tI" aria-label="Play: A2RL Drone Championship, Finals Day 1 (0:57)"><img src="https://i.ytimg.com/vi/SOfx5WvG-tI/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">0:57</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=SOfx5WvG-tI" data-embed="https://www.youtube-nocookie.com/embed/SOfx5WvG-tI?autoplay=1&amp;rel=0" aria-label="Play: A2RL Drone Championship, Finals Day 1 (0:57)"><img src="https://i.ytimg.com/vi/SOfx5WvG-tI/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">0:57</span></a>
           <figcaption>A2RL Drone Championship - Finals Day 1</figcaption>
         </figure>
         <figure class="vid">
-          <a class="player" href="https://www.youtube.com/watch?v=qMNJOZoiItY" data-id="qMNJOZoiItY" aria-label="Play: A2RL Drone Qualifiers complete (1:32)"><img src="https://i.ytimg.com/vi/qMNJOZoiItY/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:32</span></a>
+          <a class="player" href="https://www.youtube.com/watch?v=qMNJOZoiItY" data-embed="https://www.youtube-nocookie.com/embed/qMNJOZoiItY?autoplay=1&amp;rel=0" aria-label="Play: A2RL Drone Qualifiers complete (1:32)"><img src="https://i.ytimg.com/vi/qMNJOZoiItY/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:32</span></a>
           <figcaption>A2RL Drone Qualifiers complete</figcaption>
         </figure>
       </div>
@@ -365,19 +380,19 @@ footer a { color: inherit; }
   </section>
 
   <footer>
-    <p>Race videos by A2RL, played from YouTube. Results from <a href="https://a2rl.io/autonomous-drone-race">A2RL</a>
-    and <a href="https://www.industriales.upm.es/noticias/el-grupo-cvar-upm-entre-los-mejores-del-mundo-en-la-competicion-internacional-a2rl-de-vuelo-autonomo/">UPM</a>.</p>
+    <p>Race videos by A2RL, played from YouTube; our team's videos by CVAR-UPM, played from Vimeo. Results from
+    <a href="https://a2rl.io/autonomous-drone-race">A2RL</a> and <a href="https://cvar-upm.es/drone_team_web/competitions/A2RL">the team</a>.</p>
   </footer>
 </div>
 
 <script>
-// A video's thumbnail is a link to YouTube; a plain click swaps it for the player instead
+// A video's thumbnail is a link to YouTube or Vimeo; a plain click swaps it for the player instead
 document.addEventListener("click", e => {
   const a = e.target.closest("a.player");
   if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   e.preventDefault();
   const f = document.createElement("iframe");
-  f.src = "https://www.youtube-nocookie.com/embed/" + a.dataset.id + "?autoplay=1&rel=0";
+  f.src = a.dataset.embed;
   f.title = a.getAttribute("aria-label").replace(/^Play: /, "");
   f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
   f.allowFullscreen = true;
