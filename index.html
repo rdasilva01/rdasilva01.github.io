@@ -183,7 +183,8 @@ footer a { color: inherit; }
 @media (min-width: 1360px) {
   body { padding: 0; }
   body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: url("img/a2rl-arena.jpg") center / cover no-repeat; opacity: 0.25; }
-  .wrap { box-sizing: border-box; max-width: 1216px; min-height: 100vh; padding: 40px 48px 64px; background: var(--bg); box-shadow: 0 0 32px rgba(0, 0, 0, 0.18); }
+  .wrap { --pad: clamp(56px, 5vw, 96px); box-sizing: border-box; max-width: calc(1120px + 2 * var(--pad)); min-height: 100vh;
+    padding: 64px var(--pad) 80px; background: var(--bg); box-shadow: 0 0 32px rgba(0, 0, 0, 0.18); }
 }
 </style>
 </head>
