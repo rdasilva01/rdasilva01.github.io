@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rodrigo Da Silva</title>
-<meta name="description" content="Autonomous drones with Aerostack2 and the A2RL Drone Championship at CVAR-UPM, and Pokémon games ported to run natively.">
+<title>Rodrigo Da Silva Gómez</title>
+<meta name="description" content="Rodrigo Da Silva Gómez: state estimation for autonomous drones in the CVAR-UPM Drone Team, Aerostack2, the A2RL Drone Championship and its race videos, my education, and Pokémon games ported to run natively.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
@@ -109,7 +109,19 @@ h3 { font-size: 21px; line-height: 1.2; }
 .flow span { font-size: 13.5px; color: var(--muted); }
 .flow li.mine { border: 2px solid var(--accent); background: var(--accent-soft); }
 .flow .me { justify-self: start; font: 700 11px var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--panel); background: var(--accent); border-radius: 3px; padding: 0 6px; margin-bottom: 2px; }
-.credits { font-size: 14px; color: var(--muted); max-width: 80ch; }
+.follow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; font-size: 15px; color: var(--muted); }
+.follow a { font-weight: 600; text-decoration: none; }
+.follow a:hover { text-decoration: underline; }
+.year.with-link { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; }
+.year.with-link a { font: 600 13.5px var(--body); letter-spacing: 0; text-transform: none; text-decoration: none; }
+.year.with-link a:hover { text-decoration: underline; }
+
+/* Education: one card per degree, its Spanish name under the English one */
+.edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.degree { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.degree h3 { font-size: 19px; }
+.degree .es { color: var(--muted); font-style: italic; }
+.degree .school { font: 500 12.5px var(--mono); color: var(--muted); margin-top: 6px; }
 
 /* The race videos: a thumbnail that becomes the player when clicked */
 .videos { display: grid; gap: 18px; }
@@ -168,6 +180,11 @@ footer a { color: inherit; }
   .flow { grid-template-columns: minmax(0, 1fr); }
   .shots { height: 132px; }
 }
+@media (min-width: 1240px) {
+  body { padding: 0; background: #0b0d14; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: linear-gradient(rgba(6, 8, 14, 0.3), rgba(6, 8, 14, 0.3)), url("img/a2rl-arena.jpg") center / cover no-repeat; }
+  .wrap { box-sizing: border-box; max-width: 1096px; min-height: 100vh; padding: 40px 48px 64px; background: var(--bg); box-shadow: 0 0 48px rgba(0, 0, 0, 0.5); }
+}
 </style>
 </head>
 <body>
@@ -175,12 +192,13 @@ footer a { color: inherit; }
 <div class="wrap">
   <header>
     <div class="eyebrow">rdasilva01 · Aerial robotics</div>
-    <h1>Rodrigo Da Silva</h1>
-    <img class="avatar" src="https://avatars.githubusercontent.com/u/53527259?v=4&amp;s=336" alt="Rodrigo Da Silva" width="168" height="168">
+    <h1>Rodrigo Da Silva Gómez</h1>
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/53527259?v=4&amp;s=336" alt="Rodrigo Da Silva Gómez" width="168" height="168">
     <p class="lede">I work on state estimation for autonomous drones in the CVAR-UPM Drone Team, part of the Computer
     Vision and Aerial Robotics group of the Universidad Politécnica de Madrid. Our software is Aerostack2, and we race
     it at A2RL in Abu Dhabi. In my own time I port Pokémon games to run natively, no emulator needed.</p>
     <nav class="sections" aria-label="On this page">
+      <a href="#education">Education</a>
       <a href="#aerostack2">Aerostack2</a>
       <a href="#a2rl">A2RL drone racing</a>
       <a href="#projects">Personal projects</a>
@@ -188,6 +206,22 @@ footer a { color: inherit; }
       <a class="out" href="https://github.com/rdasilva01">GitHub ↗</a>
     </nav>
   </header>
+
+  <section class="part" aria-labelledby="education">
+    <h2 class="part-title" id="education">Education</h2>
+    <div class="edu">
+      <article class="degree">
+        <h3>Master's Degree in Artificial Intelligence</h3>
+        <p class="es" lang="es">Máster en Inteligencia Artificial</p>
+        <p class="school">Universidad Politécnica de Madrid</p>
+      </article>
+      <article class="degree">
+        <h3>Bachelor's Degree in Computer Engineering</h3>
+        <p class="es" lang="es">Grado en Ingeniería Informática</p>
+        <p class="school">Universidad Politécnica de Madrid</p>
+      </article>
+    </div>
+  </section>
 
   <section class="part" aria-labelledby="aerostack2">
     <div class="part-head">
@@ -267,7 +301,7 @@ footer a { color: inherit; }
         <li class="mine"><span class="me">My part</span><b>State estimation</b><span>Where the drone is and how it's moving, from the gates it sees (PnP, several at once) and the IMU.</span></li>
         <li><b>Control</b><span>MPCC flies the racing line.</span></li>
       </ol>
-      <div class="year">Our team's videos</div>
+      <div class="year with-link">Our team's videos <a href="https://vimeo.com/cvarupm">More on Vimeo ↗</a></div>
       <div class="vgrid two">
         <figure class="vid">
           <a class="player" href="https://vimeo.com/1162806489/7bf1efb1bb" data-embed="https://player.vimeo.com/video/1162806489?h=7bf1efb1bb&amp;autoplay=1" aria-label="Play: 2026 A2RL, by CVAR-UPM (2:10)"><img src="https://i.vimeocdn.com/video/2118733787-3f707e9a6c026aecabfd71331b530ca4173a583935479d583e04d42cc9b9befe-d_1280?region=us" alt="" width="1280" height="720" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">2:10</span></a>
@@ -278,7 +312,7 @@ footer a { color: inherit; }
           <figcaption>CVAR-UPM among the top teams at A2RL (2025)</figcaption>
         </figure>
       </div>
-      <p class="credits">The team, its members and its other competitions: <a href="https://cvar-upm.es/drone_team_web/">CVAR-UPM Drone Team ↗</a></p>
+      <p class="follow">Follow the team: <a href="https://cvar-upm.es/drone_team_web/">CVAR-UPM Drone Team ↗</a> <a href="https://vimeo.com/cvarupm">Vimeo ↗</a> <a href="https://www.instagram.com/cvar_upm/">Instagram ↗</a></p>
     </div>
 
     <div class="videos">
@@ -382,7 +416,8 @@ footer a { color: inherit; }
   </section>
 
   <footer>
-    <p>Race videos by A2RL, played from YouTube; our team's videos by CVAR-UPM, played from Vimeo. Results from
+    <p>Race videos and the background picture by A2RL, the race videos played from YouTube; our team's videos by
+    CVAR-UPM, played from Vimeo. Results from
     <a href="https://a2rl.io/autonomous-drone-race">A2RL</a> and <a href="https://cvar-upm.es/drone_team_web/competitions/A2RL">the team</a>.</p>
   </footer>
 </div>
