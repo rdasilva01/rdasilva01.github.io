@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pokeblack</title>
+<meta name="description" content="Pokémon Black decompiled back into C, function by function, until it rebuilds the same game byte for byte: the progress.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; the overall numbers, how it's done, the progress over time, by kind of code, then
+   every module of the game as a map */
+:root {
+  --bg: #eef0f3;
+  --panel: #ffffff;
+  --ink: #161a21;
+  --muted: #59616e;
+  --line: #d6dae1;
+  --grid: #e6e9ee;
+  --accent: #2b3442;
+  --frame: #1b2029;
+  /* data: the validated blue/orange pair for the two lines, the blue ramp for magnitude */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --done: #184f95;
+  --matched: #86b6ef;
+  --track: #e3e7ee;
+  --display: "Pixelify Sans", "Courier New", monospace;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --panel: #1b1f27; --ink: #e6e9ef; --muted: #9aa3b1; --line: #2d333e; --grid: #262b34;
+    --accent: #c6cfdb; --frame: #0a0c10;
+    --series-1: #3987e5; --series-2: #d95926; --done: #6da7ec; --matched: #1c5cab; --track: #262b34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --panel: #1b1f27; --ink: #e6e9ef; --muted: #9aa3b1; --line: #2d333e; --grid: #262b34;
+  --accent: #c6cfdb; --frame: #0a0c10;
+  --series-1: #3987e5; --series-2: #d95926; --done: #6da7ec; --matched: #1c5cab; --track: #262b34;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px; margin: 0;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 38px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.home { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; }
+.home:hover { color: var(--ink); text-decoration: underline; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 7vw, 54px); line-height: 1; }
+.lede { color: var(--muted); max-width: 68ch; font-size: 17px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--ink); }
+.part { display: grid; gap: 14px; }
+.part-title { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 4.5vw, 32px); line-height: 1.1; }
+.part-lede { color: var(--muted); max-width: 72ch; font-size: 15.5px; }
+
+/* The headline: the code as one bar, then functions and files */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px; min-width: 0; }
+.headline { display: grid; gap: 16px; }
+.hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.hero .num { font-family: var(--body); font-weight: 700; font-size: clamp(48px, 10vw, 68px); line-height: 1; }
+.hero .what { color: var(--muted); font-size: 17px; }
+.meter { display: flex; gap: 2px; height: 16px; }
+.meter span { display: block; height: 100%; min-width: 0; }
+.meter .done { background: var(--done); border-radius: 4px 0 0 4px; }
+.meter .matched { background: var(--matched); }
+.meter .rest { background: var(--track); flex: 1; border-radius: 0 4px 4px 0; }
+.meter.small { height: 10px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13.5px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+.legend i.line { height: 2px; width: 16px; border-radius: 1px; }
+.legend b { color: var(--ink); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.tile { border-top: 1px solid var(--line); padding-top: 10px; display: grid; gap: 2px; }
+.tile .label { font-size: 14px; color: var(--muted); }
+.tile .value { font-size: 26px; font-weight: 700; line-height: 1.15; }
+.tile .sub { font-size: 13.5px; color: var(--muted); }
+
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px 28px; }
+.how div { display: grid; gap: 4px; align-content: start; }
+.how h3 { font-size: 16.5px; }
+.how p { font-size: 15px; color: var(--muted); }
+
+/* The history: one axis (percent), two lines, a crosshair */
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.chart-head h3 { font-size: 17px; }
+.chart { position: relative; margin-top: 10px; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.chart svg:focus-visible { outline: 3px solid var(--series-1); outline-offset: 4px; border-radius: 4px; }
+.chart .gridline { stroke: var(--grid); stroke-width: 1; }
+.chart .baseline { stroke: var(--line); stroke-width: 1; }
+.chart .tick { fill: var(--muted); font: 500 11.5px var(--mono); font-variant-numeric: tabular-nums; }
+.chart .endlabel { fill: var(--ink); font: 600 13px var(--body); }
+.chart .series { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .cross { stroke: var(--muted); stroke-width: 1; }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14); display: grid; gap: 3px; min-width: 150px; z-index: 3; }
+.tip[hidden] { display: none; }
+.tip .when { color: var(--muted); font: 500 11.5px var(--mono); }
+.tip .row { display: flex; align-items: center; gap: 8px; }
+.tip .row i { width: 14px; height: 2px; border-radius: 1px; flex: none; }
+.tip .row b { font-variant-numeric: tabular-nums; }
+.tip .row span { color: var(--muted); }
+details.numbers { font-size: 14px; }
+details.numbers summary { cursor: pointer; color: var(--muted); }
+details.numbers summary:hover { color: var(--ink); }
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+table { border-collapse: collapse; font-size: 13.5px; min-width: 100%; }
+th, td { text-align: left; padding: 4px 12px 4px 0; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* By kind: one row per category */
+.kinds { display: grid; gap: 14px; }
+.kind { display: grid; grid-template-columns: minmax(150px, 230px) 1fr auto; gap: 4px 16px; align-items: center; }
+.kind .name { font-weight: 600; }
+.kind .name small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+.kind .pct { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; min-width: 4.5ch; }
+.kind.sub .name { font-weight: 400; padding-left: 14px; }
+.kinds h3 { font-size: 15px; color: var(--muted); font-weight: 600; margin-top: 6px; }
+@media (max-width: 560px) {
+  .kind { grid-template-columns: 1fr auto; }
+  .kind .meter { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* The map: every module, its size by area, its colour by how much is matching C */
+.map { display: flex; flex-wrap: wrap; gap: 4px; align-items: flex-end; }
+.cell { --s: 30px; width: var(--s); height: var(--s); border-radius: 3px; border: 0; padding: 0; cursor: pointer; display: grid; place-items: center; font: 500 10.5px var(--mono); position: relative; }
+.cell.zero { background: var(--track); color: var(--muted); }
+.cell:hover, .cell:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; z-index: 1; }
+.cell[aria-pressed="true"] { outline: 3px solid var(--ink); outline-offset: 1px; }
+.scale { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.scale .ramp { width: 180px; height: 10px; border-radius: 3px; }
+.scale .none { display: inline-flex; align-items: center; gap: 6px; }
+.scale .none i { width: 12px; height: 12px; border-radius: 3px; background: var(--track); display: inline-block; }
+.detail { display: grid; gap: 8px; min-height: 92px; }
+.detail h3 { font-size: 18px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.detail h3 small { font: 500 12.5px var(--mono); color: var(--muted); }
+.detail p { font-size: 14.5px; color: var(--muted); }
+.detail .files { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.status { color: var(--muted); font-size: 14px; }
+
+footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="home" href="../">← rdasilva01.github.io</a>
+    <div class="eyebrow">Pokémon Black · matching decompilation</div>
+    <h1>pokeblack</h1>
+    <p class="lede">Pokémon Black's source code, written again in C one function at a time, until it compiles back
+    into the very same game, byte for byte. Once all of it is C, it becomes a port that runs natively on Windows and
+    Android, the way <a href="../pokefirered-x/">pokefirered-x</a> does for FireRed.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <section class="part" aria-labelledby="progress">
+    <h2 class="part-title" id="progress">Where it stands</h2>
+    <div class="panel headline" id="headline"><p class="status">Loading the numbers…</p></div>
+  </section>
+
+  <section class="part" aria-labelledby="how">
+    <h2 class="part-title" id="how">How it's done</h2>
+    <div class="how">
+      <div>
+        <h3>Byte for byte</h3>
+        <p>A function counts when the original compiler, Metrowerks CodeWarrior for the DS, turns its C into exactly
+        the bytes the game has. After every change the whole game is rebuilt from the C and checked against the
+        cartridge's copy.</p>
+      </div>
+      <div>
+        <h3>Black 2 as a starting point</h3>
+        <p>Black 2 shares much of Black's code. Where the
+        <a href="https://github.com/fuddlesworth/pokebw2">pokebw2</a> decompilation has a function Black also has, its
+        C is taken over and changed into Black's own version: other numbers, smaller structures, features Black 2
+        added taken out.</p>
+      </div>
+      <div>
+        <h3>Files, not just functions</h3>
+        <p>The game was written as source files, and each one is rebuilt whole: its functions, its data, its place in
+        the game. A file is complete when the game links it from the C instead of the original bytes.</p>
+      </div>
+      <div>
+        <h3>Then the port</h3>
+        <p>With the game in C, it can be compiled for a PC or a phone instead of the DS, with the DS's screens, sound
+        and buttons done by the port, as for FireRed and HeartGold.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="history">
+    <h2 class="part-title" id="history">Over time</h2>
+    <div class="panel">
+      <div class="chart-head">
+        <h3>Share of the game in matching C</h3>
+        <div class="legend" id="history-legend"></div>
+      </div>
+      <div class="chart" id="chart"></div>
+      <details class="numbers">
+        <summary>The numbers as a table</summary>
+        <div class="table-wrap" id="history-table"></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="kinds">
+    <h2 class="part-title" id="kinds">By kind of code</h2>
+    <p class="part-lede">The game's own code is written in C by Game Freak; the rest is Nintendo's libraries and other
+    companies' middleware, linked into the game.</p>
+    <div class="panel kinds" id="kinds-list"></div>
+  </section>
+
+  <section class="part" aria-labelledby="map">
+    <h2 class="part-title" id="map">Every part of the game</h2>
+    <p class="part-lede">The DS keeps one program in memory and swaps in overlays, pieces of code loaded for a screen
+    or a feature: the battle, the bag, the Global Trade Station. Each square is one of them, as large as its code,
+    coloured by how much of it is matching C. Pick one to see its numbers.</p>
+    <div class="scale" id="scale"></div>
+    <div class="panel map" id="map-grid" role="group" aria-label="Modules of the game"></div>
+    <div class="panel detail" id="detail" aria-live="polite"><p class="status">Pick a square.</p></div>
+    <details class="numbers">
+      <summary>Every module as a table</summary>
+      <div class="table-wrap" id="module-table"></div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Numbers from objdiff's report on the decompilation, updated as the work goes on. The code is kept private for
+    now.</p>
+    <p>A fan project: not affiliated with Nintendo, Game Freak or The Pokémon Company. No game files are shared here.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const el = (tag, props = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k === "style") e.style.cssText = v;
+    else e.setAttribute(k, v);
+  }
+  for (const kid of kids) e.append(kid);
+  return e;
+};
+const SVG = "http://www.w3.org/2000/svg";
+const svg = (tag, attrs = {}) => {
+  const e = document.createElementNS(SVG, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  return e;
+};
+const pct = (a, b) => (b ? 100 * a / b : 0);
+const fmtPct = v => (v >= 99.95 && v < 100 ? "99.9" : v.toFixed(1)) + "%";
+const fmtInt = n => n.toLocaleString("en-US");
+const fmtKB = n => n >= 1024 * 1024 ? (n / 1048576).toFixed(2) + " MB" : n >= 1024 ? Math.round(n / 1024) + " KB" : n + " bytes";
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const dayLabel = d => d.getDate() + " " + MONTHS[d.getMonth()];
+const longDate = s => { const d = new Date(s); return d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear(); };
+
+// A bar in two parts: code in complete files, matched code in files still being done, the rest
+function meter(m, small) {
+  const done = pct(m.code_complete, m.code), matched = Math.max(0, pct(m.code_matched, m.code) - done);
+  const bar = el("div", { class: "meter" + (small ? " small" : ""), role: "img",
+    "aria-label": fmtPct(pct(m.code_matched, m.code)) + " matching, " + fmtPct(done) + " in complete files" });
+  if (done > 0) bar.append(el("span", { class: "done", style: "width:" + done + "%" }));
+  if (matched > 0) bar.append(el("span", { class: "matched", style: "width:" + matched + "%" + (done > 0 ? "" : ";border-radius:4px 0 0 4px") }));
+  bar.append(el("span", { class: "rest", style: done + matched > 0 ? "" : "border-radius:4px" }));
+  return bar;
+}
+
+function headline(d) {
+  const t = d.total, box = $("headline");
+  box.replaceChildren();
+  const code = pct(t.code_matched, t.code);
+  box.append(el("div", { class: "hero" },
+    el("span", { class: "num", text: fmtPct(code) }),
+    el("span", { class: "what", text: "of the game's code is matching C" })));
+  box.append(meter(t));
+  const legend = el("div", { class: "legend" });
+  const key = (cls, label, value) => el("span", {}, el("i", { style: "background:var(--" + cls + ")" }), label + " ", el("b", { text: value }));
+  legend.append(key("done", "in complete files", fmtPct(pct(t.code_complete, t.code))),
+    key("matched", "in files still being done", fmtPct(pct(t.code_matched - t.code_complete, t.code))),
+    key("track", "not yet", fmtPct(100 - code)));
+  box.append(legend);
+  const tiles = el("div", { class: "tiles" });
+  const tile = (label, value, sub) => el("div", { class: "tile" }, el("span", { class: "label", text: label }),
+    el("span", { class: "value", text: value }), el("span", { class: "sub", text: sub }));
+  tiles.append(
+    tile("Functions", fmtInt(t.functions_matched), "of " + fmtInt(t.functions) + " (" + fmtPct(pct(t.functions_matched, t.functions)) + ")"),
+    tile("Source files complete", fmtInt(t.files_complete), "of " + fmtInt(t.files) + " found so far"),
+    tile("Code", fmtKB(t.code_matched), "of " + fmtKB(t.code)));
+  box.append(tiles);
+}
+
+function facts(d) {
+  const first = d.history[0];
+  $("facts").replaceChildren(
+    el("span", {}, "Updated ", el("b", { text: longDate(d.updated) })),
+    el("span", {}, "Started ", el("b", { text: longDate(first.date) })),
+    el("span", {}, "The game rebuilt byte for byte after every change"));
+}
+
+// The history chart, drawn for the chart's width; the crosshair snaps to the nearest update
+const SERIES = [
+  { key: "code", name: "Code", color: "--series-1" },
+  { key: "functions", name: "Functions", color: "--series-2" },
+];
+let chartData = null, chartIndex = -1;
+
+function drawChart() {
+  const box = $("chart"), h = chartData.history;
+  const W = Math.max(300, box.clientWidth), H = Math.round(Math.min(320, Math.max(220, W * 0.42)));
+  const m = { l: 40, r: W < 520 ? 12 : 104, t: 10, b: 28 };
+  const t0 = new Date(h[0].date).getTime(), t1 = new Date(h[h.length - 1].date).getTime();
+  const x = t => m.l + (W - m.l - m.r) * (t - t0) / Math.max(1, t1 - t0);
+  const y = v => m.t + (H - m.t - m.b) * (1 - v / 100);
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img", tabindex: "0",
+    "aria-label": "Share of the game in matching C over time: code from 0% to " + h[h.length - 1].code +
+      "%, functions to " + h[h.length - 1].functions + "%. Use the arrow keys to step through the updates." });
+  for (const v of [0, 25, 50, 75, 100]) {
+    s.append(svg("line", { class: v ? "gridline" : "baseline", x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }));
+    const lab = svg("text", { class: "tick", x: m.l - 8, y: y(v) + 4, "text-anchor": "end" });
+    lab.textContent = v + "%";
+    s.append(lab);
+  }
+  // A tick each day (every other on a narrow chart)
+  const day = 86400000, start = new Date(h[0].date); start.setHours(0, 0, 0, 0);
+  const days = Math.ceil((t1 - start.getTime()) / day) + 1, step = W < 520 ? Math.ceil(days / 5) : Math.ceil(days / 11);
+  let lastRight = -Infinity;
+  for (let i = 0; i < days; i += step) {
+    const d = new Date(start.getTime() + i * day);
+    const tx = x(Math.max(t0, d.getTime()));
+    if (tx > W - m.r + 1) break;
+    const text = dayLabel(d), width = 7 * text.length, left = i === 0 ? tx : tx - width / 2;
+    if (left < lastRight + 8) continue;   // (would touch the label before it)
+    const lab = svg("text", { class: "tick", x: tx, y: H - 8, "text-anchor": i === 0 ? "start" : "middle" });
+    lab.textContent = text;
+    s.append(lab);
+    lastRight = left + width;
+  }
+  const ends = [];
+  for (const ser of SERIES) {
+    const pts = h.map(p => [x(new Date(p.date).getTime()), y(p[ser.key])]);
+    s.append(svg("path", { class: "series", d: "M" + pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L"), stroke: css(ser.color) }));
+    const last = pts[pts.length - 1];
+    s.append(svg("circle", { cx: last[0], cy: last[1], r: 4, fill: css(ser.color), stroke: css("--panel"), "stroke-width": 2 }));
+    ends.push({ ser, x: last[0], y: last[1], v: h[h.length - 1][ser.key] });
+  }
+  // End labels only when they don't collide (the legend carries them otherwise)
+  if (m.r > 40 && Math.abs(ends[0].y - ends[1].y) >= 16) {
+    for (const e of ends) {
+      const lab = svg("text", { class: "endlabel", x: e.x + 10, y: e.y + 4 });
+      lab.textContent = e.ser.name + " " + e.v.toFixed(1) + "%";
+      s.append(lab);
+    }
+  }
+  const cross = svg("line", { class: "cross", y1: m.t, y2: H - m.b, visibility: "hidden" });
+  s.append(cross);
+  const tip = el("div", { class: "tip", hidden: "" });
+  const xs = h.map(p => x(new Date(p.date).getTime()));
+  const show = i => {
+    chartIndex = i;
+    if (i < 0) { cross.setAttribute("visibility", "hidden"); tip.hidden = true; return; }
+    const p = h[i], cx = xs[i];
+    cross.setAttribute("x1", cx); cross.setAttribute("x2", cx); cross.setAttribute("visibility", "visible");
+    const d = new Date(p.date);
+    tip.replaceChildren(el("span", { class: "when", text: longDate(p.date) + ", " + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0") }));
+    for (const ser of SERIES) {
+      tip.append(el("div", { class: "row" }, el("i", { style: "background:" + css(ser.color) }),
+        el("b", { text: p[ser.key].toFixed(1) + "%" }), el("span", { text: ser.name.toLowerCase() })));
+    }
+    if (p.files_complete != null) tip.append(el("div", { class: "row" }, el("i", { style: "background:transparent" }),
+      el("b", { text: fmtInt(p.files_complete) }), el("span", { text: "files complete" })));
+    tip.hidden = false;
+    const tw = tip.offsetWidth, left = cx + 12 + tw > W ? cx - 12 - tw : cx + 12;
+    tip.style.left = Math.max(0, left) + "px";
+    tip.style.top = Math.max(0, Math.min(y(p.code), y(p.functions)) - 10) + "px";
+  };
+  const nearest = clientX => {
+    const r = s.getBoundingClientRect(), px = (clientX - r.left) * W / r.width;
+    let best = 0;
+    for (let i = 1; i < xs.length; i++) if (Math.abs(xs[i] - px) < Math.abs(xs[best] - px)) best = i;
+    return best;
+  };
+  s.addEventListener("pointermove", e => show(nearest(e.clientX)));
+  s.addEventListener("pointerdown", e => show(nearest(e.clientX)));
+  s.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") show(-1); });
+  s.addEventListener("focus", () => show(chartIndex >= 0 ? chartIndex : h.length - 1));
+  s.addEventListener("blur", () => show(-1));
+  s.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      e.preventDefault();
+      show(Math.max(0, Math.min(h.length - 1, (chartIndex < 0 ? h.length - 1 : chartIndex) + (e.key === "ArrowLeft" ? -1 : 1))));
+    } else if (e.key === "Home") { e.preventDefault(); show(0); }
+    else if (e.key === "End") { e.preventDefault(); show(h.length - 1); }
+  });
+  box.replaceChildren(s, tip);
+}
+
+function historyParts(d) {
+  chartData = d;
+  const legend = $("history-legend");
+  for (const ser of SERIES) legend.append(el("span", {}, el("i", { class: "line", style: "background:var(" + ser.color + ")" }), ser.name));
+  drawChart();
+  let pending = 0;
+  new ResizeObserver(() => { cancelAnimationFrame(pending); pending = requestAnimationFrame(drawChart); }).observe($("chart"));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawChart);
+  const table = el("table"), head = el("tr");
+  for (const [t, n] of [["Date", false], ["Code", true], ["Functions", true], ["Files complete", true]]) head.append(el("th", { class: n ? "n" : "", text: t }));
+  table.append(el("thead", {}, head));
+  const body = el("tbody");
+  for (const p of [...d.history].reverse()) {
+    body.append(el("tr", {}, el("td", { text: longDate(p.date) }), el("td", { class: "n", text: p.code.toFixed(1) + "%" }),
+      el("td", { class: "n", text: p.functions.toFixed(1) + "%" }), el("td", { class: "n", text: p.files_complete == null ? "" : fmtInt(p.files_complete) })));
+  }
+  table.append(body);
+  $("history-table").replaceChildren(table);
+}
+
+// By kind: the report's categories
+const KIND_NAMES = {
+  "game": ["Game code", "Game Freak's C: the field, battles, menus"],
+  "lib": ["Libraries", "Nintendo's SDKs and middleware"],
+  "main": ["Main program", "always in memory"],
+  "overlays": ["Overlays", "loaded when needed"],
+  "lib/sdk": ["Nintendo's SDKs", "NitroSDK, NitroSystem, Wi-Fi, C library"],
+  "lib/dwc": ["Nintendo Wi-Fi Connection", ""],
+  "lib/spl": ["Particle effects", ""],
+  "lib/dpw": ["Global Trade Station client", ""],
+  "lib/poke_net": ["Pokémon network client", ""],
+  "lib/dsprot": ["Copy protection", ""],
+  "lib/nitro": ["NitroSDK headers", ""],
+};
+function kinds(d) {
+  const box = $("kinds-list"), cats = Object.fromEntries(d.categories.map(c => [c.id, c]));
+  box.replaceChildren();
+  const row = (c, sub) => {
+    const [name, note] = KIND_NAMES[c.id] || [c.name, ""];
+    const label = el("div", { class: "name", text: name });
+    if (note && !sub) label.append(el("small", { text: note + " · " + fmtKB(c.code) }));
+    else label.append(el("small", { text: fmtKB(c.code) }));
+    return el("div", { class: "kind" + (sub ? " sub" : "") }, label, meter(c, true), el("span", { class: "pct", text: fmtPct(pct(c.code_matched, c.code)) }));
+  };
+  for (const id of ["game", "lib"]) if (cats[id]) box.append(row(cats[id]));
+  box.append(el("h3", { text: "Where it lives" }));
+  for (const id of ["main", "overlays"]) if (cats[id]) box.append(row(cats[id]));
+  const libs = d.categories.filter(c => c.id.startsWith("lib/")).sort((a, b) => b.code - a.code);
+  if (libs.length) {
+    box.append(el("h3", { text: "The libraries" }));
+    for (const c of libs) box.append(row(c, true));
+  }
+}
+
+// The map: a square per module, side by the square root of its code, colour from the blue ramp by its share
+const LIGHT_RAMP = ["#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"];
+const MODULE_NOTES = {
+  "main": "Always in memory: the system, Nintendo's libraries and the code every screen shares.",
+  "ltd_autoload_0": "Code only a DSi runs (Nintendo's TwlSDK).",
+  "ov009": "Wi-Fi: Nintendo Wi-Fi Connection and GameSpy's matchmaking.",
+  "ov010": "Field events: people, their movements and script commands.",
+  "ov021": "The field: maps and many of the script commands.",
+  "ov093": "The battle engine.",
+  "ov094": "The battle's pictures and its touch screen.",
+  "ov114": "Online services: the Global Trade Station and the Battle Subway's records.",
+  "ov119": "Trading.",
+  "ov135": "The Global Trade Station's screens.",
+  "ov170": "The PC's boxes.",
+  "ov172": "The Xtransceiver's video calls.",
+  "ov175": "Wi-Fi battle competitions.",
+  "ov208": "The Pokédex's entry pages.",
+};
+const dark = () => matchMedia("(prefers-color-scheme: dark)").matches && document.documentElement.dataset.theme !== "light" || document.documentElement.dataset.theme === "dark";
+function rampColor(share) {
+  // light: near zero recedes toward the white surface; dark: reversed, near zero recedes toward the dark one
+  const ramp = dark() ? [...LIGHT_RAMP].reverse() : LIGHT_RAMP;
+  return ramp[Math.min(ramp.length - 1, Math.floor(share / 100 * ramp.length))];
+}
+const inkOn = hex => {
+  const n = parseInt(hex.slice(1), 16), c = [n >> 16, (n >> 8) & 255, n & 255].map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] > 0.3 ? "#0b0b0b" : "#ffffff";
+};
+let selected = null;
+function cellLabel(m) { return m.id.startsWith("ov") ? String(parseInt(m.id.slice(2), 10)) : m.id === "main" ? "main" : m.id === "ltd_autoload_0" ? "DSi" : "·"; }
+function drawMap(d) {
+  const grid = $("map-grid");
+  grid.replaceChildren();
+  const maxOverlay = Math.max(...d.modules.filter(m => m.id.startsWith("ov")).map(m => m.code));
+  for (const m of d.modules) {
+    const share = pct(m.code_matched, m.code);
+    const side = Math.round(Math.max(22, Math.min(m.id === "main" ? 132 : 92, 22 + 70 * Math.sqrt(m.code / maxOverlay))));
+    const b = el("button", { class: "cell" + (m.code_matched ? "" : " zero"), type: "button", "aria-pressed": String(selected === m.id),
+      "aria-label": m.name + ": " + fmtPct(share) + " of " + fmtKB(m.code) + " matching", title: m.name + " · " + fmtPct(share) + " of " + fmtKB(m.code) });
+    b.style.setProperty("--s", side + "px");
+    if (m.code_matched) { const c = rampColor(share); b.style.background = c; b.style.color = inkOn(c); }
+    if (side >= 26) b.textContent = cellLabel(m);
+    b.addEventListener("click", () => { selected = m.id; drawMap(d); showModule(m); });
+    grid.append(b);
+  }
+  const scale = $("scale");
+  const ramp = dark() ? [...LIGHT_RAMP].reverse() : LIGHT_RAMP;
+  scale.replaceChildren(el("span", { text: "0%" }), el("span", { class: "ramp", style: "background:linear-gradient(90deg," + ramp.join(",") + ")" }),
+    el("span", { text: "100% matching C" }), el("span", { class: "none" }, el("i"), "no C yet"));
+}
+function showModule(m) {
+  const box = $("detail"), share = pct(m.code_matched, m.code);
+  const h = el("h3", { text: m.name }, el("small", { text: fmtPct(share) + " of " + fmtKB(m.code) }));
+  box.replaceChildren(h, meter(m, true));
+  if (MODULE_NOTES[m.id]) box.append(el("p", { text: MODULE_NOTES[m.id] }));
+  box.append(el("p", { text: m.files ? fmtInt(m.files_complete) + " of its " + fmtInt(m.files) + " source files complete, " +
+    fmtInt(m.functions_matched) + " of " + fmtInt(m.functions) + " functions matching" : "No source files found in it yet: " + fmtInt(m.functions) + " functions to decompile." }));
+  if (m.top && m.top.length) box.append(el("p", { class: "files", text: "Biggest files: " + m.top.map(f => f + ".c").join(", ") }));
+}
+function moduleTable(d) {
+  const table = el("table"), head = el("tr");
+  for (const [t, n] of [["Module", false], ["Code", true], ["Matching", true], ["Files complete", true], ["Biggest files", false]]) head.append(el("th", { class: n ? "n" : "", text: t }));
+  table.append(el("thead", {}, head));
+  const body = el("tbody");
+  for (const m of d.modules) {
+    body.append(el("tr", {}, el("td", { text: m.name }), el("td", { class: "n", text: fmtKB(m.code) }),
+      el("td", { class: "n", text: fmtPct(pct(m.code_matched, m.code)) }), el("td", { class: "n", text: m.files ? m.files_complete + " / " + m.files : "" }),
+      el("td", { text: (m.top || []).join(", ") })));
+  }
+  table.append(body);
+  $("module-table").replaceChildren(table);
+}
+
+fetch("progress.json", { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+  facts(d);
+  headline(d);
+  historyParts(d);
+  kinds(d);
+  drawMap(d);
+  moduleTable(d);
+  const main = d.modules.find(m => m.id === "main");
+  if (main) { selected = "main"; drawMap(d); showModule(main); }
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => drawMap(d));
+}).catch(() => { $("headline").replaceChildren(el("p", { class: "status", text: "The numbers couldn't be loaded." })); });
+</script>
+</body>
+</html>
