@@ -1,0 +1,598 @@
+{
+ "versions": [
+  {
+   "commit": "b23a09224",
+   "date": "2026-10-24",
+   "order": 110,
+   "version": "1.10",
+   "id": "1.10"
+  },
+  {
+   "commit": "51220672b",
+   "date": "2026-10-24",
+   "order": 109,
+   "version": "1.9",
+   "id": "1.9"
+  },
+  {
+   "commit": "50ef256a6",
+   "date": "2026-10-24",
+   "order": 108,
+   "version": "1.8",
+   "id": "1.8"
+  },
+  {
+   "commit": "dffeb0998",
+   "date": "2026-10-23",
+   "order": 107,
+   "version": "1.7",
+   "id": "1.7"
+  },
+  {
+   "commit": "b672421ce",
+   "date": "2026-10-22",
+   "order": 106,
+   "version": "1.6",
+   "id": "1.6"
+  },
+  {
+   "commit": "17313d1b8",
+   "date": "2026-10-17",
+   "order": 105,
+   "version": "1.5",
+   "id": "1.5"
+  },
+  {
+   "commit": "513ce045f",
+   "date": "2026-10-16",
+   "order": 104,
+   "version": "1.4",
+   "id": "1.4"
+  },
+  {
+   "commit": "5e78a9e77",
+   "date": "2026-10-16",
+   "order": 103,
+   "version": "1.3",
+   "id": "1.3"
+  },
+  {
+   "commit": "8c77c2e48",
+   "date": "2026-10-15",
+   "order": 102,
+   "version": "1.2",
+   "id": "1.2"
+  },
+  {
+   "commit": "b240279a1",
+   "date": "2026-10-14",
+   "order": 101,
+   "version": "1.1",
+   "id": "1.1"
+  },
+  {
+   "commit": "",
+   "date": "2026-10-13",
+   "order": 100,
+   "version": "1.0",
+   "id": "1.0"
+  }
+ ],
+ "changes": [
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 1,
+   "text": "FireRed on Windows and Android, with its sound.",
+   "version": "1.0",
+   "id": "c005"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 2,
+   "text": "Savestates (F5), fast-forward, fullscreen.",
+   "version": "1.0",
+   "id": "c006"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 3,
+   "text": "Play together over the network: the Wireless Adapter, the Link window (F2), online codes.",
+   "version": "1.0",
+   "id": "c007"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 4,
+   "text": "Settings (F4), with keys and controller buttons.",
+   "version": "1.0",
+   "id": "c008"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 5,
+   "text": "The debug menu (F3).",
+   "version": "1.0",
+   "id": "c009"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "added",
+   "order": 6,
+   "text": "The Mystery Gift events: the Aurora and Mystic Tickets.",
+   "version": "1.0",
+   "id": "c010"
+  },
+  {
+   "date": "2026-10-14",
+   "kind": "added",
+   "order": 1,
+   "text": "The players of other copies on your map: walking, running, cycling, surfing.",
+   "version": "1.1",
+   "id": "c011"
+  },
+  {
+   "date": "2026-10-14",
+   "kind": "added",
+   "order": 2,
+   "text": "Choose how the others see you (F6).",
+   "version": "1.1",
+   "id": "c012"
+  },
+  {
+   "date": "2026-10-14",
+   "kind": "added",
+   "order": 3,
+   "text": "Export and import the save (debug menu).",
+   "version": "1.1",
+   "id": "c013"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 1,
+   "text": "Extras: instant text, running indoors and always, skipping the replay, trade evolutions by level.",
+   "version": "1.2",
+   "id": "c014"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 2,
+   "text": "Resume where you left off when the game starts again.",
+   "version": "1.2",
+   "id": "c015"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 3,
+   "text": "Emotes over your head (E), names over the players nearby, and the players on the Town Map.",
+   "version": "1.2",
+   "id": "c016"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 4,
+   "text": "A friend list in the Link window.",
+   "version": "1.2",
+   "id": "c017"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 5,
+   "text": "Trade and battle with the players nearby, anywhere.",
+   "version": "1.2",
+   "id": "c018"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 6,
+   "text": "DexNav (F7): the wild Pokémon of each map.",
+   "version": "1.2",
+   "id": "c019"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "added",
+   "order": 7,
+   "text": "Extras for reusable TMs and move tutors.",
+   "version": "1.2",
+   "id": "c020"
+  },
+  {
+   "date": "2026-10-15",
+   "kind": "changed",
+   "order": 8,
+   "text": "Easier on phones: less battery, a steady fast-forward.",
+   "version": "1.2",
+   "id": "c021"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 1,
+   "text": "The summary shows IVs and EVs (A on its SKILLS page) and the stats a nature raises and lowers.",
+   "version": "1.3",
+   "id": "c022"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 2,
+   "text": "Pokémon editor (F8): IVs, EVs and natures (an extra).",
+   "version": "1.3",
+   "id": "c023"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 3,
+   "text": "Mints, bottle caps and EV-lowering berries, on Celadon's 5F (an extra).",
+   "version": "1.3",
+   "id": "c024"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 4,
+   "text": "The first Pokémon in the party follows you, with HeartGold's sprites (an extra).",
+   "version": "1.3",
+   "id": "c025"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 1,
+   "text": "HeartGold's Pokémon pictures in battles and menus (an extra).",
+   "version": "1.4",
+   "id": "c026"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "added",
+   "order": 2,
+   "text": "MOVES in the party menu: remember forgotten moves, forget others.",
+   "version": "1.4",
+   "id": "c027"
+  },
+  {
+   "date": "2026-10-16",
+   "kind": "fixed",
+   "order": 3,
+   "text": "The touch L and R buttons work in open windows.",
+   "version": "1.4",
+   "id": "c028"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "added",
+   "order": 1,
+   "text": "NAME in the party menu: a new nickname for a Pokémon, anywhere.",
+   "version": "1.5",
+   "id": "c029"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "added",
+   "order": 2,
+   "text": "Physical or special by the move, as from Diamond and Pearl: FIRE PUNCH hits with ATTACK.",
+   "version": "1.5",
+   "id": "c030"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "added",
+   "order": 3,
+   "text": "The Fairy type: Clefairy, Gardevoir, Marill, Mawile... and CHARM, SWEET KISS and MOONLIGHT.",
+   "version": "1.5",
+   "id": "c031"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "added",
+   "order": 4,
+   "text": "Pokédex data: SELECT on a Pokédex page shows the base stats, abilities, evolutions and every move it learns.",
+   "version": "1.5",
+   "id": "c032"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "added",
+   "order": 5,
+   "text": "The changelog, in the MENU. On a PC, Esc (or Y on a controller) opens the MENU.",
+   "version": "1.5",
+   "id": "c033"
+  },
+  {
+   "date": "2026-10-17",
+   "kind": "fixed",
+   "order": 6,
+   "text": "The B that closes a window no longer reaches the game under it.",
+   "version": "1.5",
+   "id": "c034"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 1,
+   "text": "Real-time battles (an extra): wild Pokémon and trainers fought right on the map, A B L R for the moves.",
+   "version": "1.6",
+   "id": "c035"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 2,
+   "text": "All 353 moves in real time, a camera that follows the fight and four looks for the bars and buttons.",
+   "version": "1.6",
+   "id": "c036"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 3,
+   "text": "Dodge with a direction pressed twice. SELECT swaps Pokémon, START opens the battle's menu.",
+   "version": "1.6",
+   "id": "c037"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 4,
+   "text": "Trainers as hard as you choose (Very hard at first), double battles, and boss fights with the gym leaders, the Elite Four and more.",
+   "version": "1.6",
+   "id": "c038"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 5,
+   "text": "Wild Pokémon with their own ways of fighting, sometimes two at once. A dazed one is easier to catch.",
+   "version": "1.6",
+   "id": "c039"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "added",
+   "order": 6,
+   "text": "Combos, a rank after each win, aim help, cover behind trees, and tall grass that catches fire.",
+   "version": "1.6",
+   "id": "c040"
+  },
+  {
+   "date": "2026-10-22",
+   "kind": "fixed",
+   "order": 7,
+   "text": "The following Pokémon keeps its colors after the quest log's replay.",
+   "version": "1.6",
+   "id": "c041"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 1,
+   "text": "The Game Corner+ (an extra): Celadon's Game Corner full of new games, each named over its machines.",
+   "version": "1.7",
+   "id": "c042"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 2,
+   "text": "VOLTORB FLIP from HeartGold and CARD FLIP from Gold and Silver.",
+   "version": "1.7",
+   "id": "c043"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 3,
+   "text": "MAGIKARP DERBY, WHO'S THAT POKéMON?, POKé PLINKO, STAT SHOWDOWN and a SHELL GAME.",
+   "version": "1.7",
+   "id": "c044"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 4,
+   "text": "A prize shop of six Pokémon a day, the same for everyone, with their nature, stats and level, rerolled for coins.",
+   "version": "1.7",
+   "id": "c045"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 5,
+   "text": "The TMs and held items in the shop, one of them a daily deal.",
+   "version": "1.7",
+   "id": "c046"
+  },
+  {
+   "date": "2026-10-23",
+   "kind": "added",
+   "order": 6,
+   "text": "An egg machine: today's eggs by rarity, 1 in 1024 shiny, almost ready to hatch.",
+   "version": "1.7",
+   "id": "c047"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 1,
+   "text": "The battle type in Settings > Extras: Original or Real-time.",
+   "version": "1.8",
+   "id": "c048"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 2,
+   "text": "Trainers are fought in an arena of their own: a flash, a clearing in the forest, then back where you were.",
+   "version": "1.8",
+   "id": "c049"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 3,
+   "text": "Classic clear: a see-through look for real-time battles.",
+   "version": "1.8",
+   "id": "c050"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "changed",
+   "order": 4,
+   "text": "Hordes: your one Pokémon against two or three wild ones.",
+   "version": "1.8",
+   "id": "c051"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 5,
+   "text": "Your Pokémon runs around you to the front as a battle starts.",
+   "version": "1.8",
+   "id": "c052"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "fixed",
+   "order": 6,
+   "text": "A caught Pokémon's ball stays where it landed, with three stars at the click.",
+   "version": "1.8",
+   "id": "c053"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "removed",
+   "order": 7,
+   "text": "Grass no longer catches fire in real-time battles.",
+   "version": "1.8",
+   "id": "c054"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "fixed",
+   "order": 8,
+   "text": "The sounds of wind and ice moves playing on after the battle.",
+   "version": "1.8",
+   "id": "c055"
+  },
+  {
+   "date": "2026-10-24",
+   "kind": "fixed",
+   "order": 9,
+   "text": "Foes off the screen walking through trees and walls.",
+   "version": "1.8",
+   "id": "c056"
+  },
+  {
+   "commit": "042466874",
+   "date": "2026-10-24",
+   "kind": "fixed",
+   "order": 1,
+   "text": "Touch taps quicker than a frame were sometimes missed; every press counts now.",
+   "version": "1.9",
+   "id": "c057"
+  },
+  {
+   "commit": "8dffa98ee",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 2,
+   "text": "On the phone, real-time battles get their own touch buttons: a stick that comes where your thumb touches (any angle, slower when pushed a little), the four moves around the right thumb in their types' colors, filling up as they recharge, a DODGE button, and SWAP and START at the top right.",
+   "version": "1.9",
+   "id": "c058"
+  },
+  {
+   "commit": "8dffa98ee",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 3,
+   "text": "A controller's left stick moves your Pokémon at any angle in real-time battles, slower when pushed a little.",
+   "version": "1.9",
+   "id": "c059"
+  },
+  {
+   "commit": "69acb09bf",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 4,
+   "text": "MENU > Touch buttons: drag each touch button wherever you want and set how see-through they are, for the normal and the battle layouts.",
+   "version": "1.9",
+   "id": "c060"
+  },
+  {
+   "commit": "56172bef5",
+   "date": "2026-10-24",
+   "kind": "changed",
+   "order": 1,
+   "text": "Outside battles the touch D-pad is now a cross like the GBA's (between two arms presses both); the round pad stays as an option in MENU > Touch buttons.",
+   "version": "1.10",
+   "id": "c061"
+  },
+  {
+   "commit": "56172bef5",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 2,
+   "text": "The battle stick can come where your thumb lands, as before, or stay fixed at its place: a choice in MENU > Touch buttons.",
+   "version": "1.10",
+   "id": "c062"
+  },
+  {
+   "commit": "c8f9f5766",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 3,
+   "text": "MENU > Touch buttons: tap a button to select it and make it bigger or smaller (50% to 200%); tap the background to unselect.",
+   "version": "1.10",
+   "id": "c063"
+  },
+  {
+   "commit": "b1ed202f4",
+   "date": "2026-10-24",
+   "kind": "changed",
+   "order": 4,
+   "text": "The party menu groups a Pokémon's field moves under FIELD (in blue) when it knows more than one, and has POKéDEX to open its Pokédex page.",
+   "version": "1.10",
+   "id": "c064"
+  },
+  {
+   "commit": "474132bc2",
+   "date": "2026-10-24",
+   "kind": "changed",
+   "order": 5,
+   "text": "The touch D-pad gives 4 directions, so a thumb a little off left or right no longer walks the player up or down (8 directions stay as an option in MENU > Touch buttons). A direction holds until the thumb is clearly into the next one, and the thumb is followed past the D-pad's edge.",
+   "version": "1.10",
+   "id": "c065"
+  },
+  {
+   "commit": "474132bc2, 5a29f6d43, 89deda5f3",
+   "date": "2026-10-24",
+   "kind": "added",
+   "order": 6,
+   "text": "On Android the touch buttons vibrate: a click for each button pressed, a lighter tick for each new D-pad direction (Android 10 and later). VIBRATION in MENU > Touch buttons sets how strong, from off to 100% in steps of 25.",
+   "version": "1.10",
+   "id": "c066"
+  },
+  {
+   "commit": "474132bc2, 7a9694464",
+   "date": "2026-10-24",
+   "kind": "changed",
+   "order": 7,
+   "text": "The cross D-pad is drawn sharper, with a thinner edge and slightly rounded corners, and is bigger and a little closer to the picture by default.",
+   "version": "1.10",
+   "id": "c067"
+  }
+ ]
+}

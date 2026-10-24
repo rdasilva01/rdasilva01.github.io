@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FireRed Port Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; first what the port adds to FireRed (groups of pictures, then a plain list), then the changelog: the next version's changes, then each version newest first */
+:root {
+  --bg: #eef2f6;
+  --panel: #ffffff;
+  --ink: #1d2430;
+  --muted: #5b6676;
+  --line: #d3dae4;
+  --accent: #c8352b;
+  --accent-soft: #f7e1de;
+  --frame: #2a3442;
+  --added: #23804a;
+  --added-bg: #e0f1e6;
+  --changed: #9a6a0c;
+  --changed-bg: #f5ead2;
+  --fixed: #275fb3;
+  --fixed-bg: #dfe8f7;
+  --removed: #646b78;
+  --removed-bg: #e7e9ee;
+  --display: "Pixelify Sans", "Courier New", monospace;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161c; --panel: #1b2129; --ink: #e6e9ef; --muted: #9aa4b3; --line: #2d3541; --frame: #0b0e12;
+    --accent: #ff6b5c; --accent-soft: #3a2120;
+    --added: #63d08b; --added-bg: #183020; --changed: #e7b552; --changed-bg: #372c16;
+    --fixed: #7eaaf2; --fixed-bg: #17243a; --removed: #a6aebb; --removed-bg: #272c34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161c; --panel: #1b2129; --ink: #e6e9ef; --muted: #9aa4b3; --line: #2d3541; --frame: #0b0e12;
+  --accent: #ff6b5c; --accent-soft: #3a2120;
+  --added: #63d08b; --added-bg: #183020; --changed: #e7b552; --changed-bg: #372c16;
+  --fixed: #7eaaf2; --fixed-bg: #17243a; --removed: #a6aebb; --removed-bg: #272c34;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 36px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 6vw, 46px); line-height: 1.05; }
+.lede { color: var(--muted); max-width: 64ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.sections { display: flex; flex-wrap: wrap; gap: 8px; }
+.sections a { font: 600 14px var(--body); color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--panel); border-radius: 4px; padding: 4px 12px; }
+.sections a:hover { border-color: var(--accent); }
+.part-title { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 4.5vw, 32px); line-height: 1.1; scroll-margin-top: 16px; }
+.part { display: grid; gap: 26px; }
+
+/* What's added: a group per area, its pictures as framed screens */
+.group { display: grid; gap: 12px; }
+.group-head { display: grid; gap: 4px; }
+.group-head h3 { font-size: 21px; font-weight: 700; }
+.group-head h3 .where { font: 500 12px var(--mono); color: var(--muted); margin-left: 8px; white-space: nowrap; }
+.group-head p { color: var(--muted); max-width: 70ch; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px 14px; }
+.cards.wide { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.card { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; image-rendering: pixelated; background: var(--frame); border: 3px solid var(--frame); border-radius: 4px; }
+.cards.wide .card img { aspect-ratio: 20 / 9; image-rendering: auto; }
+.card figcaption { font-size: 14px; line-height: 1.4; }
+.card figcaption b { display: block; font-size: 15px; }
+.more { font-size: 14px; color: var(--muted); max-width: 80ch; }
+.also { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 28px; }
+.also h3 { font-size: 16px; margin-bottom: 4px; }
+.also ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 15px; }
+
+/* The changelog */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.jump, .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.jump a { font-family: var(--mono); font-size: 13px; color: var(--ink); text-decoration: none; padding: 2px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+.jump a:hover { border-color: var(--accent); }
+.jump a.next { color: var(--accent); border-color: var(--accent); }
+.filters button { font: 600 13px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+.filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+.filters button:focus-visible, .jump a:focus-visible, .sections a:focus-visible, a.commit:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+#log { display: grid; gap: 22px; }
+.release { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; display: grid; gap: 14px; scroll-margin-top: 16px; }
+.release.next { border: 2px dashed var(--accent); background: var(--accent-soft); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.head h2 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; }
+.head h2 small { font-size: 0.55em; color: var(--muted); margin-right: 2px; }
+.release.next .head h2 { color: var(--accent); font-size: 26px; }
+.head time, .head .note { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.head .tally { margin-left: auto; font-size: 13px; color: var(--muted); }
+.kind { display: grid; gap: 6px; }
+.kind h4 { margin: 0; justify-self: start; font: 700 12px var(--body); letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 8px; border-radius: 3px; }
+.k-added h4 { color: var(--added); background: var(--added-bg); }
+.k-changed h4 { color: var(--changed); background: var(--changed-bg); }
+.k-fixed h4 { color: var(--fixed); background: var(--fixed-bg); }
+.k-removed h4 { color: var(--removed); background: var(--removed-bg); }
+.kind ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.kind li { min-width: 0; }
+.commit { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; margin-left: 6px; white-space: nowrap; }
+a.commit { border-bottom: 1px dotted var(--muted); }
+a.commit:hover { color: var(--accent); border-color: var(--accent); }
+.empty { color: var(--muted); font-size: 14px; }
+.status { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">pokefirered · Windows and Android</div>
+    <h1>FireRed Port Changelog</h1>
+    <p class="lede">Pokémon FireRed running natively on Windows and Android, with a lot added to it. First, what the port brings compared to the original game; then every change, version by version.</p>
+    <div class="facts" aria-live="polite">
+      <span>Current version <b id="current">-</b></span>
+      <span><b id="next-count">0</b> unreleased</span>
+      <span><b id="total">0</b> changes in all</span>
+    </div>
+    <nav class="sections" aria-label="On this page">
+      <a href="#added">What's added</a>
+      <a href="#changelog">Changelog</a>
+    </nav>
+  </header>
+
+  <section class="part" aria-labelledby="added">
+    <h2 class="part-title" id="added">What's added to FireRed</h2>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Real-time battles <span class="where">Settings › Extras › Battle type</span></h3>
+        <p>Wild Pokémon and trainers are fought right on the map: your Pokémon moves freely and A, B, L and R are its four moves.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/rtb-battle.png" alt="Charmander's Ember flying at a wild Pidgey on Route 1, the four moves at the bottom right" width="480" height="320" loading="lazy"><figcaption><b>Fought on the map</b>All 353 moves work in real time. The camera follows the fight; a double tap dodges.</figcaption></figure>
+        <figure class="card"><img src="img/rtb-boss-card.png" alt="Leader Brock's title card: the Rock-Solid Pokémon Trainer" width="480" height="320" loading="lazy"><figcaption><b>Boss fights</b>Gym leaders, the Elite Four, the Champion and Giovanni open with a title card and fight one level harder.</figcaption></figure>
+        <figure class="card"><img src="img/rtb-boss-ace.png" alt="Onix unleashing Rock Storm, red warning lines all around it" width="480" height="320" loading="lazy"><figcaption><b>Big attacks</b>A boss's last Pokémon gets serious at half its HP and unleashes big attacks, with warnings first.</figcaption></figure>
+        <figure class="card"><img src="img/rtb-boss.png" alt="Fighting Brock's Geodude in the arena, his bar at the top" width="480" height="320" loading="lazy"><figcaption><b>The arena</b>Trainers are fought in a clearing of their own, with trees to hide behind; their guard breaks under hits.</figcaption></figure>
+        <figure class="card"><img src="img/rtb-horde.png" alt="Three wild Rattata at once, their boxes at the top left in the see-through Classic look" width="480" height="320" loading="lazy"><figcaption><b>Hordes and looks</b>Sometimes two or three wild ones at once. Five looks for the bars and buttons, here Classic clear.</figcaption></figure>
+      </div>
+      <p class="more">Also: trainers as hard as you choose (Easy to Very hard), double battles, wild Pokémon with their own ways of fighting, dazed foes that are easier to catch, combos and a rank after each win, aim help, cover behind trees, and SELECT to swap Pokémon at once.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Game Corner+ <span class="where">Celadon City</span></h3>
+        <p>Celadon's Game Corner full of new games, each named over its machines, a prize shop that changes every day and an egg machine.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/gc-voltorb.png" alt="Voltorb Flip: a five by five board of cards with the points and Voltorbs of each row and column" width="480" height="320" loading="lazy"><figcaption><b>Voltorb Flip</b>HeartGold's game with its rules and boards.</figcaption></figure>
+        <figure class="card"><img src="img/gc-derby.png" alt="Magikarp Derby: five Magikarp in their lanes, the odds on each" width="480" height="320" loading="lazy"><figcaption><b>Magikarp Derby</b>Five Magikarp race; pick a lane and bet on the odds.</figcaption></figure>
+        <figure class="card"><img src="img/gc-plinko.png" alt="Poké Plinko: rows of pegs over nine slots paying from 0.2 to 16 times" width="480" height="320" loading="lazy"><figcaption><b>Poké Plinko</b>Balls bounce down eight rows of pegs into nine slots.</figcaption></figure>
+        <figure class="card"><img src="img/gc-shop.png" alt="The prize shop: six Pokémon in a grid, each with its level, nature, stat bars and price" width="480" height="320" loading="lazy"><figcaption><b>Prize shop</b>Six Pokémon a day, the same for everyone, with their nature and stats; reroll them for coins.</figcaption></figure>
+        <figure class="card"><img src="img/gc-gacha.png" alt="The egg machine and today's eggs by rarity, from legendary to common" width="480" height="320" loading="lazy"><figcaption><b>Egg machine</b>Today's eggs by rarity, 1 in 1024 shiny, almost ready to hatch.</figcaption></figure>
+      </div>
+      <p class="more">Also: Card Flip from Gold and Silver, Who's That Pokémon?, Stat Showdown and a Shell Game; TMs and held items in the shop, one of them a daily deal.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Play together <span class="where">Link window (F2)</span></h3>
+        <p>A Wireless Adapter over the network: on the same Wi-Fi, or online with a code, without opening ports.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/players.png" alt="Bob, another player, standing in Pallet Town with his name over his head" width="480" height="320" loading="lazy"><figcaption><b>Players on your map</b>Other players walk, run, cycle and surf where you are, with their names over them.</figcaption></figure>
+        <figure class="card"><img src="img/emote.png" alt="An exclamation mark over the player's head" width="480" height="320" loading="lazy"><figcaption><b>Emotes</b>!, ?, !!, a smile or an X over your head (E).</figcaption></figure>
+      </div>
+      <p class="more">Also: the Union Room, trades and battles in the Direct Corner, Pokémon Jump, Dodrio Berry Picking, Berry Crush and Mystery Gift; trading and battling anywhere with the player in front of you; a friend list; how others see you (F6); the other players on the Town Map.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>Pokémon and windows</h3>
+        <p>More to see about your Pokémon, and windows the original never had.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/follower.png" alt="Charmander walking behind the player in Pallet Town" width="480" height="320" loading="lazy"><figcaption><b>Following Pokémon</b>Your first Pokémon walks behind you, with HeartGold's sprites.</figcaption></figure>
+        <figure class="card"><img src="img/hgss-battle.png" alt="A wild Charizard drawn with HeartGold's picture" width="480" height="320" loading="lazy"><figcaption><b>HeartGold's pictures</b>The Pokémon as HeartGold draws them, in battles and menus.</figcaption></figure>
+        <figure class="card"><img src="img/dexdata.png" alt="Charizard's Pokédex data: its types and base stats as bars" width="480" height="320" loading="lazy"><figcaption><b>Pokédex data</b>SELECT on a Pokédex page: base stats, abilities, evolutions and every move.</figcaption></figure>
+        <figure class="card"><img src="img/editor.png" alt="The Pokémon editor: Charmander's IVs, EVs and stats, its nature" width="480" height="320" loading="lazy"><figcaption><b>Pokémon editor</b>IVs, EVs and natures (F8).</figcaption></figure>
+        <figure class="card"><img src="img/dexnav.png" alt="DexNav on Route 1: the wild Pokémon of the grass" width="480" height="320" loading="lazy"><figcaption><b>DexNav</b>The wild Pokémon of each map, unknown ones as shapes (F7).</figcaption></figure>
+        <figure class="card"><img src="img/states.png" alt="The savestates window: nine places, one saved with its picture and date" width="480" height="320" loading="lazy"><figcaption><b>Savestates</b>Nine of them, each with a picture of the moment (F5).</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>On the phone <span class="where">MENU › Touch buttons</span></h3>
+        <p>Touch buttons beside the picture, made your own; a controller works too.</p>
+      </div>
+      <div class="cards wide">
+        <figure class="card"><img src="img/touch-dpad.png" alt="The phone screen: a cross D-pad on the left, A, B, START and the others on the right" width="960" height="432" loading="lazy"><figcaption><b>Touch buttons</b>A cross D-pad like the GBA's (or a round pad) with 4 or 8 directions, a little vibration for each press, the MENU and fast-forward.</figcaption></figure>
+        <figure class="card"><img src="img/touch-battle.png" alt="A real-time battle on the phone: a stick on the left, the four moves around the right thumb" width="960" height="432" loading="lazy"><figcaption><b>Battle controls</b>A stick and the moves around your thumb in their types' colors, and DODGE.</figcaption></figure>
+        <figure class="card"><img src="img/touch-editor.png" alt="The touch button editor: a button framed and made bigger, the toolbar at the top" width="960" height="432" loading="lazy"><figcaption><b>Your layout</b>Move each button, make it bigger or smaller, and set how see-through they are and how strong the vibration is.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="also">
+      <div>
+        <h3>Game options</h3>
+        <ul>
+          <li>Instant text</li>
+          <li>Running indoors, and always running</li>
+          <li>Skipping the quest log replay</li>
+          <li>Trade evolutions by level or held item</li>
+          <li>Reusable TMs and move tutors</li>
+          <li>Physical or special by the move, as from Diamond and Pearl</li>
+          <li>The Fairy type</li>
+          <li>Renaming Pokémon and remembering moves from the party menu</li>
+          <li>The party menu's FIELD (the field moves together) and POKéDEX</li>
+          <li>Mints, bottle caps and EV-lowering berries (Celadon 5F)</li>
+          <li>IVs, EVs and nature arrows in the summary</li>
+        </ul>
+      </div>
+      <div>
+        <h3>The program</h3>
+        <ul>
+          <li>Windows (32 and 64-bit) and Android</li>
+          <li>Resuming where you left off</li>
+          <li>Fast-forward and fullscreen</li>
+          <li>Settings, keys and controller buttons (F4)</li>
+          <li>The debug menu (F3)</li>
+          <li>Exporting and importing the save</li>
+          <li>The Mystery Gift events: the Aurora and Mystic Tickets</li>
+          <li>This changelog in the game (MENU)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="changelog">
+    <h2 class="part-title" id="changelog">Changelog</h2>
+    <div class="toolbar">
+      <nav class="jump" id="jump" aria-label="Versions"></nav>
+      <div class="filters" role="group" aria-label="Show changes of a kind" id="filters">
+        <button type="button" id="f-all" data-kind="all" aria-pressed="true">All</button>
+        <button type="button" id="f-added" data-kind="added" aria-pressed="false">Added</button>
+        <button type="button" id="f-changed" data-kind="changed" aria-pressed="false">Changed</button>
+        <button type="button" id="f-fixed" data-kind="fixed" aria-pressed="false">Fixed</button>
+        <button type="button" id="f-removed" data-kind="removed" aria-pressed="false">Removed</button>
+      </div>
+    </div>
+    <main id="log">
+      <p class="empty">Loading the changes. Each version appears here with its date and what it brought.</p>
+    </main>
+    <p class="status" id="status"></p>
+  </section>
+</div>
+
+<script>
+const KINDS = [["added", "Added"], ["changed", "Changed"], ["fixed", "Fixed"], ["removed", "Removed"]];
+const REPO = "";
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const versions = {}, changes = {};
+let filter = "all", jumped = false;
+try { filter = localStorage.getItem("changelog-filter") || "all"; } catch (e) {}
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+  }
+  for (const c of children || []) if (c) e.appendChild(c);
+  return e;
+}
+
+function niceDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+  return m ? Number(m[3]) + " " + MONTHS[Number(m[2]) - 1] + " " + m[1] : "";
+}
+
+// A change's commits (one hash, or several separated by commas): links to the repository, or
+// plain text where it can't be opened (REPO empty)
+function commitLink(hashes) {
+  const list = String(hashes || "").split(/[\s,]+/).filter(Boolean);
+  if (!list.length) return null;
+  return el("span", { class: "commits" }, list.map(h => REPO
+    ? el("a", { class: "commit", href: REPO + h, target: "_blank", rel: "noopener", text: h })
+    : el("span", { class: "commit", text: h })));
+}
+
+function anchor(version) {
+  return version === "next" ? "unreleased" : "v" + version;
+}
+
+function render() {
+  const log = document.getElementById("log");
+  const all = Object.values(changes);
+  const byVersion = {};
+  for (const c of all) (byVersion[c.version] = byVersion[c.version] || []).push(c);
+  const order = Object.values(versions).sort((a, b) => (b.order || 0) - (a.order || 0));
+  const next = byVersion.next || [];
+
+  document.getElementById("current").textContent = order.length ? "v" + order[0].version : "-";
+  document.getElementById("next-count").textContent = next.length;
+  document.getElementById("total").textContent = all.length;
+  for (const b of document.querySelectorAll("#filters button")) b.setAttribute("aria-pressed", String(b.dataset.kind === filter));
+
+  const sections = [];
+  if (next.length) sections.push({ version: "next", items: next });
+  for (const v of order) sections.push({ version: v.version, date: v.date, commit: v.commit, items: byVersion[v.version] || [] });
+
+  const jump = document.getElementById("jump");
+  jump.textContent = "";
+  for (const s of sections)
+    jump.appendChild(el("a", { href: "#" + anchor(s.version), class: s.version === "next" ? "next" : "", text: s.version === "next" ? "Unreleased" : "v" + s.version }));
+
+  log.textContent = "";
+  if (!sections.length) {
+    log.appendChild(el("p", { class: "empty", text: "No changes recorded yet." }));
+    return;
+  }
+  for (const s of sections) {
+    const isNext = s.version === "next";
+    const shown = s.items.filter(c => filter === "all" || c.kind === filter).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const counts = KINDS.map(([k, label]) => [s.items.filter(c => c.kind === k).length, label.toLowerCase()]).filter(([n]) => n);
+    const head = el("div", { class: "head" }, [
+      isNext ? el("h2", { text: "Unreleased" }) : el("h2", {}, [el("small", { text: "v" }), document.createTextNode(s.version)]),
+      isNext ? el("span", { class: "note", text: "goes into the next version" }) : (s.date ? el("time", { datetime: s.date, text: niceDate(s.date) }) : null),
+      isNext ? null : commitLink(s.commit),
+      el("span", { class: "tally", text: counts.map(([n, l]) => n + " " + l).join(" · ") }),
+    ]);
+    const section = el("section", { class: "release" + (isNext ? " next" : ""), id: anchor(s.version), "aria-label": isNext ? "Unreleased" : "Version " + s.version }, [head]);
+    if (!shown.length) section.appendChild(el("p", { class: "empty", text: "Nothing of this kind in this version." }));
+    for (const [k, label] of KINDS) {
+      const items = shown.filter(c => c.kind === k);
+      if (!items.length) continue;
+      section.appendChild(el("div", { class: "kind k-" + k }, [
+        el("h4", { text: label }),
+        el("ul", {}, items.map(c => el("li", {}, [
+          c.area ? el("span", { class: "area", text: c.area + ": " }) : null,
+          document.createTextNode(c.text || ""),
+          commitLink(c.commit),
+        ]))),
+      ]));
+    }
+    log.appendChild(section);
+  }
+  if (!jumped && /^#[A-Za-z0-9._~-]+$/.test(location.hash)) {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target) { jumped = true; target.scrollIntoView(); }
+  }
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  filter = b.dataset.kind;
+  try { localStorage.setItem("changelog-filter", filter); } catch (err) {}
+  render();
+});
+
+render();
+document.getElementById("log").replaceChildren(el("p", { class: "empty", text: "Loading the changes. Each version appears here with its date and what it brought." }));
+
+fetch("changelog.json", { cache: "no-cache" })
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(data => {
+    for (const v of data.versions) versions[v.id] = v;
+    for (const c of data.changes) changes[c.id] = c;
+    render();
+  })
+  .catch(() => {
+    document.getElementById("log").replaceChildren(el("p", { class: "empty", text: "Couldn't load the changes: reload the page." }));
+  });
+</script>
+</body>
+</html>
