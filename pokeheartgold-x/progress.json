@@ -1,0 +1,1852 @@
+{
+ "updated": "2026-10-24",
+ "groups": [
+  {
+   "id": "start",
+   "name": "Start",
+   "blurb": "From the opening to the first step"
+  },
+  {
+   "id": "field",
+   "name": "Field",
+   "blurb": "Walking around, talking, and the choices the game asks for"
+  },
+  {
+   "id": "battle",
+   "name": "Battle",
+   "blurb": "Commands, moves, the battle's bag and party, catching"
+  },
+  {
+   "id": "party",
+   "name": "Party and Summary",
+   "blurb": "The party, a Pokémon's pages, levels and moves"
+  },
+  {
+   "id": "bag",
+   "name": "Bag and items",
+   "blurb": "The bag and the key items that open screens"
+  },
+  {
+   "id": "menus",
+   "name": "Pokédex, Trainer Card, Options, Save",
+   "blurb": "The rest of the field menu"
+  },
+  {
+   "id": "pokegear",
+   "name": "Pokégear",
+   "blurb": "Clock, map, radio, phone"
+  },
+  {
+   "id": "services",
+   "name": "PC, shops and services",
+   "blurb": "Boxes, marts, the move relearner and deleter"
+  },
+  {
+   "id": "minigames",
+   "name": "Minigames",
+   "blurb": "Voltorb Flip, the Ruins of Alph, scratch cards, contests"
+  },
+  {
+   "id": "athlon",
+   "name": "Pokéathlon",
+   "blurb": "The courses and their ten events"
+  },
+  {
+   "id": "frontier",
+   "name": "Battle Frontier",
+   "blurb": "What the facilities add to battles"
+  },
+  {
+   "id": "link",
+   "name": "Link, Wi-Fi and Pokéwalker",
+   "blurb": "Trading, the Union Room, connections"
+  },
+  {
+   "id": "ending",
+   "name": "Ending",
+   "blurb": "The Hall of Fame and the credits"
+  }
+ ],
+ "screens": [
+  {
+   "id": "title",
+   "group": "start",
+   "name": "Title screen",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "The bottom's Ho-Oh scene with the logo laid over its upper half. START or A as now.",
+   "changed": "",
+   "top": "The logo, the sky and Ho-Oh flying",
+   "bottom": "Ho-Oh in 3D over the clouds",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "opening",
+   "group": "start",
+   "name": "Opening movie",
+   "kind": "both",
+   "status": "planned",
+   "plan": "Scene by scene: the screen that carries it, mostly the top; the few scenes split across both shown as one picture.",
+   "changed": "",
+   "top": "Most scenes",
+   "bottom": "Some scenes, and halves of others",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "main-menu",
+   "group": "start",
+   "name": "Main menu",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Show the bottom screen. The D-pad already moves through it.",
+   "changed": "",
+   "top": "Nothing (black)",
+   "bottom": "CONTINUE with the save's player, time and badges; NEW GAME; CONNECT TO POKéWALKER",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "main-menu-more",
+   "group": "start",
+   "name": "Main menu, further down",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Show the bottom screen, as the rest of the main menu.",
+   "changed": "",
+   "top": "Nothing (black)",
+   "bottom": "MIGRATE FROM FIRERED, Nintendo Wi-Fi Connection settings, Wii message settings",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "adventure-info",
+   "group": "start",
+   "name": "Adventure info",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The text on top with its three answers in a list window. The same list window as the field's choices (see Field: A choice of several).",
+   "changed": "",
+   "top": "Oak's question about what to explain",
+   "bottom": "CONTROL INFO, ADVENTURE INFO, NO INFO NEEDED",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "oak",
+   "group": "start",
+   "name": "Professor Oak's welcome",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "Oak and his words; his menus and the boy/girl choice show the bottom while they wait; a touch on his screen goes on, as the bottom's button did.",
+   "top": "Oak and his words",
+   "bottom": "A backdrop and the Touch button",
+   "tier": 4,
+   "results": [
+    {
+     "file": "oak-1.png",
+     "caption": "Oak and his words"
+    }
+   ]
+  },
+  {
+   "id": "intro-confirm",
+   "group": "start",
+   "name": "Boy or girl, name confirmed",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The player's picture beside Oak on the top screen. The same small YES/NO box as every yes/no (see Field: Yes or no).",
+   "changed": "",
+   "top": "Oak asks: Your name is ...?",
+   "bottom": "The player's picture with YES and NO",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "naming",
+   "group": "start",
+   "name": "Naming screen",
+   "kind": "both",
+   "status": "done",
+   "plan": "Like the GBA's naming screen: the name and the icon in a strip at the top, the keyboard below it (its rows a little tighter so both fit). The D-pad already moves on the keyboard.",
+   "changed": "The bottom screen, with the top's question (\"MAGIKARP's nickname?\", \"Your name?\"...) above the name being typed.",
+   "top": "The name being typed and whose it is",
+   "bottom": "The keyboard (letters, symbols, OK, BACK)",
+   "tier": 2,
+   "results": [
+    {
+     "file": "naming-1.png",
+     "caption": "The question (whose name) above the name"
+    }
+   ]
+  },
+  {
+   "id": "field",
+   "group": "field",
+   "name": "Walking around",
+   "kind": "top",
+   "status": "done",
+   "plan": "The map fills the screen. The bottom panel goes away; X opens the menu (next).",
+   "changed": "",
+   "top": "The map",
+   "bottom": "The field menu's buttons, always there, and the registered item",
+   "tier": 1,
+   "results": [
+    {
+     "file": "field-1.png",
+     "caption": "The map fills the screen"
+    }
+   ]
+  },
+  {
+   "id": "start-menu",
+   "group": "field",
+   "name": "Field menu",
+   "kind": "both",
+   "status": "done",
+   "plan": "A compact column at the map's right, as in FireRed and Platinum, with the same entries and the contest's and Safari's extras.",
+   "changed": "A column of buttons in the bottom screen's look at the top right (touch, D-pad, A, B/X closes).",
+   "top": "The map",
+   "bottom": "POKéDEX, the trainer card, POKéMON, SAVE, BAG, OPTIONS, POKéGEAR (the contest adds RETIRE and BALL)",
+   "tier": 1,
+   "results": [
+    {
+     "file": "start-menu-1.png",
+     "caption": "X: a column of buttons; touch or D-pad"
+    }
+   ]
+  },
+  {
+   "id": "dialogue",
+   "group": "field",
+   "name": "Talking and signs",
+   "kind": "top",
+   "status": "done",
+   "plan": "Nothing to change: the text box is already on the top.",
+   "changed": "",
+   "top": "The map with the text box",
+   "bottom": "The field menu",
+   "tier": 1,
+   "results": [
+    {
+     "file": "dialogue-1.png",
+     "caption": "Nothing changed: the text box was already there"
+    }
+   ]
+  },
+  {
+   "id": "yes-no",
+   "group": "field",
+   "name": "Yes or no",
+   "kind": "both",
+   "status": "done",
+   "plan": "A small YES/NO box above the text box's right end, as on the GBA. Every yes/no of the scripts uses this one window, so one change covers them all.",
+   "changed": "YES and NO as two buttons above the text box's right end; B answers NO. The text's little YES/NO picture pointing at the bottom screen is left out.",
+   "top": "The question in the text box",
+   "bottom": "Big YES and NO buttons",
+   "tier": 1,
+   "results": [
+    {
+     "file": "yes-no-1.png",
+     "caption": "YES and NO above the text box; B is NO"
+    }
+   ]
+  },
+  {
+   "id": "choices",
+   "group": "field",
+   "name": "A choice of several",
+   "kind": "both",
+   "status": "done",
+   "plan": "A list window at the map's right, above the text box (FireRed's look). The scripts' choice menus all go through one function, so one change covers marts, PCs, elevators, the Day Care...",
+   "changed": "Buttons in the bottom screen's look above the text box (lists, multichoices, grids; touch and keys; help texts follow the chosen one).",
+   "top": "The words in the text box",
+   "bottom": "The choices as buttons (here BUY, SELL, SEE YA)",
+   "tier": 1,
+   "results": [
+    {
+     "file": "choices-1.png",
+     "caption": "A script's choices as buttons above the text box"
+    }
+   ]
+  },
+  {
+   "id": "pc-menu",
+   "group": "field",
+   "name": "Turning on a PC",
+   "kind": "both",
+   "status": "done",
+   "plan": "The same list window as the field's choices (see Field: A choice of several).",
+   "changed": "Buttons like the field's other choices.",
+   "top": "Which PC should be accessed?",
+   "bottom": "SOMEONE'S PC, TEST's PC, SWITCH OFF",
+   "tier": 2,
+   "results": [
+    {
+     "file": "pc-menu-1.png",
+     "caption": "Buttons, like the other choices"
+    }
+   ]
+  },
+  {
+   "id": "storage-menu",
+   "group": "field",
+   "name": "The storage system's menu",
+   "kind": "both",
+   "status": "done",
+   "plan": "The same list window as the field's choices (see Field: A choice of several). (one column of five)",
+   "changed": "One column of five buttons (DEPOSIT POKéMON... SEE YA!), each one's help in the text box.",
+   "top": "What the storage system does",
+   "bottom": "DEPOSIT, WITHDRAW, MOVE POKéMON, MOVE ITEMS, SEE YA in two columns",
+   "tier": 2,
+   "results": [
+    {
+     "file": "storage-menu-1.png",
+     "caption": "Five buttons, each one's help in the text box"
+    }
+   ]
+  },
+  {
+   "id": "athlon-courses",
+   "group": "field",
+   "name": "Six choices in two columns",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The same list window as the field's choices (see Field: A choice of several). Long lists scroll in the window.",
+   "changed": "",
+   "top": "Which course would you like to try?",
+   "bottom": "Five courses and EXIT in two columns",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "nurse",
+   "group": "field",
+   "name": "Pokémon Center nurse",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The nurse and her words",
+   "bottom": "The field menu",
+   "tier": 1,
+   "results": [
+    {
+     "file": "nurse-1.png",
+     "caption": "As on the DS's top screen"
+    }
+   ]
+  },
+  {
+   "id": "fly-map",
+   "group": "field",
+   "name": "Fly map",
+   "kind": "both",
+   "status": "done",
+   "plan": "The map fills the screen; the place's name in a bar along its top, its description in a box while the cursor rests on it.",
+   "changed": "The map; the place's name along its top, and its description in the bottom bar while the cursor rests (when the top's panel is up).",
+   "top": "The chosen place's name and description",
+   "bottom": "The map to pick a place on",
+   "tier": 2,
+   "results": [
+    {
+     "file": "fly-map-1.png",
+     "caption": "The name along the top, the description below"
+    }
+   ]
+  },
+  {
+   "id": "town-map",
+   "group": "field",
+   "name": "Town Map",
+   "kind": "both",
+   "status": "done",
+   "plan": "As the Fly map.",
+   "changed": "As the Fly map.",
+   "top": "The chosen place's name and description",
+   "bottom": "The map",
+   "tier": 3,
+   "results": [
+    {
+     "file": "town-map-1.png",
+     "caption": "As the Fly map"
+    }
+   ]
+  },
+  {
+   "id": "dowsing",
+   "group": "field",
+   "name": "Dowsing Machine",
+   "kind": "both",
+   "status": "planned",
+   "plan": "A small radar in a corner of the map; a button does the touch that searches.",
+   "changed": "",
+   "top": "The map",
+   "bottom": "The Dowsing Machine's radar, touched to search",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "union-room",
+   "group": "field",
+   "name": "Union Room",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The room fills the screen (its talk list is already on top); X opens the room's menu as a column, like the field's.",
+   "changed": "",
+   "top": "The room, and the talk menu (GREET, DRAW, BATTLE, TRADE, RECORDS, SPIN) as a list window",
+   "bottom": "The room's own menu (CHAT, LOG, POKéDEX, PA, POKéMON, OPTIONS, BAG)",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "battle-intro",
+   "group": "battle",
+   "name": "A battle starts",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The trainer slides in, the challenge",
+   "bottom": "A Poké Ball backdrop",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-intro-1.png",
+     "caption": "The battle's start, as on the DS"
+    }
+   ]
+  },
+  {
+   "id": "battle-commands",
+   "group": "battle",
+   "name": "What will it do?",
+   "kind": "both",
+   "status": "done",
+   "plan": "The four commands in a box at the right of the text box, as in Gen 3 (FIGHT BAG / POKéMON RUN), the text box shortened to its left; the party's balls beside the HP box. The D-pad and A already move a cursor on these buttons.",
+   "changed": "Four colored buttons at the text box's right, the prompt on two lines.",
+   "top": "The battle, the HP boxes, the question",
+   "bottom": "FIGHT, BAG, RUN, POKéMON and the party's Poké Balls",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-commands-1.png",
+     "caption": "Four colored buttons at the text box's right"
+    }
+   ]
+  },
+  {
+   "id": "battle-moves",
+   "group": "battle",
+   "name": "Choosing a move",
+   "kind": "both",
+   "status": "done",
+   "plan": "Gen 3's move box over the text box: the moves in two columns, the chosen one's PP and type at the right.",
+   "changed": "The moves as type-colored buttons over the text box, PP and CANCEL at the right.",
+   "top": "The battle",
+   "bottom": "The four moves with their type and PP, CANCEL",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-moves-1.png",
+     "caption": "The moves by type color, PP and CANCEL"
+    }
+   ]
+  },
+  {
+   "id": "battle-targets",
+   "group": "battle",
+   "name": "Choosing a target (double battles)",
+   "kind": "both",
+   "status": "done",
+   "plan": "Aim on the battle itself: the target's sprite and HP box flash, LEFT/RIGHT to change, A to pick.",
+   "changed": "The targets as buttons over the text box (foes on top, allies below, CANCEL), like the moves, rather than aiming on the sprites.",
+   "top": "The double battle",
+   "bottom": "The four battlers' boxes to aim at",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-targets-1.png",
+     "caption": "Targets as buttons (foes, then allies)"
+    }
+   ]
+  },
+  {
+   "id": "battle-text",
+   "group": "battle",
+   "name": "Battle messages",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The battle and its text",
+   "bottom": "A backdrop",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-text-1.png",
+     "caption": "The battle's scene and words"
+    }
+   ]
+  },
+  {
+   "id": "battle-bag",
+   "group": "battle",
+   "name": "The battle's bag",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Show the bottom screen while the bag is open (the battle waits). Its buttons take the D-pad.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "HP/PP RESTORE, POKé BALLS, STATUS HEALERS, BATTLE ITEMS, the last item used",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-bag-1.png",
+     "caption": "The battle's bag (the bottom screen)"
+    }
+   ]
+  },
+  {
+   "id": "battle-bag-items",
+   "group": "battle",
+   "name": "A pocket of the battle's bag",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen, as the bag.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "Six items a page, the pages' arrows",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-bag-items-1.png",
+     "caption": "Its pockets and items"
+    }
+   ]
+  },
+  {
+   "id": "battle-bag-item",
+   "group": "battle",
+   "name": "An item in battle",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen, as the bag.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "The item's description and USE",
+   "tier": 1,
+   "results": []
+  },
+  {
+   "id": "battle-party",
+   "group": "battle",
+   "name": "The battle's party",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen while it's open.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "The six Pokémon with their HP",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-party-1.png",
+     "caption": "The battle's party"
+    }
+   ]
+  },
+  {
+   "id": "battle-party-mon",
+   "group": "battle",
+   "name": "A Pokémon in battle",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "SHIFT, SUMMARY, CHECK MOVES",
+   "tier": 1,
+   "results": [
+    {
+     "file": "battle-party-mon-1.png",
+     "caption": "SHIFT, SUMMARY, CHECK MOVES"
+    }
+   ]
+  },
+  {
+   "id": "battle-summary",
+   "group": "battle",
+   "name": "Summary in battle",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "The Pokémon's stats and moves, page by page",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "catch-throw",
+   "group": "battle",
+   "name": "Throwing a Poké Ball",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The ball shaking",
+   "bottom": "A backdrop",
+   "tier": 1,
+   "results": [
+    {
+     "file": "catch-throw-1.png",
+     "caption": "The ball thrown"
+    }
+   ]
+  },
+  {
+   "id": "catch-pokedex",
+   "group": "battle",
+   "name": "Registered in the Pokédex",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The new Pokémon's Pokédex page",
+   "bottom": "A backdrop",
+   "tier": 2,
+   "results": [
+    {
+     "file": "catch-pokedex-1.png",
+     "caption": "The new Pokédex entry"
+    }
+   ]
+  },
+  {
+   "id": "catch-nickname",
+   "group": "battle",
+   "name": "Give a nickname?",
+   "kind": "both",
+   "status": "done",
+   "plan": "The same small YES/NO box as every yes/no (see Field: Yes or no).",
+   "changed": "",
+   "top": "The question",
+   "bottom": "YES and NO",
+   "tier": 1,
+   "results": [
+    {
+     "file": "catch-nickname-1.png",
+     "caption": "Yes / No on the scene"
+    }
+   ]
+  },
+  {
+   "id": "safari-battle",
+   "group": "battle",
+   "name": "Safari battle",
+   "kind": "both",
+   "status": "done",
+   "plan": "As the battle's commands: the Safari's in the box beside the text.",
+   "changed": "BALL / BAIT / MUD / RUN as the battle's four buttons beside the text.",
+   "top": "The battle",
+   "bottom": "The Safari's commands (shown once the text is out)",
+   "tier": 3,
+   "results": [
+    {
+     "file": "safari-battle-1.png",
+     "caption": "BALL / BAIT / MUD / RUN as buttons"
+    }
+   ]
+  },
+  {
+   "id": "contest-battle",
+   "group": "battle",
+   "name": "Bug-Catching Contest battle",
+   "kind": "both",
+   "status": "planned",
+   "plan": "As the battle's commands.",
+   "changed": "",
+   "top": "The battle",
+   "bottom": "The contest's commands (Park Ball, RUN)",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "battle-party-pick",
+   "group": "battle",
+   "name": "Choosing who enters",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen, with the top's name and item in its prompt line. Link battles and the Frontier use it.",
+   "changed": "",
+   "top": "A backdrop (the chosen Pokémon's name and item once one is picked)",
+   "bottom": "The party with ENTER/NOT ENTERED, CONFIRM, CANCEL",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "party",
+   "group": "party",
+   "name": "Party",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen; the top's name and item strip folds into the prompt line.",
+   "changed": "The bottom screen; the top's strip folds into the Pokémon menu's question box (\"Do what with MEWTWO? | ITEM None\").",
+   "top": "A backdrop (the chosen Pokémon's name and item once one is picked)",
+   "bottom": "The six Pokémon with HP, the prompt, CANCEL",
+   "tier": 1,
+   "results": [
+    {
+     "file": "party-1.png",
+     "caption": "The question box with the held item folded in"
+    }
+   ]
+  },
+  {
+   "id": "party-actions",
+   "group": "party",
+   "name": "A Pokémon's actions",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen, as the party.",
+   "changed": "",
+   "top": "The Pokémon's name and item",
+   "bottom": "Its actions: field moves, SUMMARY, SWITCH, ITEM, QUIT",
+   "tier": 1,
+   "results": [
+    {
+     "file": "party-actions-1.png",
+     "caption": "The ITEM actions, the held item beside the question"
+    }
+   ]
+  },
+  {
+   "id": "party-switch",
+   "group": "party",
+   "name": "Switching places",
+   "kind": "bottom",
+   "status": "done",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "The Pokémon's name and item",
+   "bottom": "Moving one to another place",
+   "tier": 1,
+   "results": [
+    {
+     "file": "party-switch-1.png",
+     "caption": "Moving a Pokémon"
+    }
+   ]
+  },
+  {
+   "id": "script-pick",
+   "group": "party",
+   "name": "Choose a Pokémon (for a person)",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen. The tutors, the Day Care and trades use it.",
+   "changed": "",
+   "top": "A backdrop",
+   "bottom": "The party, 'Choose a Pokémon.'",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "summary",
+   "group": "party",
+   "name": "Summary",
+   "kind": "both",
+   "status": "done",
+   "plan": "One screen per page, like FireRed's summary: the Pokémon's picture and name at the left, the page at the right; L/R or LEFT/RIGHT for the pages the bottom has as buttons.",
+   "changed": "Each tab's two screens are two pages; LEFT/RIGHT go INFO, TRAINER MEMO, SKILLS, BATTLE MOVES, RIBBONS... (the next page starts on the screen the last one ended on). A tap on a page that was on the top screen goes back to the tab's buttons; the tab buttons and Cancel work as before.",
+   "top": "The page: trainer memo, info, stats...",
+   "bottom": "The Pokémon's picture, the pages as buttons, its ribbons/moves",
+   "tier": 1,
+   "results": [
+    {
+     "file": "summary-1.png",
+     "caption": "INFO (LEFT/RIGHT go through the pages)"
+    },
+    {
+     "file": "summary-2.png",
+     "caption": "TRAINER MEMO, the DS's top screen"
+    },
+    {
+     "file": "summary-3.png",
+     "caption": "SKILLS, the DS's top screen"
+    }
+   ]
+  },
+  {
+   "id": "summary-moves",
+   "group": "party",
+   "name": "Summary: skills and moves",
+   "kind": "both",
+   "status": "done",
+   "plan": "As the summary: the moves page shows the moves and the chosen one's details.",
+   "changed": "",
+   "top": "Stats, ability, item",
+   "bottom": "The battle moves with PP, the chosen move's details",
+   "tier": 1,
+   "results": [
+    {
+     "file": "summary-moves-1.png",
+     "caption": "BATTLE MOVES"
+    },
+    {
+     "file": "summary-moves-2.png",
+     "caption": "A move's details"
+    }
+   ]
+  },
+  {
+   "id": "level-up",
+   "group": "party",
+   "name": "Level up (Rare Candy)",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen (the party).",
+   "changed": "",
+   "top": "A backdrop",
+   "bottom": "The party, with the stats window",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "forget-move",
+   "group": "party",
+   "name": "Forget a move for a new one",
+   "kind": "both",
+   "status": "done",
+   "plan": "The bottom screen, with the Pokémon's picture, name and level in its header taken from the top; the stats aren't needed to choose.",
+   "changed": "The bottom screen, with a SKILLS button between the new move and Cancel (also LEFT/RIGHT) that shows the stats, the ability and the picture; a touch or any key goes back.",
+   "top": "The Pokémon's stats and moves",
+   "bottom": "Its four moves and the new one, the chosen one's power, accuracy, words",
+   "tier": 2,
+   "results": [
+    {
+     "file": "forget-move-1.png",
+     "caption": "The moves, with a SKILLS button"
+    },
+    {
+     "file": "forget-move-2.png",
+     "caption": "SKILLS: stats and ability"
+    }
+   ]
+  },
+  {
+   "id": "evolution",
+   "group": "party",
+   "name": "Evolution",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "The evolution on the screen (it showed the bottom's backdrop before); its learn-a-move menus where they were, touchable.",
+   "top": "The Pokémon evolving",
+   "bottom": "A backdrop",
+   "tier": 2,
+   "results": [
+    {
+     "file": "evolution-1.png",
+     "caption": "Evolving"
+    },
+    {
+     "file": "evolution-2.png",
+     "caption": "Evolved"
+    }
+   ]
+  },
+  {
+   "id": "chatter",
+   "group": "party",
+   "name": "Chatot learns a cry",
+   "kind": "top",
+   "status": "planned",
+   "plan": "Top screen only. The microphone works as on the DS.",
+   "changed": "",
+   "top": "Chatot and the instructions",
+   "bottom": "The field menu",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "mic-test",
+   "group": "party",
+   "name": "Mic test",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The bottom screen; its title from the top in the header.",
+   "changed": "",
+   "top": "Mic Test",
+   "bottom": "Jigglypuff listening, the words",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "bag",
+   "group": "bag",
+   "name": "Bag",
+   "kind": "both",
+   "status": "done",
+   "plan": "The bottom screen as the base (pockets and list); the chosen item's description in a band at its foot, taken from the top.",
+   "changed": "The bag's bottom screen; when an item is picked (touch or A), its description from the top screen shows in a band between the item and its actions. The item grid itself has no room for it.",
+   "top": "The bag and the pocket's name",
+   "bottom": "The pockets' icons, the items, the page",
+   "tier": 1,
+   "results": [
+    {
+     "file": "bag-1.png",
+     "caption": "The pockets and items"
+    },
+    {
+     "file": "bag-2.png",
+     "caption": "An item picked: its description comes along"
+    }
+   ]
+  },
+  {
+   "id": "bag-pocket",
+   "group": "bag",
+   "name": "A pocket and an item's description",
+   "kind": "both",
+   "status": "done",
+   "plan": "As the bag.",
+   "changed": "",
+   "top": "The bag and the item's description",
+   "bottom": "The pocket's items",
+   "tier": 1,
+   "results": [
+    {
+     "file": "bag-pocket-1.png",
+     "caption": "A pocket"
+    }
+   ]
+  },
+  {
+   "id": "bag-item-menu",
+   "group": "bag",
+   "name": "An item's actions",
+   "kind": "both",
+   "status": "done",
+   "plan": "As the bag: the actions as a small list beside the item.",
+   "changed": "",
+   "top": "The item's description",
+   "bottom": "USE, GIVE, TRASH, CANCEL",
+   "tier": 1,
+   "results": [
+    {
+     "file": "bag-item-menu-1.png",
+     "caption": "The actions, with the description above them"
+    }
+   ]
+  },
+  {
+   "id": "bag-give",
+   "group": "bag",
+   "name": "Giving an item from the party",
+   "kind": "both",
+   "status": "planned",
+   "plan": "As the bag.",
+   "changed": "",
+   "top": "The bag",
+   "bottom": "Picking the item to give",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "berry-pots",
+   "group": "bag",
+   "name": "Berry Pots",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The four pots as the base; the chosen pot's state in a box. A cursor picks a pot.",
+   "changed": "",
+   "top": "The chosen pot up close",
+   "bottom": "The four pots, 'Touch one of the Berry Pots', CANCEL",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "apricorn-box",
+   "group": "bag",
+   "name": "Apricorn Box",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The bottom screen with the description in a band.",
+   "changed": "",
+   "top": "The box's description",
+   "bottom": "The Apricorns, CLOSE",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "pal-pad",
+   "group": "bag",
+   "name": "Pal Pad",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "A backdrop",
+   "bottom": "CHECK FRIEND ROSTER, REGISTER FRIEND CODE, the player's code, EXIT",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "unown-report",
+   "group": "bag",
+   "name": "Unown Report",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The page across both screens shown in one, scrolled.",
+   "changed": "",
+   "top": "The report's page",
+   "bottom": "The rest of the page and the page turns",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "vs-recorder",
+   "group": "bag",
+   "name": "Vs. Recorder",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen with its title.",
+   "changed": "",
+   "top": "VS. RECORDER",
+   "bottom": "BATTLE VIDEOS, CANCEL",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "mail-read",
+   "group": "bag",
+   "name": "Reading mail",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen only.",
+   "changed": "",
+   "top": "Nothing (black)",
+   "bottom": "The letter",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "mail-write",
+   "group": "bag",
+   "name": "Writing mail (Easy Chat)",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The message in a strip at the top, the word groups and lists below, like the GBA's Easy Chat.",
+   "changed": "",
+   "top": "The message being written",
+   "bottom": "The word groups to pick from",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "ball-capsules",
+   "group": "bag",
+   "name": "Ball Capsules",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The capsule as the base, the Seals in a side list; a cursor places them.",
+   "changed": "",
+   "top": "The capsules (placing Seals on them)",
+   "bottom": "The capsule being decorated",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "pokedex",
+   "group": "menus",
+   "name": "Pokédex cover",
+   "kind": "both",
+   "status": "done",
+   "plan": "The cover with the counts on it; the three buttons as button prompts.",
+   "changed": "Nothing to change: the bottom screen already has the counts and the buttons (the top is the cover's picture).",
+   "top": "The Pokédex's cover",
+   "bottom": "SEEN, OBTAINED; SEARCH, OPEN, QUIT",
+   "tier": 2,
+   "results": [
+    {
+     "file": "pokedex-1.png",
+     "caption": "Nothing changed: the counts and buttons were there"
+    }
+   ]
+  },
+  {
+   "id": "pokedex-list",
+   "group": "menus",
+   "name": "Pokédex list and page",
+   "kind": "both",
+   "status": "done",
+   "plan": "The list as the base, the chosen one's picture and name in a side box; A opens its page full screen.",
+   "changed": "The list; A (or a touch on the chosen one) shows its entry page (picture, type, size, words) full screen, the D-pad still moves along the list there, A again opens the details, B or a touch goes back.",
+   "top": "The chosen Pokémon's page (picture, type, size, words)",
+   "bottom": "The list of numbers and pictures",
+   "tier": 2,
+   "results": [
+    {
+     "file": "pokedex-list-1.png",
+     "caption": "The list"
+    },
+    {
+     "file": "pokedex-list-2.png",
+     "caption": "A: the entry page"
+    }
+   ]
+  },
+  {
+   "id": "pokedex-area",
+   "group": "menus",
+   "name": "Pokédex: where it lives",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The map as the base, the time of day and the pages as button prompts.",
+   "changed": "",
+   "top": "The map of where it lives, the time of day",
+   "bottom": "The time of day, the pages (AREA, SIZE, FORMS, BACK)",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "pokedex-size",
+   "group": "menus",
+   "name": "Pokédex: size",
+   "kind": "both",
+   "status": "planned",
+   "plan": "Both comparisons side by side on one screen (each is narrow), the pages as button prompts.",
+   "changed": "",
+   "top": "Its height next to the player's",
+   "bottom": "Its weight on a seesaw with the player, the pages",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "pokedex-forms",
+   "group": "menus",
+   "name": "Pokédex: forms",
+   "kind": "both",
+   "status": "planned",
+   "plan": "One screen with the pictures and a cursor.",
+   "changed": "",
+   "top": "Its forms and genders",
+   "bottom": "The forms to pick",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "trainer-card",
+   "group": "menus",
+   "name": "Trainer Card",
+   "kind": "both",
+   "status": "done",
+   "plan": "The card full screen; the badges as its other side, flipped with A as the DS flips the card.",
+   "changed": "The card on the screen; UP or the LEAGUE BADGES tab (where the bottom bar's hint was) shows the badges, DOWN/A/B or a touch goes back; LEFT/RIGHT or a touch on the card still flips it.",
+   "top": "The badges",
+   "bottom": "The card: ID, name, money, Pokédex, score, time",
+   "tier": 2,
+   "results": [
+    {
+     "file": "trainer-card-1.png",
+     "caption": "The card, with a LEAGUE BADGES tab"
+    },
+    {
+     "file": "trainer-card-2.png",
+     "caption": "The badges (UP or the tab)"
+    }
+   ]
+  },
+  {
+   "id": "trainer-card-back",
+   "group": "menus",
+   "name": "Trainer Card's back",
+   "kind": "both",
+   "status": "doing",
+   "plan": "As the card's front. The signature is drawn with the stylus: a cursor pen for it.",
+   "changed": "",
+   "top": "The badges",
+   "bottom": "The back: Hall of Fame, links, signature",
+   "tier": 3,
+   "results": [
+    {
+     "file": "trainer-card-back-1.png",
+     "caption": "The back (signing still needs a touch)"
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "group": "menus",
+   "name": "Options",
+   "kind": "both",
+   "status": "done",
+   "plan": "The list as the base, the frame's preview in a corner.",
+   "changed": "The list; while TEXT SPEED or FRAME is chosen, the top's box that tries them shows beside that row.",
+   "top": "The window frame's preview",
+   "bottom": "The options' list, CONFIRM, QUIT",
+   "tier": 2,
+   "results": [
+    {
+     "file": "options-1.png",
+     "caption": "TEXT SPEED chosen: the preview below it"
+    },
+    {
+     "file": "options-2.png",
+     "caption": "FRAME chosen: the preview above it"
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "group": "menus",
+   "name": "Save",
+   "kind": "both",
+   "status": "done",
+   "plan": "A save box over the map (as FireRed's) and the question in the text box, then the same small YES/NO box as every yes/no.",
+   "changed": "",
+   "top": "The map",
+   "bottom": "The place, player, badges and time; 'Would you like to save the game?'",
+   "tier": 1,
+   "results": [
+    {
+     "file": "save-1.png",
+     "caption": "The save box and the buttons on the map"
+    }
+   ]
+  },
+  {
+   "id": "gear",
+   "group": "pokegear",
+   "name": "Pokégear (opens on the phone)",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The bottom screen with the clock in its header bar.",
+   "changed": "",
+   "top": "The clock and the day",
+   "bottom": "The phone's contacts, the apps' icons along the bottom",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "gear-map",
+   "group": "pokegear",
+   "name": "Pokégear map",
+   "kind": "both",
+   "status": "done",
+   "plan": "The map with the clock and the place's name in its header bar.",
+   "changed": "The place under the cursor in the map's top left corner and the clock (time and day) in its bottom right one, over the southern sea (the map has no empty strip for a header bar).",
+   "top": "The clock, the place and its description",
+   "bottom": "The map",
+   "tier": 2,
+   "results": [
+    {
+     "file": "gear-map-1.png",
+     "caption": "The place under the cursor and the clock in the corners"
+    }
+   ]
+  },
+  {
+   "id": "gear-radio",
+   "group": "pokegear",
+   "name": "Pokégear radio",
+   "kind": "both",
+   "status": "done",
+   "plan": "The tuner with the station's words in a box. (The Poké Flute channel wakes Snorlax: it matters.)",
+   "changed": "The station's words as a strip between the tuner and the Pokégear's buttons.",
+   "top": "The clock and the station's words",
+   "bottom": "The tuner",
+   "tier": 2,
+   "results": [
+    {
+     "file": "gear-radio-1.png",
+     "caption": "The station's words above the buttons"
+    }
+   ]
+  },
+  {
+   "id": "gear-call",
+   "group": "pokegear",
+   "name": "A phone call",
+   "kind": "both",
+   "status": "done",
+   "plan": "A text box over the contacts while the call lasts.",
+   "changed": "The top's call box (who, and what they say) over the contacts while the call lasts.",
+   "top": "The caller's words",
+   "bottom": "The contacts",
+   "tier": 2,
+   "results": [
+    {
+     "file": "gear-call-1.png",
+     "caption": "The caller and their words over the contacts"
+    }
+   ]
+  },
+  {
+   "id": "gear-settings",
+   "group": "pokegear",
+   "name": "Pokégear skins",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "The clock",
+   "bottom": "The skins to pick",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "pc-boxes",
+   "group": "services",
+   "name": "PC boxes",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "The box as the base, as in FireRed's PC; the chosen Pokémon's picture, name and level in a side panel, its details on a button.",
+   "changed": "",
+   "top": "The chosen Pokémon's details",
+   "bottom": "The box and the party, the actions",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "pc-deposit",
+   "group": "services",
+   "name": "Depositing",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "As the PC boxes.",
+   "changed": "",
+   "top": "The chosen Pokémon's details",
+   "bottom": "The party and the actions",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "pc-items",
+   "group": "services",
+   "name": "Moving items",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "As the PC boxes.",
+   "changed": "",
+   "top": "The chosen Pokémon's details",
+   "bottom": "The box with its items",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "mailbox",
+   "group": "services",
+   "name": "Mailbox",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen, the envelope left out.",
+   "changed": "",
+   "top": "The chosen letter's envelope",
+   "bottom": "The letters kept",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "mart-buy",
+   "group": "services",
+   "name": "Buying",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "FireRed's mart: the list at the right, the description at the bottom, the money in a corner.",
+   "changed": "",
+   "top": "The map, the item's picture and description",
+   "bottom": "The items and prices, the money",
+   "tier": 1,
+   "results": []
+  },
+  {
+   "id": "mart-count",
+   "group": "services",
+   "name": "How many?",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "A small count box beside the list, as on the GBA.",
+   "changed": "",
+   "top": "The item's description",
+   "bottom": "How many, the total, the bag's count",
+   "tier": 1,
+   "results": []
+  },
+  {
+   "id": "mart-sell",
+   "group": "services",
+   "name": "Selling",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "As the bag.",
+   "changed": "",
+   "top": "The bag",
+   "bottom": "The pocket's items",
+   "tier": 2,
+   "results": []
+  },
+  {
+   "id": "relearner",
+   "group": "services",
+   "name": "Move relearner",
+   "kind": "both",
+   "status": "done",
+   "plan": "The list as the base, the Pokémon's name and its current moves in a side panel.",
+   "changed": "The list with its details; the Pokémon and the moves it knows (the top's LEARNED MOVES page) are a page of their own: SELECT or the LEARNED MOVES tab on the bottom bar, any key or a touch goes back. (No room for a side panel: the list's details fill the screen.)",
+   "top": "The Pokémon and its moves",
+   "bottom": "The moves it can learn again, the chosen one's details",
+   "tier": 3,
+   "results": [
+    {
+     "file": "relearner-1.png",
+     "caption": "The list, with a LEARNED MOVES tab"
+    },
+    {
+     "file": "relearner-2.png",
+     "caption": "LEARNED MOVES (SELECT or the tab)"
+    }
+   ]
+  },
+  {
+   "id": "deleter",
+   "group": "services",
+   "name": "Move deleter",
+   "kind": "both",
+   "status": "done",
+   "plan": "As forgetting a move (Party and Summary).",
+   "changed": "Its questions are the field's buttons, and the move to forget is picked on the summary's forget page (with the SKILLS button).",
+   "top": "The Pokémon's stats and moves",
+   "bottom": "The moves to forget, the chosen one's details",
+   "tier": 3,
+   "results": [
+    {
+     "file": "deleter-1.png",
+     "caption": "Its questions as buttons; the move is picked on the forget page"
+    }
+   ]
+  },
+  {
+   "id": "voltorb-flip",
+   "group": "minigames",
+   "name": "Voltorb Flip",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "The board as the base; the coins and level at its side; memo mode on a button. Buttons already work.",
+   "changed": "",
+   "top": "The level, the rules, the coins",
+   "bottom": "The 5x5 board with its rows' and columns' counts",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "voltorb-memo",
+   "group": "minigames",
+   "name": "Voltorb Flip memos",
+   "kind": "both",
+   "status": "planned",
+   "plan": "As Voltorb Flip.",
+   "changed": "",
+   "top": "The level, the coins",
+   "bottom": "The board in memo mode",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "alph",
+   "group": "minigames",
+   "name": "Ruins of Alph puzzle",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The puzzle as the base, the hint on a button; a cursor picks a tile, A lifts and drops it, L/R turn it.",
+   "changed": "",
+   "top": "The hint",
+   "bottom": "The puzzle: tiles dragged and turned",
+   "tier": 3,
+   "results": []
+  },
+  {
+   "id": "scratch",
+   "group": "minigames",
+   "name": "Scratch cards",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The card as the base; a cursor scratches while A is held.",
+   "changed": "",
+   "top": "The three cards",
+   "bottom": "Scratching with the stylus",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "bug-contest",
+   "group": "minigames",
+   "name": "Bug-Catching Contest",
+   "kind": "top",
+   "status": "done",
+   "plan": "As walking around, with the contest's menu entries.",
+   "changed": "Walking around as usual; the start menu's column has the contest's entries; its battle went through in the one-screen sweep.",
+   "top": "The park",
+   "bottom": "The field menu with RETIRE and BALL",
+   "tier": 3,
+   "results": [
+    {
+     "file": "bug-contest-1.png",
+     "caption": "Walking around"
+    }
+   ]
+  },
+  {
+   "id": "safari",
+   "group": "minigames",
+   "name": "Safari Zone",
+   "kind": "top",
+   "status": "done",
+   "plan": "As walking around.",
+   "changed": "",
+   "top": "The zone",
+   "bottom": "The field menu",
+   "tier": 3,
+   "results": [
+    {
+     "file": "safari-1.png",
+     "caption": "Walking around"
+    }
+   ]
+  },
+  {
+   "id": "athlon-pick",
+   "group": "athlon",
+   "name": "Choosing three Pokémon",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The party as the base, the stars in a side panel; A picks, B takes back.",
+   "changed": "",
+   "top": "The course and the chosen Pokémon's stars",
+   "bottom": "The party to drag into the three places",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "athlon-rules",
+   "group": "athlon",
+   "name": "An event's rules",
+   "kind": "both",
+   "status": "planned",
+   "plan": "One screen with the name at the top and the buttons below.",
+   "changed": "",
+   "top": "The event's name and place",
+   "bottom": "Event Rules, Controls, START",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "hurdle-dash",
+   "group": "athlon",
+   "name": "Hurdle Dash",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The lanes as the base with the hurdles ahead in a strip above; a button per lane jumps (LEFT, UP, RIGHT or L, A, R).",
+   "changed": "",
+   "top": "The track ahead",
+   "bottom": "The three Pokémon running, tapped to jump",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "pennant-capture",
+   "group": "athlon",
+   "name": "Pennant Capture",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base, the score in a corner; the D-pad steers the chosen Pokémon, L/R switch.",
+   "changed": "",
+   "top": "The score and timer, the Pokémon",
+   "bottom": "The field: the Pokémon dragged to the flags",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "relay-run",
+   "group": "athlon",
+   "name": "Relay Run",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The track as the base, the laps in a corner; A mashed runs, B switches.",
+   "changed": "",
+   "top": "The laps, the timer",
+   "bottom": "The track: the runner stroked to speed up, SWITCH",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "block-smash",
+   "group": "athlon",
+   "name": "Block Smash",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The blocks as the base, the towers' count in a corner; A mashed smashes, B switches.",
+   "changed": "",
+   "top": "The towers of blocks broken",
+   "bottom": "The blocks, tapped to smash",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "circle-push",
+   "group": "athlon",
+   "name": "Circle Push",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The ring as the base; the D-pad steers, L/R switch.",
+   "changed": "",
+   "top": "The round and the points",
+   "bottom": "The ring: the Pokémon dragged to push",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "goal-roll",
+   "group": "athlon",
+   "name": "Goal Roll",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base; the D-pad steers, L/R switch.",
+   "changed": "",
+   "top": "The score and timer",
+   "bottom": "The field with the ball and goals",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "snow-throw",
+   "group": "athlon",
+   "name": "Snow Throw",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. Here both halves are the playing field: show the whole field squeezed or scrolled, a cursor aims, A throws.",
+   "changed": "",
+   "top": "The snow field and the other teams",
+   "bottom": "Aiming and throwing",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "ring-drop",
+   "group": "athlon",
+   "name": "Ring Drop",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The ring as the base; the D-pad steers, A charges.",
+   "changed": "",
+   "top": "The points",
+   "bottom": "The ring: the Pokémon pushed out",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "lamp-jump",
+   "group": "athlon",
+   "name": "Lamp Jump",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. Both halves are the playing field (the lamps above, the jumpers below): one tall field scrolled with the jumpers; buttons jump.",
+   "changed": "",
+   "top": "The lamps above",
+   "bottom": "The Pokémon jumping, tapped to jump",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "disc-catch",
+   "group": "athlon",
+   "name": "Disc Catch",
+   "kind": "both",
+   "status": "deciding",
+   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base with the coming discs shown at its top; the D-pad steers, A jumps.",
+   "changed": "",
+   "top": "The discs coming",
+   "bottom": "The Pokémon moved to catch them",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "athlon-results",
+   "group": "athlon",
+   "name": "An event's results",
+   "kind": "both",
+   "status": "planned",
+   "plan": "One table on one screen, scrolled if it doesn't fit.",
+   "changed": "",
+   "top": "The event, the scores",
+   "bottom": "The places and totals",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "athlon-ceremony",
+   "group": "athlon",
+   "name": "Awards",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The podium with the text box over it.",
+   "changed": "",
+   "top": "The words",
+   "bottom": "The winners on the podium",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "castle-party",
+   "group": "frontier",
+   "name": "Battle Castle's party",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "A backdrop",
+   "bottom": "The party with the Castle's points and actions",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "arcade-board",
+   "group": "frontier",
+   "name": "Battle Arcade's board",
+   "kind": "top",
+   "status": "planned",
+   "plan": "Top screen only.",
+   "changed": "",
+   "top": "The board's panels and the gamble",
+   "bottom": "A backdrop",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "trade",
+   "group": "link",
+   "name": "Trading",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The two Pokémon side by side with the text box under them.",
+   "changed": "",
+   "top": "The two Pokémon to trade",
+   "bottom": "The trade's waiting words",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "trade-animation",
+   "group": "link",
+   "name": "The trade's animation",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The animation's halves as one scene (the ball's path shortened).",
+   "changed": "",
+   "top": "The Poké Ball leaving",
+   "bottom": "The DS sending it",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "wifi",
+   "group": "link",
+   "name": "Nintendo Wi-Fi Connection",
+   "kind": "both",
+   "status": "planned",
+   "plan": "One screen with the picture and the message. (Wi-Fi fails as it does on a DS today.)",
+   "changed": "",
+   "top": "Connecting...",
+   "bottom": "The Wi-Fi picture",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "walker-pick",
+   "group": "link",
+   "name": "Pokéwalker: choosing who strolls",
+   "kind": "both",
+   "status": "planned",
+   "plan": "As the PC boxes.",
+   "changed": "",
+   "top": "The chosen Pokémon",
+   "bottom": "The box to pick from, YES/NO",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "walker-route",
+   "group": "link",
+   "name": "Pokéwalker: a route",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The description in a box with the question and the YES/NO box under it.",
+   "changed": "",
+   "top": "The route and its description",
+   "bottom": "Take a stroll there? YES/NO",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "walker-link",
+   "group": "link",
+   "name": "Pokéwalker: linking",
+   "kind": "both",
+   "status": "planned",
+   "plan": "The picture with the text box under it.",
+   "changed": "",
+   "top": "The Pokéwalker pointed at the DS",
+   "bottom": "What to do",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "gba-migrate",
+   "group": "link",
+   "name": "Migrating from a GBA game",
+   "kind": "bottom",
+   "status": "planned",
+   "plan": "Bottom screen.",
+   "changed": "",
+   "top": "Nothing (black)",
+   "bottom": "The GBA game's box to pick six from",
+   "tier": 4,
+   "results": []
+  },
+  {
+   "id": "hall-of-fame",
+   "group": "ending",
+   "name": "Hall of Fame",
+   "kind": "top",
+   "status": "done",
+   "plan": "Top screen only.",
+   "changed": "The parade is shown (it was the bottom's black screen before).",
+   "top": "Each Pokémon registered",
+   "bottom": "Nothing",
+   "tier": 4,
+   "results": [
+    {
+     "file": "hall-of-fame-1.png",
+     "caption": "The parade"
+    }
+   ]
+  },
+  {
+   "id": "credits",
+   "group": "ending",
+   "name": "Credits",
+   "kind": "both",
+   "status": "planned",
+   "plan": "One scene: the names and the walking player in one screen.",
+   "changed": "",
+   "top": "The credits' scene (upper half)",
+   "bottom": "Its lower half, with the names",
+   "tier": 4,
+   "results": []
+  }
+ ]
+}

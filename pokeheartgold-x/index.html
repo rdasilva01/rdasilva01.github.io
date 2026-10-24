@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeartGold on One Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; the overall progress, how it's done, then every screen of the game by area, each
+   as the DS showed it (both screens) beside how it looks on one screen now */
+:root {
+  --bg: #f1efe8;
+  --panel: #ffffff;
+  --ink: #1f2229;
+  --muted: #5f6470;
+  --line: #d9d5c8;
+  --accent: #a87a10;
+  --accent-soft: #f6ecd0;
+  --frame: #2a2f38;
+  --done: #23804a;
+  --done-bg: #e0f1e6;
+  --doing: #b5660b;
+  --doing-bg: #f8e6d0;
+  --deciding: #7a4fb8;
+  --deciding-bg: #ece3f8;
+  --planned: #646b78;
+  --planned-bg: #e8e9ed;
+  --display: "Pixelify Sans", "Courier New", monospace;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14151a; --panel: #1d1f26; --ink: #e8e6e0; --muted: #a3a29b; --line: #34353d; --frame: #0b0c10;
+    --accent: #e7b84a; --accent-soft: #3a2f16;
+    --done: #63d08b; --done-bg: #183020; --doing: #f0a650; --doing-bg: #3a2814;
+    --deciding: #b99af0; --deciding-bg: #2b2140; --planned: #a6aebb; --planned-bg: #272a32;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14151a; --panel: #1d1f26; --ink: #e8e6e0; --muted: #a3a29b; --line: #34353d; --frame: #0b0c10;
+  --accent: #e7b84a; --accent-soft: #3a2f16;
+  --done: #63d08b; --done-bg: #183020; --doing: #f0a650; --doing-bg: #3a2814;
+  --deciding: #b99af0; --deciding-bg: #2b2140; --planned: #a6aebb; --planned-bg: #272a32;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px; margin: 0;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 34px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 6vw, 46px); line-height: 1.05; }
+.lede { color: var(--muted); max-width: 66ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.facts b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* The overall progress: one bar split by status */
+.meter { display: grid; gap: 8px; max-width: 760px; }
+.bar { display: flex; height: 14px; border-radius: 4px; overflow: hidden; background: var(--planned-bg); border: 1px solid var(--line); }
+.bar span { display: block; height: 100%; }
+.bar .s-done { background: var(--done); }
+.bar .s-doing { background: var(--doing); }
+.bar .s-deciding { background: var(--deciding); }
+.big { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1; }
+.big small { font-size: 0.55em; color: var(--muted); }
+
+.part-title { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 4.5vw, 32px); line-height: 1.1; scroll-margin-top: 16px; }
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 28px; }
+.how div { display: grid; gap: 4px; align-content: start; }
+.how h3 { font-size: 16px; }
+.how p { font-size: 15px; color: var(--muted); }
+
+/* The filters and the jump to an area */
+.toolbar { display: grid; gap: 10px; position: sticky; top: 0; z-index: 2; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); }
+.filters, .jump { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button { font: 600 13px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.filters button .n { font-variant-numeric: tabular-nums; }
+.filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.jump a { font-family: var(--mono); font-size: 12.5px; color: var(--ink); text-decoration: none; padding: 2px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+.jump a:hover { border-color: var(--accent); }
+.filters button:focus-visible, .jump a:focus-visible, .one:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* An area and its screens */
+#areas { display: grid; gap: 34px; }
+.area { display: grid; gap: 12px; scroll-margin-top: 110px; }
+.area-head { display: grid; gap: 2px; }
+.area-head h3 { font-size: 22px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.area-head h3 .count { font: 500 12.5px var(--mono); color: var(--muted); }
+.area-head p { color: var(--muted); max-width: 72ch; font-size: 15px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; align-content: start; min-width: 0; scroll-margin-top: 110px; }
+.card.flash { box-shadow: 0 0 0 3px var(--accent); }
+.pics { display: flex; align-items: center; gap: 8px; }
+.pics figure { margin: 0; display: grid; gap: 3px; justify-items: center; }
+.pics figcaption { font: 500 11px var(--mono); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.ds img { display: block; height: 132px; width: 88px; image-rendering: pixelated; border: 3px solid var(--frame); border-radius: 4px; background: var(--frame); }
+.arrow { color: var(--muted); font-size: 18px; }
+.one { display: block; position: relative; padding: 0; border: 0; background: none; cursor: default; }
+button.one { cursor: pointer; }
+.one img, .one .none { display: block; height: 132px; width: 176px; border-radius: 4px; }
+.one img { image-rendering: pixelated; border: 3px solid var(--done); background: var(--frame); }
+.one .none { border: 2px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 8px; font-size: 13px; color: var(--muted); }
+.one .page { position: absolute; right: 6px; bottom: 6px; font: 500 11px var(--mono); color: #fff; background: rgba(0, 0, 0, 0.62); border-radius: 3px; padding: 1px 5px; }
+.text { display: grid; gap: 6px; min-width: 0; }
+.title { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.title h4 { font-size: 16.5px; line-height: 1.25; }
+.chip { font: 700 11.5px var(--body); letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 8px; border-radius: 3px; }
+.chip.s-done { color: var(--done); background: var(--done-bg); }
+.chip.s-doing { color: var(--doing); background: var(--doing-bg); }
+.chip.s-deciding { color: var(--deciding); background: var(--deciding-bg); }
+.chip.s-planned, .chip.s-skip { color: var(--planned); background: var(--planned-bg); }
+.kind { font: 500 11.5px var(--mono); color: var(--muted); }
+.desc { font-size: 14.5px; line-height: 1.45; }
+.desc .lbl { font-weight: 700; color: var(--muted); }
+.cap { font-size: 13.5px; color: var(--muted); }
+.empty, .status { color: var(--muted); font-size: 14px; }
+footer { color: var(--muted); font-size: 13px; }
+@media (max-width: 640px) {
+  .filters, .jump { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+  .filters button, .jump a { white-space: nowrap; flex: none; }
+}
+@media (max-width: 420px) {
+  .ds img { height: 108px; width: 72px; }
+  .one img, .one .none { height: 108px; width: 144px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card.flash { transition: box-shadow 0.6s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">pokeheartgold-x · Windows</div>
+    <h1>HeartGold on One Screen</h1>
+    <p class="lede">Pokémon HeartGold running natively on Windows, being made playable on a single touchscreen, the way the
+    Game Boy Advance games are played: every screen the DS splits over its two screens is drawn again for one. This page
+    follows that work, screen by screen.</p>
+    <div class="meter" aria-live="polite">
+      <div class="big"><span id="done-n">-</span> <small>of <span id="total-n">-</span> screens done</small></div>
+      <div class="bar" id="bar" role="img" aria-label="Progress"></div>
+      <div class="facts" id="facts"></div>
+    </div>
+  </header>
+
+  <section class="part" aria-labelledby="how">
+    <h2 class="part-title" id="how">How it works</h2>
+    <div class="how" style="margin-top: 14px">
+      <div><h3>One picture at a time</h3><p>The window shows one of the DS's two screens: the map and the battles from the top one,
+        the menus and apps from the bottom one. The screen you look at is always the one you can touch.</p></div>
+      <div><h3>Menus as buttons</h3><p>The start menu, every YES/NO, the scripts' choices and the battle's commands and moves
+        become buttons drawn on the top screen in the look of HeartGold's bottom-screen buttons, for touch, D-pad or mouse.</p></div>
+      <div><h3>The top screen comes along</h3><p>What the other screen held is brought over: an item's description, a held
+        item, whose name you're typing, the clock, a place's name. Pages the DS showed side by side become pages you turn.</p></div>
+      <div><h3>The other screen, any time</h3><p>Holding Space shows the other DS screen, for whatever isn't drawn again yet.</p></div>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="screens">
+    <h2 class="part-title" id="screens">Every screen</h2>
+    <div class="toolbar" style="margin-top: 12px">
+      <div class="filters" role="group" aria-label="Show screens by status" id="filters"></div>
+      <nav class="jump" id="jump" aria-label="Areas"></nav>
+    </div>
+    <main id="areas" style="margin-top: 18px">
+      <p class="empty">Loading the screens. Each one appears here as the DS showed it and as it looks on one screen.</p>
+    </main>
+  </section>
+
+  <footer>Pictures: the port's own screenshots. On the left of each screen, both DS screens; on the right, the one screen.</footer>
+</div>
+
+<script>
+const STATUSES = [["done", "Done"], ["doing", "In progress"], ["deciding", "Being decided"], ["planned", "Planned"], ["skip", "Left as is"]];
+const STATUS_NAME = Object.fromEntries(STATUSES);
+const KIND = { top: "the top screen only", bottom: "the bottom screen only", both: "both screens merged" };
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let data = null, filter = "all", jumped = false;
+try { filter = localStorage.getItem("onescreen-filter") || "all"; } catch (e) {}
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+  }
+  for (const c of children || []) if (c) e.appendChild(c);
+  return e;
+}
+
+function niceDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+  return m ? Number(m[3]) + " " + MONTHS[Number(m[2]) - 1] + " " + m[1] : "";
+}
+
+const count = (list, status) => list.filter(s => s.status === status).length;
+
+// The one-screen picture: the first result, a button turning to the next when there are more
+function onePicture(s) {
+  if (!s.results.length) {
+    const text = s.status === "deciding" ? "Being decided" : s.status === "doing" ? "In progress" : "Not done yet";
+    return el("div", { class: "one" }, [el("div", { class: "none", text })]);
+  }
+  let i = 0;
+  const img = el("img", { src: "img/one/" + s.results[0].file, alt: s.name + " on one screen: " + s.results[0].caption, width: "256", height: "192", loading: "lazy" });
+  if (s.results.length === 1) return el("div", { class: "one" }, [img]);
+  const page = el("span", { class: "page", text: "1/" + s.results.length });
+  const button = el("button", { type: "button", class: "one", "aria-label": "Next picture of " + s.name + " (1 of " + s.results.length + ")" }, [img, page]);
+  button.addEventListener("click", () => {
+    i = (i + 1) % s.results.length;
+    img.src = "img/one/" + s.results[i].file;
+    img.alt = s.name + " on one screen: " + s.results[i].caption;
+    page.textContent = (i + 1) + "/" + s.results.length;
+    button.setAttribute("aria-label", "Next picture of " + s.name + " (" + (i + 1) + " of " + s.results.length + ")");
+    const cap = button.closest(".card").querySelector(".cap");
+    if (cap) cap.textContent = s.results[i].caption;
+  });
+  return button;
+}
+
+function card(s) {
+  const pics = el("div", { class: "pics" }, [
+    el("figure", { class: "ds" }, [
+      el("img", { src: "img/ds/" + s.id + ".png", alt: s.name + " on the DS: top screen, " + s.top + "; bottom screen, " + s.bottom, width: "256", height: "384", loading: "lazy" }),
+      el("figcaption", { text: "DS" }),
+    ]),
+    el("span", { class: "arrow", "aria-hidden": "true", text: "→" }),
+    el("figure", {}, [onePicture(s), el("figcaption", { text: "One screen" })]),
+  ]);
+  const finished = s.status === "done" || s.status === "doing";
+  const desc = finished && s.changed
+    ? el("p", { class: "desc", text: s.changed })
+    : el("p", { class: "desc" }, [el("span", { class: "lbl", text: finished ? "As planned: " : "Plan: " }), document.createTextNode(s.plan)]);
+  const text = el("div", { class: "text" }, [
+    el("div", { class: "title" }, [el("h4", { text: s.name }), el("span", { class: "chip s-" + s.status, text: STATUS_NAME[s.status] || s.status })]),
+    s.kind ? el("div", { class: "kind", text: "Needs " + KIND[s.kind] }) : null,
+    desc,
+    s.results.length ? el("p", { class: "cap", text: s.results[0].caption }) : null,
+  ]);
+  return el("article", { class: "card", id: s.id }, [pics, text]);
+}
+
+function render() {
+  const screens = data.screens;
+  const total = screens.length, done = count(screens, "done");
+  document.getElementById("done-n").textContent = done;
+  document.getElementById("total-n").textContent = total;
+  const bar = document.getElementById("bar");
+  bar.textContent = "";
+  for (const st of ["done", "doing", "deciding"]) {
+    const n = count(screens, st);
+    if (n) bar.appendChild(el("span", { class: "s-" + st, style: "width:" + (100 * n / total) + "%" }));
+  }
+  bar.setAttribute("aria-label", done + " of " + total + " screens done, " + count(screens, "doing") + " in progress, " + count(screens, "deciding") + " being decided");
+  const facts = document.getElementById("facts");
+  facts.textContent = "";
+  for (const [st, label] of STATUSES) {
+    const n = count(screens, st);
+    if (n) facts.appendChild(el("span", {}, [el("b", { text: String(n) }), document.createTextNode(" " + label.toLowerCase())]));
+  }
+  facts.appendChild(el("span", { text: "Updated " + niceDate(data.updated) }));
+
+  const filters = document.getElementById("filters");
+  filters.textContent = "";
+  for (const [st, label] of [["all", "All"]].concat(STATUSES)) {
+    const n = st === "all" ? total : count(screens, st);
+    if (!n) continue;
+    const b = el("button", { type: "button", "aria-pressed": String(filter === st), "data-status": st }, [
+      st === "all" ? null : el("span", { class: "dot", style: "background: var(--" + (st === "skip" ? "planned" : st) + ")" }),
+      document.createTextNode(label), el("span", { class: "n", text: String(n) })]);
+    filters.appendChild(b);
+  }
+
+  const areas = document.getElementById("areas"), jump = document.getElementById("jump");
+  areas.textContent = "";
+  jump.textContent = "";
+  for (const g of data.groups) {
+    const all = screens.filter(s => s.group === g.id);
+    const shown = all.filter(s => filter === "all" || s.status === filter);
+    if (!shown.length) continue;
+    jump.appendChild(el("a", { href: "#area-" + g.id, text: g.name }));
+    areas.appendChild(el("section", { class: "area", id: "area-" + g.id, "aria-label": g.name }, [
+      el("div", { class: "area-head" }, [
+        el("h3", {}, [document.createTextNode(g.name), el("span", { class: "count", text: count(all, "done") + " of " + all.length + " done" })]),
+        el("p", { text: g.blurb }),
+      ]),
+      el("div", { class: "cards" }, shown.map(card)),
+    ]));
+  }
+  if (!areas.children.length) areas.appendChild(el("p", { class: "empty", text: "No screen has this status. Pick All." }));
+  if (!jumped && /^#[A-Za-z0-9._~-]+$/.test(location.hash)) {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target) {
+      jumped = true;
+      target.scrollIntoView();
+      target.classList.add("flash");
+      setTimeout(() => target.classList.remove("flash"), 1600);
+    }
+  }
+}
+
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b || !data) return;
+  filter = b.dataset.status;
+  try { localStorage.setItem("onescreen-filter", filter); } catch (err) {}
+  render();
+});
+
+fetch("progress.json", { cache: "no-cache" })
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(d => { data = d; if (filter !== "all" && !d.screens.some(s => s.status === filter)) filter = "all"; render(); })
+  .catch(() => {
+    document.getElementById("areas").replaceChildren(el("p", { class: "empty", text: "Couldn't load the screens: reload the page." }));
+  });
+</script>
+</body>
+</html>
