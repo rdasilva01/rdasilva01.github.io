@@ -3,16 +3,417 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pokefirered-x</title>
-<meta http-equiv="refresh" content="0; url=pokefirered-x/">
-<link rel="canonical" href="pokefirered-x/">
+<title>Rodrigo Da Silva</title>
+<meta name="description" content="Autonomous drones with Aerostack2 and the A2RL Drone Championship at CVAR-UPM, and Pokémon games ported to run natively.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-body { margin: 40px 16px; font-family: "Segoe UI", system-ui, sans-serif; background: #eef2f6; color: #1d2430; }
-a { color: #c8352b; }
-@media (prefers-color-scheme: dark) { body { background: #12161c; color: #e6e9ef; } }
+/* Layout: one reading column; who I am, then Aerostack2 (what it is, its layers), then the A2RL drone championship
+   (what it is, its races, both editions, our team, the race videos), then the personal projects */
+:root {
+  --bg: #f2f4f7;
+  --panel: #ffffff;
+  --ink: #182029;
+  --muted: #5a6573;
+  --line: #d5dbe3;
+  --accent: #0b6e99;
+  --accent-soft: #e0eef6;
+  --frame: #1d2630;
+  --firered: #c8352b;
+  --heartgold: #a87a10;
+  --done: #23804a;
+  --display: "Pixelify Sans", "Courier New", monospace;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141a; --panel: #19202a; --ink: #e5e9ef; --muted: #9aa5b4; --line: #2b3440; --frame: #080b0f;
+    --accent: #5cc4f0; --accent-soft: #16303f;
+    --firered: #ff6b5c; --heartgold: #e7b84a; --done: #63d08b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141a; --panel: #19202a; --ink: #e5e9ef; --muted: #9aa5b4; --line: #2b3440; --frame: #080b0f;
+  --accent: #5cc4f0; --accent-soft: #16303f;
+  --firered: #ff6b5c; --heartgold: #e7b84a; --done: #63d08b;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 36px 64px;
+}
+.wrap { max-width: 1000px; margin: 0 auto; display: grid; gap: 56px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, .player:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+header { display: grid; gap: 14px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-weight: 700; font-size: clamp(34px, 7vw, 52px); line-height: 1.02; letter-spacing: -0.01em; }
+.lede { color: var(--muted); font-size: 17px; max-width: 64ch; }
+.sections { display: flex; flex-wrap: wrap; gap: 8px; }
+.sections a { font: 600 14px var(--body); color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--panel); border-radius: 4px; padding: 4px 12px; }
+.sections a:hover { border-color: var(--accent); }
+.sections a.out { color: var(--muted); }
+
+.part { display: grid; gap: 24px; }
+.part-head { display: grid; gap: 8px; }
+.part-title { font-weight: 700; font-size: clamp(26px, 4.6vw, 34px); line-height: 1.1; scroll-margin-top: 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.part-title .tag { font: 500 12.5px var(--mono); color: var(--muted); letter-spacing: 0.02em; }
+.part-head p { color: var(--muted); max-width: 70ch; }
+h3 { font-size: 21px; line-height: 1.2; }
+.links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-weight: 600; font-size: 15px; }
+.links a { text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+
+/* Aerostack2: what it gives, beside its layers */
+.as2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px 36px; align-items: start; }
+.points { margin: 0; display: grid; gap: 12px; }
+.points div { display: grid; gap: 1px; }
+.points dt { font-weight: 700; }
+.points dd { margin: 0; color: var(--muted); font-size: 15.5px; }
+.stack { margin: 0; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px; }
+.stack .ros { grid-row: 1 / span 5; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; justify-content: center; font: 500 12px var(--mono); letter-spacing: 0.08em; color: var(--accent); background: var(--accent-soft); border-radius: 4px; }
+.layer { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 7px 12px; display: grid; gap: 1px; }
+.layer b { font-size: 15px; }
+.layer span { font-size: 13.5px; color: var(--muted); }
+.stack figcaption { grid-column: 2; font-size: 13px; color: var(--muted); }
+
+/* A2RL: the races, then both editions */
+.formats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.format { border-top: 3px solid var(--accent); padding-top: 8px; display: grid; gap: 2px; align-content: start; }
+.format h4 { font-size: 16px; }
+.format p { font-size: 14.5px; color: var(--muted); }
+.seasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.season { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
+.season h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.season h3 small { font: 500 12.5px var(--mono); color: var(--muted); }
+.season .when { font: 500 12.5px var(--mono); color: var(--muted); }
+.season p { font-size: 15.5px; }
+.us { border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 4px 4px 0; padding: 8px 12px; font-size: 15px; }
+.us b { color: var(--accent); }
+
+/* Our team: how the drone flies, my part marked */
+.team { display: grid; gap: 14px; }
+.team > p { max-width: 70ch; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+.flow li { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; display: grid; gap: 2px; align-content: start; }
+.flow li + li::before { content: "→"; position: absolute; left: -18px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.flow b { font-size: 15px; }
+.flow span { font-size: 13.5px; color: var(--muted); }
+.flow li.mine { border: 2px solid var(--accent); background: var(--accent-soft); }
+.flow .me { justify-self: start; font: 700 11px var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--panel); background: var(--accent); border-radius: 3px; padding: 0 6px; margin-bottom: 2px; }
+.credits { font-size: 14px; color: var(--muted); max-width: 80ch; }
+
+/* The race videos: a thumbnail that becomes the player when clicked */
+.videos { display: grid; gap: 18px; }
+.vids-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.vids-head p { color: var(--muted); font-size: 15px; }
+.featured { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 14px 20px; align-items: center; }
+.featured .about { display: grid; gap: 6px; }
+.featured h4 { font-size: 19px; line-height: 1.25; }
+.featured p { color: var(--muted); font-size: 15px; }
+.year { font: 500 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px 14px; }
+.vgrid.three { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.vid { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.vid figcaption { font-size: 14.5px; line-height: 1.35; font-weight: 600; }
+.player { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--frame); border-radius: 6px; overflow: hidden; }
+.player img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.player .play { position: absolute; left: 50%; top: 50%; width: 56px; height: 40px; transform: translate(-50%, -50%); border-radius: 10px; background: rgba(0, 0, 0, 0.72); display: grid; place-items: center; }
+.player .play svg { width: 20px; height: 20px; fill: #fff; }
+a.player:hover .play { background: var(--accent); }
+.player .len { position: absolute; right: 6px; bottom: 6px; font: 500 11.5px var(--mono); color: #fff; background: rgba(0, 0, 0, 0.75); border-radius: 3px; padding: 1px 5px; }
+.player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Personal projects: one card each, in its own page's colour */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.project { --c: var(--accent); background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 6px; padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.project.firered { --c: var(--firered); }
+.project.heartgold { --c: var(--heartgold); }
+.shots { display: flex; gap: 8px; align-items: center; height: 168px; }
+.shots img { display: block; height: 100%; width: auto; max-width: 100%; min-width: 0; object-fit: contain; image-rendering: pixelated; border: 3px solid var(--frame); border-radius: 4px; background: var(--frame); }
+.shots .arrow { color: var(--muted); flex: none; }
+.project h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; color: var(--c); }
+.project .what { font: 500 12.5px var(--mono); color: var(--muted); }
+.project p { font-size: 15.5px; }
+.stat { display: grid; gap: 5px; font-size: 14px; color: var(--muted); min-height: 21px; }
+.stat b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.bar { height: 8px; border-radius: 4px; overflow: hidden; background: var(--line); }
+.bar span { display: block; height: 100%; background: var(--done); }
+.project .go { font-weight: 700; color: var(--c); text-decoration: none; justify-self: start; }
+.project .go:hover { text-decoration: underline; }
+
+footer { color: var(--muted); font-size: 13px; display: grid; gap: 4px; border-top: 1px solid var(--line); padding-top: 14px; }
+footer a { color: inherit; }
+
+@media (max-width: 760px) {
+  .as2, .featured { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+  .flow li + li::before { content: none; }
+}
+@media (max-width: 420px) {
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .shots { height: 132px; }
+}
 </style>
 </head>
 <body>
-<p><a href="pokefirered-x/">pokefirered-x</a></p>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">rdasilva01 · Aerial robotics</div>
+    <h1>Rodrigo Da Silva</h1>
+    <p class="lede">I work on autonomous drones with CVAR-UPM, the Computer Vision and Aerial Robotics group of the
+    Universidad Politécnica de Madrid. Our software is Aerostack2, and we race it at A2RL in Abu Dhabi. In my own
+    time I port Pokémon games to run natively, no emulator needed.</p>
+    <nav class="sections" aria-label="On this page">
+      <a href="#aerostack2">Aerostack2</a>
+      <a href="#a2rl">A2RL drone racing</a>
+      <a href="#projects">Personal projects</a>
+      <a class="out" href="https://github.com/rdasilva01">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <section class="part" aria-labelledby="aerostack2">
+    <div class="part-head">
+      <h2 class="part-title" id="aerostack2">Aerostack2 <span class="tag">ROS 2 · open source · BSD-3</span></h2>
+      <p>An open-source framework, built on ROS 2, for making drones fly on their own: one drone or a whole swarm, from
+      flying by hand to complete autonomous missions. It's developed at CVAR-UPM and grew out of Aerostack, which the
+      group has used since 2016.</p>
+    </div>
+    <div class="as2">
+      <dl class="points">
+        <div><dt>Any drone, same code</dt><dd>The same mission runs on a Crazyflie, a DJI Tello, a Pixhawk, a DJI Matrice or in simulation; only the platform plugin changes.</dd></div>
+        <div><dt>Plugins all the way</dt><dd>State estimators, controllers and behaviors are plugins: swap one and the rest of the system doesn't notice.</dd></div>
+        <div><dt>Ready-made behaviors</dt><dd>Take off, go to, follow a path, land, trajectories, swarm flocking, started and watched from a mission.</dd></div>
+        <div><dt>Missions your way</dt><dd>Written as a Python script or as a behavior tree.</dd></div>
+      </dl>
+      <figure class="stack" aria-label="Aerostack2's layers, from the mission down to the drone, all over ROS 2">
+        <div class="ros">ROS 2</div>
+        <div class="layer"><b>Applications</b><span>Your mission</span></div>
+        <div class="layer"><b>Mission control</b><span>Python API · behavior trees</span></div>
+        <div class="layer"><b>Behaviors</b><span>Take off · go to · follow path · land · swarm</span></div>
+        <div class="layer"><b>Robotics functions</b><span>State estimation · motion control</span></div>
+        <div class="layer"><b>Platforms and sensors</b><span>Crazyflie · Tello · Pixhawk · MAVLink · DJI Matrice · Betaflight · Gazebo</span></div>
+        <figcaption>Its layers, from the mission down to the drone.</figcaption>
+      </figure>
+    </div>
+    <div class="links">
+      <a href="https://github.com/aerostack2/aerostack2">GitHub ↗</a>
+      <a href="https://aerostack2.github.io/">Documentation ↗</a>
+      <a href="https://arxiv.org/abs/2303.18237">The paper ↗</a>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="a2rl">
+    <div class="part-head">
+      <h2 class="part-title" id="a2rl">A2RL Drone Championship <span class="tag">Abu Dhabi</span></h2>
+      <p>A2RL, the Abu Dhabi Autonomous Racing League, holds races where nobody is at the controls. In its drone
+      championship, run with the Drone Champions League, drones flown by AI race through a track of gates at up to
+      150 km/h.</p>
+      <p>The catch: every team flies the same drone, and it sees almost nothing. One forward-facing camera and an IMU,
+      with a small computer on board; no LiDAR, no stereo, no GPS, nothing outside telling it where it is. So the race
+      is won in the software: finding the gates in the picture, working out from them where the drone is, and flying
+      the line as fast as it dares.</p>
+    </div>
+
+    <div class="formats">
+      <div class="format"><h4>Speed race</h4><p>Alone on the track, against the clock. The AI Grand Challenge in 2025.</p></div>
+      <div class="format"><h4>Multi-drone</h4><p>Several AI drones on the track at once, racing without crashing into each other. Gold and Silver races in 2026.</p></div>
+      <div class="format"><h4>Human vs AI</h4><p>The best AI drones against world-class FPV pilots, head to head.</p></div>
+      <div class="format"><h4>Drag race</h4><p>A straight line, flat out. In 2025.</p></div>
+    </div>
+
+    <div class="seasons">
+      <article class="season">
+        <h3>Season 1 <small>2025</small></h3>
+        <div class="when">11–12 April 2025 · ADNEC Marina Hall · $1M prize · 14 teams</div>
+        <p>Billed as the first race for AI drones only. MAVLab from TU Delft won the AI Grand Challenge, two laps in 17
+        seconds, and its drone beat top human pilots head to head.</p>
+        <p class="us"><b>CVAR-UPM:</b> one of the eight AI teams in the final, and second in our multi-drone race,
+        flying both laps on its own with only the camera and the IMU.</p>
+      </article>
+      <article class="season">
+        <h3>Season 2 <small>2026</small></h3>
+        <div class="when">21–22 January 2026 · UMEX, ADNEC · $600,000 prize</div>
+        <p>TII Racing set the fastest lap, 12.032 s, ahead of MAVLab's 12.832 s; MAVLab won the Gold multi-drone race.
+        Human vs AI went to the last of nine races at 4–4, and world champion Minchan Kim took it when the AI drone
+        clipped a gate.</p>
+        <p class="us"><b>CVAR-UPM:</b> second in the Silver multi-drone race and the sixth-fastest lap of the
+        championship, three times faster than the year before.</p>
+      </article>
+    </div>
+
+    <div class="team">
+      <h3>Our team: CVAR-UPM</h3>
+      <p>We race with Aerostack2, the same framework pushed to racing speed. For 2026 the drone got a new MPCC
+      controller and pose estimation from several gates at once, which I worked on.</p>
+      <ol class="flow" aria-label="How our drone flies">
+        <li><b>Camera and IMU</b><span>All the drone has to go on.</span></li>
+        <li><b>Gate detection</b><span>Finds the gates in the picture.</span></li>
+        <li class="mine"><span class="me">My part</span><b>Pose estimation</b><span>Where the drone is, from the gates it sees (PnP, several gates at once).</span></li>
+        <li><b>Control</b><span>MPCC flies the racing line.</span></li>
+      </ol>
+      <p class="credits">The 2026 team: Pascual Campoy (director), Rafael Pérez-Seguí (coordinator), Rodrigo Da Silva
+      (pose estimation), Javier Melero (gate detection), Francisco Anguita (control and sensing), Carmen Rojas
+      (control), Alejandro Rodríguez (machine learning). <a href="https://vimeo.com/1079143067/22126ae9a6">Our 2025 video ↗</a></p>
+    </div>
+
+    <div class="videos">
+      <div class="vids-head">
+        <h3>Race videos</h3>
+        <p>From <a href="https://www.youtube.com/channel/UCx07pX3iq_-cCk71u1Vtx2Q">A2RL's YouTube channel ↗</a></p>
+      </div>
+
+      <div class="featured">
+        <a class="player" href="https://www.youtube.com/watch?v=P25BwtepmUk" data-id="P25BwtepmUk" aria-label="Play: Full Race Replay, A2RL Drone Championship 2026 (37:45)">
+          <img src="https://i.ytimg.com/vi/P25BwtepmUk/maxresdefault.jpg" alt="" width="1280" height="720">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+          <span class="len">37:45</span>
+        </a>
+        <div class="about">
+          <div class="year">2026 · Full race</div>
+          <h4>Full Race Replay | A2RL Drone Championship 2026</h4>
+          <p>The whole championship as it happened: the speed runs, the multi-drone races and Human vs AI.</p>
+        </div>
+      </div>
+
+      <div class="year">2026 · Season 2</div>
+      <div class="vgrid three">
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=9AW6YG5OmsM" data-id="9AW6YG5OmsM" aria-label="Play: The Speed Race That Changed the Championship (2:15)"><img src="https://i.ytimg.com/vi/9AW6YG5OmsM/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">2:15</span></a>
+          <figcaption>The Speed Race That Changed the Championship</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=QFU3Oh_AHOU" data-id="QFU3Oh_AHOU" aria-label="Play: Human vs AI: Who Won the Ultimate Drone Race? (6:31)"><img src="https://i.ytimg.com/vi/QFU3Oh_AHOU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:31</span></a>
+          <figcaption>Human vs AI: Who Won the Ultimate Drone Race?</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=FCSTBm3eY3Y" data-id="FCSTBm3eY3Y" aria-label="Play: Code vs Instinct: The Race Continues (10:20)"><img src="https://i.ytimg.com/vi/FCSTBm3eY3Y/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">10:20</span></a>
+          <figcaption>Code vs Instinct: The Race Continues</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=qtRUoYxZnjE" data-id="qtRUoYxZnjE" aria-label="Play: The Fastest Multi-Drone Race Yet (6:18)"><img src="https://i.ytimg.com/vi/qtRUoYxZnjE/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:18</span></a>
+          <figcaption>The Fastest Multi-Drone Race Yet</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=ezjJdfEUg0I" data-id="ezjJdfEUg0I" aria-label="Play: Chaos, Crashes and Split-Second Decisions, Multi-Drone Race (6:43)"><img src="https://i.ytimg.com/vi/ezjJdfEUg0I/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">6:43</span></a>
+          <figcaption>Chaos, Crashes &amp; Split-Second Decisions | Multi-Drone Race</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=0hRglNtqLko" data-id="0hRglNtqLko" aria-label="Play: How Fast Can Racing Drones Go? (4:22)"><img src="https://i.ytimg.com/vi/0hRglNtqLko/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">4:22</span></a>
+          <figcaption>How Fast Can Racing Drones Go?</figcaption>
+        </figure>
+      </div>
+
+      <div class="year">2025 · Season 1</div>
+      <div class="vgrid">
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=AvyI58mnyo4" data-id="AvyI58mnyo4" aria-label="Play: AI Grand Challenge: MAVLAB Takes the Win at A2RL (8:29)"><img src="https://i.ytimg.com/vi/AvyI58mnyo4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">8:29</span></a>
+          <figcaption>AI Grand Challenge: MAVLAB Takes the Win at A2RL</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=iw79WXzigRA" data-id="iw79WXzigRA" aria-label="Play: AI Beats Human in Autonomous Drone Race Championship Final (1:14)"><img src="https://i.ytimg.com/vi/iw79WXzigRA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:14</span></a>
+          <figcaption>AI Beats Human in Autonomous Drone Race Championship Final</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=SOfx5WvG-tI" data-id="SOfx5WvG-tI" aria-label="Play: A2RL Drone Championship, Finals Day 1 (0:57)"><img src="https://i.ytimg.com/vi/SOfx5WvG-tI/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">0:57</span></a>
+          <figcaption>A2RL Drone Championship - Finals Day 1</figcaption>
+        </figure>
+        <figure class="vid">
+          <a class="player" href="https://www.youtube.com/watch?v=qMNJOZoiItY" data-id="qMNJOZoiItY" aria-label="Play: A2RL Drone Qualifiers complete (1:32)"><img src="https://i.ytimg.com/vi/qMNJOZoiItY/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="len">1:32</span></a>
+          <figcaption>A2RL Drone Qualifiers complete</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="part" aria-labelledby="projects">
+    <div class="part-head">
+      <h2 class="part-title" id="projects">Personal projects</h2>
+      <p>Pokémon games ported to run natively, with things the originals never had.</p>
+    </div>
+    <div class="projects">
+      <article class="project firered">
+        <div class="shots"><img src="pokefirered-x/img/rtb-battle.png" alt="Charmander's Ember flying at a wild Pidgey on Route 1, fought right on the map" width="480" height="320" loading="lazy"></div>
+        <h3>pokefirered-x</h3>
+        <div class="what">Pokémon FireRed · Windows and Android</div>
+        <p>FireRed with a lot added: battles fought in real time right on the map, a Game Corner full of new games,
+        playing together over the network, your Pokémon following you, and touch buttons on the phone.</p>
+        <div class="stat" id="firered-stat"></div>
+        <a class="go" href="pokefirered-x/">What it adds and its changelog →</a>
+      </article>
+      <article class="project heartgold">
+        <div class="shots">
+          <img src="pokeheartgold-x/img/ds/battle-commands.png" alt="A battle as the DS shows it: the scene on top, FIGHT, BAG, RUN and POKéMON on the bottom screen" width="256" height="384" loading="lazy">
+          <span class="arrow" aria-hidden="true">→</span>
+          <img src="pokeheartgold-x/img/one/battle-commands-1.png" alt="The same battle on one screen, the four buttons beside the text box" width="256" height="192" loading="lazy">
+        </div>
+        <h3>pokeheartgold-x</h3>
+        <div class="what">Pokémon HeartGold · Windows</div>
+        <p>HeartGold made playable on one screen, the way the Game Boy Advance games are played: every screen the DS
+        splits over its two screens is drawn again for one.</p>
+        <div class="stat" id="heartgold-stat"></div>
+        <a class="go" href="pokeheartgold-x/">The progress, screen by screen →</a>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <p>Race videos by A2RL, played from YouTube. Results from <a href="https://a2rl.io/autonomous-drone-race">A2RL</a>
+    and <a href="https://www.industriales.upm.es/noticias/el-grupo-cvar-upm-entre-los-mejores-del-mundo-en-la-competicion-internacional-a2rl-de-vuelo-autonomo/">UPM</a>.</p>
+  </footer>
+</div>
+
+<script>
+// A video's thumbnail is a link to YouTube; a plain click swaps it for the player instead
+document.addEventListener("click", e => {
+  const a = e.target.closest("a.player");
+  if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  const f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/" + a.dataset.id + "?autoplay=1&rel=0";
+  f.title = a.getAttribute("aria-label").replace(/^Play: /, "");
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.allowFullscreen = true;
+  const box = document.createElement("div");
+  box.className = "player";
+  box.appendChild(f);
+  a.replaceWith(box);
+});
+
+// Each project's own page data: FireRed's current version, HeartGold's screens done
+function getJSON(url) {
+  return fetch(url, { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+}
+
+getJSON("pokefirered-x/changelog.json").then(d => {
+  const latest = Object.values(d.versions).sort((a, b) => (b.order || 0) - (a.order || 0))[0];
+  if (!latest) return;
+  const stat = document.getElementById("firered-stat");
+  const line = document.createElement("span");
+  line.append("Current version ", Object.assign(document.createElement("b"), { textContent: "v" + latest.version }));
+  stat.appendChild(line);
+}).catch(() => {});
+
+getJSON("pokeheartgold-x/progress.json").then(d => {
+  const total = d.screens.length, done = d.screens.filter(s => s.status === "done").length;
+  if (!total) return;
+  const stat = document.getElementById("heartgold-stat");
+  const line = document.createElement("span");
+  line.append(Object.assign(document.createElement("b"), { textContent: done }), " of " + total + " screens done");
+  const bar = document.createElement("div");
+  bar.className = "bar";
+  bar.setAttribute("role", "img");
+  bar.setAttribute("aria-label", done + " of " + total + " screens done");
+  bar.appendChild(Object.assign(document.createElement("span"), { style: "width:" + (100 * done / total) + "%" }));
+  stat.append(line, bar);
+}).catch(() => {});
+</script>
 </body>
 </html>
