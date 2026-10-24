@@ -1,3 +1,5 @@
-# pokefirered-x
+# rdasilva01.github.io
 
-The website of pokefirered-x, Pokémon FireRed running natively on Windows and Android: what it adds to the original game, and its changelog.
+Websites, served by GitHub Pages:
+
+- [pokefirered-x](https://rdasilva01.github.io/pokefirered-x/): Pokémon FireRed running natively on Windows and Android: what it adds to the original game, and its changelog.
