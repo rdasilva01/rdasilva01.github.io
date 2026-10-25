@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "2fb6218c1",
+   "date": "2026-10-26",
+   "order": 112,
+   "version": "1.12",
+   "id": "1.12"
+  },
+  {
    "commit": "e1a777a7e",
    "date": "2026-10-25",
    "order": 111,
@@ -663,6 +670,69 @@
    "text": "Settings › Extras › No fast-forward in battles: every battle at the game's speed, whatever its type.",
    "version": "1.11",
    "id": "c074"
+  },
+  {
+   "commit": "9d95320e4",
+   "date": "2026-10-25",
+   "kind": "changed",
+   "order": 1,
+   "text": "In Classic on map, trainers are fought right where they stand instead of in the arena.",
+   "version": "1.12",
+   "id": "c075"
+  },
+  {
+   "commit": "9d95320e4",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 2,
+   "text": "In Classic on map, gym leaders are fought in a stadium of their own: a battle hall with its court, you on the green mark, the leader on the red one, people watching from the sides.",
+   "version": "1.12",
+   "id": "c076"
+  },
+  {
+   "commit": "33ae1eba2",
+   "date": "2026-10-25",
+   "kind": "fixed",
+   "order": 3,
+   "text": "Beating a gym leader in his gym could freeze the game (64-bit and Android) or double the prize money: his long words at the end ran past the battle's text and over its settings.",
+   "version": "1.12",
+   "id": "c077"
+  },
+  {
+   "commit": "0a4474237",
+   "date": "2026-10-25",
+   "kind": "fixed",
+   "order": 4,
+   "text": "In Classic on map, a badge's fanfare plays during the leader's words, with its pause, as in a battle.",
+   "version": "1.12",
+   "id": "c078"
+  },
+  {
+   "commit": "c640ff2de",
+   "date": "2026-10-25",
+   "kind": "changed",
+   "order": 5,
+   "text": "Classic on map is the battle type at first, and No fast-forward in battles is on at first (a choice already made stays).",
+   "version": "1.12",
+   "id": "c079"
+  },
+  {
+   "commit": "5c384e61e",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 6,
+   "text": "After a battle on the map, your Pokémon evolve right there: it glows and changes back and forth between its forms with sparkles (B stops it), then learns its new moves, a fifth one through the summary.",
+   "version": "1.12",
+   "id": "c080"
+  },
+  {
+   "commit": "567df8e26",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 7,
+   "text": "Playing together, the other players' following Pokémon walk behind them on your map too, shiny or not, as they do in their game.",
+   "version": "1.12",
+   "id": "c081"
   }
  ]
 }
