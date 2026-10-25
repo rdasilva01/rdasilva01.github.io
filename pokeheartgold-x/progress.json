@@ -2125,26 +2125,44 @@
    "group": "link",
    "name": "Pokéwalker: choosing who strolls",
    "kind": "both",
-   "status": "deciding",
-   "plan": "As the PC boxes.",
-   "changed": "",
+   "status": "done",
+   "plan": "The bottom screen; once a Pokémon is picked (its question, the box faded), its details in the box's lower rows.",
+   "changed": "While choosing, the box as it is; once a Pokémon is picked, its name and level, picture, held item and markings show on a framed card of the top screen's stripes over the box's lower rows, until YES or NO.",
    "top": "The chosen Pokémon",
    "bottom": "The box to pick from, YES/NO",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "walker-pick-1.png",
+     "caption": "Choosing: the box as it is"
+    },
+    {
+     "file": "walker-pick-2.png",
+     "caption": "Picked: its details on a card over the box"
+    }
+   ]
   },
   {
    "id": "walker-route",
    "group": "link",
    "name": "Pokéwalker: a route",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The description in a box with the question and the YES/NO box under it.",
-   "changed": "",
+   "status": "done",
+   "plan": "The top screen with the bottom's question: the description moved up, the question's box under it, YES and NO much smaller where they fit.",
+   "changed": "The route's name and description (moved up) on the top screen, the question's box under them, and YES and NO as small buttons stacked at its right (touch or keys, the choice outlined in red).",
    "top": "The route and its description",
    "bottom": "Take a stroll there? YES/NO",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "walker-route-1.png",
+     "caption": "The route with its question, YES and NO small"
+    },
+    {
+     "file": "walker-route-2.png",
+     "caption": "NO chosen"
+    }
+   ]
   },
   {
    "id": "walker-link",
