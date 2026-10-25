@@ -73,13 +73,18 @@
    "group": "start",
    "name": "Title screen",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The bottom's Ho-Oh scene with the logo laid over its upper half. START or A as now.",
-   "changed": "",
+   "status": "done",
+   "plan": "The Ho-Oh scene with the logo alone (without the sunset) above Ho-Oh.",
+   "changed": "The top's logo layer is copied without its sunset, at two thirds of its size, over the Ho-Oh scene, and the camera sits a little higher so that Ho-Oh flies under it.",
    "top": "The logo, the sky and Ho-Oh flying",
    "bottom": "Ho-Oh in 3D over the clouds",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "title-1.png",
+     "caption": "The logo alone above Ho-Oh"
+    }
+   ]
   },
   {
    "id": "opening",
@@ -1084,13 +1089,18 @@
    "group": "bag",
    "name": "Apricorn Box",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The bottom screen with the description in a band.",
-   "changed": "",
+   "status": "done",
+   "plan": "Only the bottom screen, as it is.",
+   "changed": "Nothing to change: the Apricorns, their counts and CLOSE on the bottom screen; the description is left out (the colors are on the balls).",
    "top": "The box's description",
    "bottom": "The Apricorns, CLOSE",
    "tier": 3,
-   "results": []
+   "results": [
+    {
+     "file": "apricorn-box-1.png",
+     "caption": "The bottom screen, as it is"
+    }
+   ]
   },
   {
    "id": "pal-pad",
@@ -1535,26 +1545,44 @@
    "group": "services",
    "name": "Depositing",
    "kind": "both",
-   "status": "deciding",
-   "plan": "As the PC boxes.",
-   "changed": "",
+   "status": "done",
+   "plan": "As the PC boxes: only the bottom screen, the Pokémon under the cursor in the panel at the box's right.",
+   "changed": "The PC boxes' panel shows the party Pokémon under the cursor; when its actions close, the panel comes back.",
    "top": "The chosen Pokémon's details",
    "bottom": "The party and the actions",
    "tier": 2,
-   "results": []
+   "results": [
+    {
+     "file": "pc-deposit-1.png",
+     "caption": "A party Pokémon in the panel"
+    },
+    {
+     "file": "pc-deposit-2.png",
+     "caption": "Its actions take that place"
+    }
+   ]
   },
   {
    "id": "pc-items",
    "group": "services",
    "name": "Moving items",
    "kind": "both",
-   "status": "deciding",
-   "plan": "As the PC boxes.",
-   "changed": "",
+   "status": "done",
+   "plan": "As the PC boxes: the panel at the box's right, with the held item.",
+   "changed": "The panel shows the Pokémon under the cursor and, in place of the markings, the item it holds.",
    "top": "The chosen Pokémon's details",
    "bottom": "The box with its items",
    "tier": 3,
-   "results": []
+   "results": [
+    {
+     "file": "pc-items-1.png",
+     "caption": "The panel with the held item"
+    },
+    {
+     "file": "pc-items-2.png",
+     "caption": "A party Pokémon holding an Oran Berry"
+    }
+   ]
   },
   {
    "id": "mailbox",
@@ -1615,13 +1643,22 @@
    "group": "services",
    "name": "Selling",
    "kind": "both",
-   "status": "deciding",
-   "plan": "As the bag.",
-   "changed": "",
+   "status": "done",
+   "plan": "Only the bottom screen.",
+   "changed": "Nothing to change: the bag's pockets and How many to sell work on the bottom screen alone.",
    "top": "The bag",
    "bottom": "The pocket's items",
    "tier": 2,
-   "results": []
+   "results": [
+    {
+     "file": "mart-sell-1.png",
+     "caption": "The bag's pocket (the bottom screen)"
+    },
+    {
+     "file": "mart-sell-2.png",
+     "caption": "How many to sell"
+    }
+   ]
   },
   {
    "id": "relearner",
@@ -1668,13 +1705,22 @@
    "group": "minigames",
    "name": "Voltorb Flip",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The board as the base; the coins and level at its side; memo mode on a button. Buttons already work.",
-   "changed": "",
+   "status": "done",
+   "plan": "The board as the base; the level and both coin counts under the memo button, with short labels; the rules left out (Game Info explains them).",
+   "changed": "A panel under Open Memo prints the level, the total and this game's coins in the game's font, updated as cards flip; it gives way while the memo is open.",
    "top": "The level, the rules, the coins",
    "bottom": "The 5x5 board with its rows' and columns' counts",
    "tier": 3,
-   "results": []
+   "results": [
+    {
+     "file": "voltorb-flip-1.png",
+     "caption": "Level and coins under Open Memo"
+    },
+    {
+     "file": "voltorb-flip-2.png",
+     "caption": "The memo takes that place"
+    }
+   ]
   },
   {
    "id": "voltorb-memo",
