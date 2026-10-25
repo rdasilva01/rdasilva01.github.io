@@ -1857,130 +1857,180 @@
    "group": "athlon",
    "name": "Hurdle Dash",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The lanes as the base with the hurdles ahead in a strip above; a button per lane jumps (LEFT, UP, RIGHT or L, A, R).",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "While the event plays, the top (track ahead, timer) and the bottom (the runners, touched to jump) show one above the other at half size; touches on the lower half go to the touchscreen.",
    "top": "The track ahead",
    "bottom": "The three Pokémon running, tapped to jump",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "hurdle-dash-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "pennant-capture",
    "group": "athlon",
    "name": "Pennant Capture",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base, the score in a corner; the D-pad steers the chosen Pokémon, L/R switch.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The score and timer above, the field below, both at half size; touches on the field go to the touchscreen.",
    "top": "The score and timer, the Pokémon",
    "bottom": "The field: the Pokémon dragged to the flags",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "pennant-capture-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "relay-run",
    "group": "athlon",
    "name": "Relay Run",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The track as the base, the laps in a corner; A mashed runs, B switches.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The laps and timer above, the track and SWITCH below, both at half size; touches on the track go to the touchscreen.",
    "top": "The laps, the timer",
    "bottom": "The track: the runner stroked to speed up, SWITCH",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "relay-run-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "block-smash",
    "group": "athlon",
    "name": "Block Smash",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The blocks as the base, the towers' count in a corner; A mashed smashes, B switches.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The towers above, the blocks below, both at half size; touches on the blocks go to the touchscreen.",
    "top": "The towers of blocks broken",
    "bottom": "The blocks, tapped to smash",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "block-smash-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "circle-push",
    "group": "athlon",
    "name": "Circle Push",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The ring as the base; the D-pad steers, L/R switch.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The round and points above, the ring below, both at half size; touches on the ring go to the touchscreen.",
    "top": "The round and the points",
    "bottom": "The ring: the Pokémon dragged to push",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "circle-push-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "goal-roll",
    "group": "athlon",
    "name": "Goal Roll",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base; the D-pad steers, L/R switch.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The score and timer above, the field below, both at half size; touches on the field go to the touchscreen.",
    "top": "The score and timer",
    "bottom": "The field with the ball and goals",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "goal-roll-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "snow-throw",
    "group": "athlon",
    "name": "Snow Throw",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. Here both halves are the playing field: show the whole field squeezed or scrolled, a cursor aims, A throws.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The whole snow field (both halves) at half size, one above the other; touches on the lower half aim and throw.",
    "top": "The snow field and the other teams",
    "bottom": "Aiming and throwing",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "snow-throw-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "ring-drop",
    "group": "athlon",
    "name": "Ring Drop",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The ring as the base; the D-pad steers, A charges.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The points above, the ring below, both at half size; touches on the ring go to the touchscreen.",
    "top": "The points",
    "bottom": "The ring: the Pokémon pushed out",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "ring-drop-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "lamp-jump",
    "group": "athlon",
    "name": "Lamp Jump",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. Both halves are the playing field (the lamps above, the jumpers below): one tall field scrolled with the jumpers; buttons jump.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The lamps above and the jumpers below, one tall field at half size; touches on the lower half jump.",
    "top": "The lamps above",
    "bottom": "The Pokémon jumping, tapped to jump",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "lamp-jump-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "disc-catch",
    "group": "athlon",
    "name": "Disc Catch",
    "kind": "both",
-   "status": "deciding",
-   "plan": "Its play happens on the bottom screen (where the stylus works); the top keeps the score. The field as the base with the coming discs shown at its top; the D-pad steers, A jumps.",
-   "changed": "",
+   "status": "done",
+   "plan": "Both DS screens stacked at half size in the middle, black at the sides (all ten Pokéathlon events).",
+   "changed": "The discs coming above, the field below, both at half size; touches on the field move and jump.",
    "top": "The discs coming",
    "bottom": "The Pokémon moved to catch them",
    "tier": 4,
-   "results": []
+   "results": [
+    {
+     "file": "disc-catch-1.png",
+     "caption": "Both screens stacked at half size"
+    }
+   ]
   },
   {
    "id": "athlon-results",
