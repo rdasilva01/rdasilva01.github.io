@@ -1415,13 +1415,22 @@
    "group": "pokegear",
    "name": "Pokégear (opens on the phone)",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The bottom screen with the clock in its header bar.",
-   "changed": "",
+   "status": "done",
+   "plan": "The phone's list two contacts shorter, its arrow buttons fitted to it, and the clock (time and day) in the space under it.",
+   "changed": "The list is four contacts high (the D-pad scrolls past the fourth, LEFT/RIGHT and the arrow buttons move a page of four), the arrow buttons are as high as it, and the clock and the day sit under it. A contact's menu and a call's panel open over that place as before.",
    "top": "The clock and the day",
    "bottom": "The phone's contacts, the apps' icons along the bottom",
    "tier": 2,
-   "results": []
+   "results": [
+    {
+     "file": "gear-1.png",
+     "caption": "Four contacts, the clock under them"
+    },
+    {
+     "file": "gear-2.png",
+     "caption": "Scrolled down (keys or the arrows)"
+    }
+   ]
   },
   {
    "id": "gear-map",
@@ -1500,13 +1509,26 @@
    "group": "services",
    "name": "PC boxes",
    "kind": "both",
-   "status": "deciding",
-   "plan": "The box as the base, as in FireRed's PC; the chosen Pokémon's picture, name and level in a side panel, its details on a button.",
-   "changed": "",
+   "status": "done",
+   "plan": "As FireRed's PC: the Pokémon under the cursor in a panel beside the box (name, gender, level, types, picture, markings); nature, ability and item on SUMMARY.",
+   "changed": "In MOVE, DEPOSIT and WITHDRAW the panel shows at the box's right while the cursor is on a Pokémon (both types for two-type Pokémon), and gives way to the actions, the markings, the moves, the box menu, the wallpapers and the YES/NO. MOVE ITEMS keeps the bottom screen as it is (its top screen shows the item).",
    "top": "The chosen Pokémon's details",
    "bottom": "The box and the party, the actions",
    "tier": 2,
-   "results": []
+   "results": [
+    {
+     "file": "pc-boxes-1.png",
+     "caption": "MOVE: the Pokémon under the cursor at the right"
+    },
+    {
+     "file": "pc-boxes-2.png",
+     "caption": "DEPOSIT: a party Pokémon, two types"
+    },
+    {
+     "file": "pc-boxes-3.png",
+     "caption": "Its actions take that place"
+    }
+   ]
   },
   {
    "id": "pc-deposit",
@@ -1557,26 +1579,36 @@
    "group": "services",
    "name": "Buying",
    "kind": "both",
-   "status": "deciding",
-   "plan": "FireRed's mart: the list at the right, the description at the bottom, the money in a corner.",
-   "changed": "",
+   "status": "done",
+   "plan": "Only the bottom screen; the item's description appears once an item is picked with A (How many?).",
+   "changed": "Nothing to change here: the bottom screen alone shows the items, prices, money and CANCEL. The description goes on How many?.",
    "top": "The map, the item's picture and description",
    "bottom": "The items and prices, the money",
    "tier": 1,
-   "results": []
+   "results": [
+    {
+     "file": "mart-buy-1.png",
+     "caption": "The bottom screen alone"
+    }
+   ]
   },
   {
    "id": "mart-count",
    "group": "services",
    "name": "How many?",
    "kind": "both",
-   "status": "deciding",
-   "plan": "A small count box beside the list, as on the GBA.",
-   "changed": "",
+   "status": "done",
+   "plan": "Only the bottom screen: the item's description (three lines, as the top draws them) where the item's box was, and the item's box a little smaller in the free corner beside BUY.",
+   "changed": "How many? shows the description in a framed box above the count, and the item (icon, name, price) beside BUY. The YES/NO after BUY keeps the game's own layout (the description would cover its buttons).",
    "top": "The item's description",
    "bottom": "How many, the total, the bag's count",
    "tier": 1,
-   "results": []
+   "results": [
+    {
+     "file": "mart-count-1.png",
+     "caption": "The description in the item's place, the item beside BUY"
+    }
+   ]
   },
   {
    "id": "mart-sell",
