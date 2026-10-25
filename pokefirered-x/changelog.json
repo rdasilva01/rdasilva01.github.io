@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "e1a777a7e",
+   "date": "2026-10-25",
+   "order": 111,
+   "version": "1.11",
+   "id": "1.11"
+  },
+  {
    "commit": "b23a09224",
    "date": "2026-10-24",
    "order": 110,
@@ -593,6 +600,69 @@
    "text": "The cross D-pad is drawn sharper, with a thinner edge and slightly rounded corners, and is bigger and a little closer to the picture by default.",
    "version": "1.10",
    "id": "c067"
+  },
+  {
+   "commit": "369c22284",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 6,
+   "text": "A trainer battle started in a cave is fought in a cave arena (rock walls, blocks of rock and piles of stones to hide behind, craters) instead of the forest.",
+   "version": "1.11",
+   "id": "c068"
+  },
+  {
+   "commit": "369c22284",
+   "date": "2026-10-25",
+   "kind": "fixed",
+   "order": 7,
+   "text": "FLASH lighting a dark cave went off after a trainer battle in the arena; it now stays on.",
+   "version": "1.11",
+   "id": "c069"
+  },
+  {
+   "commit": "6140f7376",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 1,
+   "text": "A new battle type, Classic on map (Settings › Extras › Battle type): the game's own battle by turns, fought right on the map with the real-time battles' looks. Everything works as in a battle: the bag, the party, catching and nicknames, learning moves, double battles aimed at a foe, evolving after.",
+   "version": "1.11",
+   "id": "c070"
+  },
+  {
+   "commit": "fb1904bbb",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 2,
+   "text": "In Classic on map, a battle's first words, a fainted foe and the EXP gained pop up on the map and go away by themselves (the EXP in blue beside your Pokémon).",
+   "version": "1.11",
+   "id": "c071"
+  },
+  {
+   "commit": "13cfc7b7c",
+   "date": "2026-10-25",
+   "kind": "changed",
+   "order": 3,
+   "text": "Classic clear is the look battles on the map start with.",
+   "version": "1.11",
+   "id": "c072"
+  },
+  {
+   "commit": "c02b9bb34",
+   "date": "2026-10-25",
+   "kind": "changed",
+   "order": 4,
+   "text": "Fast-forward works in battles of every type; it used to wait during real-time battles.",
+   "version": "1.11",
+   "id": "c073"
+  },
+  {
+   "commit": "c02b9bb34",
+   "date": "2026-10-25",
+   "kind": "added",
+   "order": 5,
+   "text": "Settings › Extras › No fast-forward in battles: every battle at the game's speed, whatever its type.",
+   "version": "1.11",
+   "id": "c074"
   }
  ]
 }
