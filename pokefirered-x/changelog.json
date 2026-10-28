@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "4a3da334a",
+   "date": "2026-10-28",
+   "order": 115,
+   "version": "1.15",
+   "id": "1.15"
+  },
+  {
    "commit": "a82471e2b",
    "date": "2026-10-28",
    "order": 114,
@@ -844,6 +851,24 @@
    "text": "Hitmontop Roulette in the Game Corner (the right wall's two lower machines): a casino's European roulette with HITMONTOP spinning round the wheel for the ball, every casino bet at its odds, and the last 60 numbers with how often each kind came.",
    "version": "1.14",
    "id": "c091"
+  },
+  {
+   "commit": "33087d92f",
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 1,
+   "text": "Settings > Extras > Hatch in the PC: an egg that's making sounds (about to hatch) gets HATCH in the PC's menu and hatches right there, in a box or in your party.",
+   "version": "1.15",
+   "id": "c092"
+  },
+  {
+   "commit": "08442907a",
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 2,
+   "text": "Settings > Extras > EXP. SHARE for all: USE the EXP. SHARE in the bag to turn it on or off. On, as in the new games, every Pokémon that fought gets all the EXP. and the rest of your team half, in every kind of battle.",
+   "version": "1.15",
+   "id": "c093"
   }
  ]
 }
