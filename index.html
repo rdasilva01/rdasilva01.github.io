@@ -440,16 +440,18 @@ footer a { color: inherit; }
       </article>
       <article class="project heartgold">
         <div class="shots">
-          <img src="pokeheartgold-x/img/ds/battle-commands.png" alt="A battle as the DS shows it: the scene on top, FIGHT, BAG, RUN and POKéMON on the bottom screen" width="256" height="384" loading="lazy">
+          <img src="pokeheartgold-x/one-screen/img/ds/battle-commands.png" alt="A battle as the DS shows it: the scene on top, FIGHT, BAG, RUN and POKéMON on the bottom screen" width="256" height="384" loading="lazy">
           <span class="arrow" aria-hidden="true">→</span>
-          <img src="pokeheartgold-x/img/one/battle-commands-1.png" alt="The same battle on one screen, the four buttons beside the text box" width="256" height="192" loading="lazy">
+          <img src="pokeheartgold-x/one-screen/img/one/battle-commands-1.png" alt="The same battle on one screen, the four buttons beside the text box" width="256" height="192" loading="lazy">
         </div>
         <h3>pokeheartgold-x</h3>
-        <div class="what">Pokémon HeartGold · Windows</div>
-        <p>HeartGold made playable on one screen, the way the Game Boy Advance games are played: every screen the DS
-        splits over its two screens is drawn again for one.</p>
+        <div class="what">Pokémon HeartGold · Windows and Android</div>
+        <p>HeartGold playable on one screen, the way the Game Boy Advance games are played: every screen the DS splits
+        over its two screens drawn again for one, with touch buttons, fast-forward, and the DS's wireless and
+        Pokéwalker.</p>
         <div class="stat" id="heartgold-stat"></div>
-        <a class="go" href="pokeheartgold-x/">The progress, screen by screen →</a>
+        <a class="go" href="pokeheartgold-x/">What it adds and its changelog →</a>
+        <a class="go" href="pokeheartgold-x/one-screen/">Every screen, on the DS and on one →</a>
       </article>
       <article class="project black">
         <div class="minimap" id="black-map" role="img" aria-label="The game's modules, coloured by how much of each is matching C"></div>
@@ -487,33 +489,40 @@ document.addEventListener("click", e => {
   a.replaceWith(box);
 });
 
-// Each project's own page data: FireRed's current version, HeartGold's screens done, Black's code matched
+// Each project's own page data: FireRed's and HeartGold's current versions, HeartGold's screens done, Black's code matched
 function getJSON(url) {
   return fetch(url, { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
 }
 
-getJSON("pokefirered-x/changelog.json").then(d => {
+// A changelog's newest version as a "Current version vX" line (null when there's none)
+function versionLine(d) {
   const latest = Object.values(d.versions).sort((a, b) => (b.order || 0) - (a.order || 0))[0];
-  if (!latest) return;
-  const stat = document.getElementById("firered-stat");
+  if (!latest) return null;
   const line = document.createElement("span");
   line.append("Current version ", Object.assign(document.createElement("b"), { textContent: "v" + latest.version }));
-  stat.appendChild(line);
+  return line;
+}
+
+getJSON("pokefirered-x/changelog.json").then(d => {
+  const line = versionLine(d);
+  if (line) document.getElementById("firered-stat").appendChild(line);
 }).catch(() => {});
 
-getJSON("pokeheartgold-x/progress.json").then(d => {
-  const total = d.screens.length, done = d.screens.filter(s => s.status === "done").length;
-  if (!total) return;
+Promise.all([getJSON("pokeheartgold-x/changelog.json").catch(() => null), getJSON("pokeheartgold-x/one-screen/progress.json").catch(() => null)]).then(([log, d]) => {
   const stat = document.getElementById("heartgold-stat");
+  const version = log && versionLine(log);
+  if (version) stat.appendChild(version);
+  const total = d ? d.screens.length : 0, done = d ? d.screens.filter(s => s.status === "done").length : 0;
+  if (!total) return;
   const line = document.createElement("span");
-  line.append(Object.assign(document.createElement("b"), { textContent: done }), " of " + total + " screens done");
+  line.append(Object.assign(document.createElement("b"), { textContent: done }), " of " + total + " screens done for one screen");
   const bar = document.createElement("div");
   bar.className = "bar";
   bar.setAttribute("role", "img");
   bar.setAttribute("aria-label", done + " of " + total + " screens done");
   bar.appendChild(Object.assign(document.createElement("span"), { style: "width:" + (100 * done / total) + "%" }));
   stat.append(line, bar);
-}).catch(() => {});
+});
 getJSON("pokeblack/progress.json").then(d => {
   const t = d.total, share = 100 * t.code_matched / t.code, done = 100 * t.code_complete / t.code;
   const stat = document.getElementById("black-stat");

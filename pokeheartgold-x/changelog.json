@@ -1,0 +1,140 @@
+{
+ "versions": [
+  {
+   "date": "2026-10-28",
+   "order": 100,
+   "version": "1.0",
+   "id": "1.0"
+  }
+ ],
+ "changes": [
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 1,
+   "text": "HeartGold running natively on Windows, 32 and 64-bit: the DS's own sound driver plays the music, and its 3D is drawn on the PC.",
+   "version": "1.0",
+   "id": "c001"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 2,
+   "text": "Android: the same 64-bit game as a phone app.",
+   "version": "1.0",
+   "id": "c002"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 3,
+   "text": "One screen (MENU › ONE SCREEN): every screen of the game drawn again for a single screen; the start menu, every YES/NO, the scripts' choices and the battle's commands as buttons over the picture.",
+   "version": "1.0",
+   "id": "c003"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 4,
+   "text": "One screen: what the other screen held comes along (an item's description, whose name you're typing, the clock, a place's name), and holding Space shows the other DS screen.",
+   "version": "1.0",
+   "id": "c004"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 5,
+   "text": "One screen: choosing a starter in Elm's lab shows the Pokémon in a bubble over its ball, with Elm's words.",
+   "version": "1.0",
+   "id": "c005"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 6,
+   "text": "The D-pad pen: the D-pad moves a pen on the screens you draw on (the signature, the scratch cards, the Alph puzzles, Ball Capsule seals).",
+   "version": "1.0",
+   "id": "c006"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 7,
+   "text": "Touch buttons: a D-pad, the DS's buttons, the MENU and fast-forward; MENU › TOUCH BUTTONS moves and sizes them and sets the D-pad's kind, how see-through they are and the vibration.",
+   "version": "1.0",
+   "id": "c007"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 8,
+   "text": "Fast-forward (F, Tab held, or the >> button) at x1.5, x2, x3, x4 or as fast as it goes (MENU › FF SPEED); the music keeps playing and speeds up with it.",
+   "version": "1.0",
+   "id": "c008"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 9,
+   "text": "The FPS counter (MENU › FPS COUNTER).",
+   "version": "1.0",
+   "id": "c009"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 10,
+   "text": "Both DS screens, laid out one above the other, side by side, or one big with the other in its corner (F10, MENU › SCREENS).",
+   "version": "1.0",
+   "id": "c010"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 11,
+   "text": "The DS's wireless over the network: the Union Room with other copies on this PC or the same Wi-Fi, to greet, trade and battle.",
+   "version": "1.0",
+   "id": "c011"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 12,
+   "text": "Playing online: the Link window (F2) gives an online code to join a friend's game, without opening ports, and keeps a friend list.",
+   "version": "1.0",
+   "id": "c012"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 13,
+   "text": "The Pokéwalker as a program of its own on Windows: send a Pokémon on a stroll and bring it back with its steps, watts and what it found.",
+   "version": "1.0",
+   "id": "c013"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 14,
+   "text": "The GBA slot on Windows: Pal Park's migration from a GBA game's save, FireRed for PC's included.",
+   "version": "1.0",
+   "id": "c014"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 15,
+   "text": "The microphone on Windows: Chatot's Chatter and the hidden microphone test hear the PC's microphone.",
+   "version": "1.0",
+   "id": "c015"
+  },
+  {
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 16,
+   "text": "Settings, the touch buttons and the friends kept in an .ini next to the save.",
+   "version": "1.0",
+   "id": "c016"
+  }
+ ]
+}

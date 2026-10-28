@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HeartGold on One Screen</title>
+<title>HeartGold Port Changelog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: one reading column; the overall progress, how it's done, then every screen of the game by area, each
-   as the DS showed it (both screens) beside how it looks on one screen now */
+/* Layout: one reading column; first what the port adds to HeartGold (groups of pictures, then a plain list), then the changelog: the next version's changes, then each version newest first */
 :root {
   --bg: #f1efe8;
   --panel: #ffffff;
@@ -18,14 +17,14 @@
   --accent: #a87a10;
   --accent-soft: #f6ecd0;
   --frame: #2a2f38;
-  --done: #23804a;
-  --done-bg: #e0f1e6;
-  --doing: #b5660b;
-  --doing-bg: #f8e6d0;
-  --deciding: #7a4fb8;
-  --deciding-bg: #ece3f8;
-  --planned: #646b78;
-  --planned-bg: #e8e9ed;
+  --added: #23804a;
+  --added-bg: #e0f1e6;
+  --changed: #9a5a0c;
+  --changed-bg: #f6e4cf;
+  --fixed: #275fb3;
+  --fixed-bg: #dfe8f7;
+  --removed: #646b78;
+  --removed-bg: #e7e9ee;
   --display: "Pixelify Sans", "Courier New", monospace;
   --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
@@ -34,158 +33,202 @@
   :root:not([data-theme="light"]) {
     --bg: #14151a; --panel: #1d1f26; --ink: #e8e6e0; --muted: #a3a29b; --line: #34353d; --frame: #0b0c10;
     --accent: #e7b84a; --accent-soft: #3a2f16;
-    --done: #63d08b; --done-bg: #183020; --doing: #f0a650; --doing-bg: #3a2814;
-    --deciding: #b99af0; --deciding-bg: #2b2140; --planned: #a6aebb; --planned-bg: #272a32;
+    --added: #63d08b; --added-bg: #183020; --changed: #f0a650; --changed-bg: #3a2814;
+    --fixed: #7eaaf2; --fixed-bg: #17243a; --removed: #a6aebb; --removed-bg: #272a32;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #14151a; --panel: #1d1f26; --ink: #e8e6e0; --muted: #a3a29b; --line: #34353d; --frame: #0b0c10;
   --accent: #e7b84a; --accent-soft: #3a2f16;
-  --done: #63d08b; --done-bg: #183020; --doing: #f0a650; --doing-bg: #3a2814;
-  --deciding: #b99af0; --deciding-bg: #2b2140; --planned: #a6aebb; --planned-bg: #272a32;
+  --added: #63d08b; --added-bg: #183020; --changed: #f0a650; --changed-bg: #3a2814;
+  --fixed: #7eaaf2; --fixed-bg: #17243a; --removed: #a6aebb; --removed-bg: #272a32;
   color-scheme: dark;
 }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 28px 64px; margin: 0;
+  padding-block: 28px 64px;
 }
-.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 34px; }
-h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 36px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
 p { margin: 0; }
 header { display: grid; gap: 12px; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 6vw, 46px); line-height: 1.05; }
-.lede { color: var(--muted); max-width: 66ch; }
+.lede { color: var(--muted); max-width: 64ch; }
 .facts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
 .facts b { color: var(--ink); font-variant-numeric: tabular-nums; }
-
-/* The overall progress: one bar split by status */
-.meter { display: grid; gap: 8px; max-width: 760px; }
-.bar { display: flex; height: 14px; border-radius: 4px; overflow: hidden; background: var(--planned-bg); border: 1px solid var(--line); }
-.bar span { display: block; height: 100%; }
-.bar .s-done { background: var(--done); }
-.bar .s-doing { background: var(--doing); }
-.bar .s-deciding { background: var(--deciding); }
-.big { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1; }
-.big small { font-size: 0.55em; color: var(--muted); }
-
+.sections { display: flex; flex-wrap: wrap; gap: 8px; }
+.sections a { font: 600 14px var(--body); color: var(--ink); text-decoration: none; border: 1px solid var(--line); background: var(--panel); border-radius: 4px; padding: 4px 12px; }
+.sections a:hover { border-color: var(--accent); }
+.sections a.out { color: var(--accent); }
 .part-title { font-family: var(--display); font-weight: 700; font-size: clamp(24px, 4.5vw, 32px); line-height: 1.1; scroll-margin-top: 16px; }
-.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 28px; }
-.how div { display: grid; gap: 4px; align-content: start; }
-.how h3 { font-size: 16px; }
-.how p { font-size: 15px; color: var(--muted); }
+.part { display: grid; gap: 26px; }
 
-/* The filters and the jump to an area */
-.toolbar { display: grid; gap: 10px; position: sticky; top: 0; z-index: 2; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); }
-.filters, .jump { display: flex; flex-wrap: wrap; gap: 6px; }
-.filters button { font: 600 13px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
-.filters button .n { font-variant-numeric: tabular-nums; }
-.filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
-.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-.jump a { font-family: var(--mono); font-size: 12.5px; color: var(--ink); text-decoration: none; padding: 2px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+/* What's added: a group per area, its pictures as framed screens (the DS's 256x192, phones' 20:9) */
+.group { display: grid; gap: 12px; }
+.group-head { display: grid; gap: 4px; }
+.group-head h3 { font-size: 21px; font-weight: 700; }
+.group-head h3 .where { font: 500 12px var(--mono); color: var(--muted); margin-left: 8px; white-space: nowrap; }
+.group-head p { color: var(--muted); max-width: 70ch; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px 14px; }
+.cards.wide { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.card { margin: 0; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; image-rendering: pixelated; background: var(--frame); border: 3px solid var(--frame); border-radius: 4px; }
+.cards.wide .card img { aspect-ratio: 20 / 9; image-rendering: auto; }
+.card figcaption { font-size: 14px; line-height: 1.4; }
+.card figcaption b { display: block; font-size: 15px; }
+.more { font-size: 14px; color: var(--muted); max-width: 80ch; }
+.more a, .also a { color: var(--accent); }
+.also { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 28px; }
+.also h3 { font-size: 16px; margin-bottom: 4px; }
+.also ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 15px; }
+
+/* The changelog */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.jump, .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.jump a { font-family: var(--mono); font-size: 13px; color: var(--ink); text-decoration: none; padding: 2px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
 .jump a:hover { border-color: var(--accent); }
-.filters button:focus-visible, .jump a:focus-visible, .one:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-/* An area and its screens */
-#areas { display: grid; gap: 34px; }
-.area { display: grid; gap: 12px; scroll-margin-top: 110px; }
-.area-head { display: grid; gap: 2px; }
-.area-head h3 { font-size: 22px; font-weight: 700; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
-.area-head h3 .count { font: 500 12.5px var(--mono); color: var(--muted); }
-.area-head p { color: var(--muted); max-width: 72ch; font-size: 15px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 10px; align-content: start; min-width: 0; scroll-margin-top: 110px; }
-.card.flash { box-shadow: 0 0 0 3px var(--accent); }
-.pics { display: flex; align-items: center; gap: 8px; }
-.pics figure { margin: 0; display: grid; gap: 3px; justify-items: center; }
-.pics figcaption { font: 500 11px var(--mono); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
-.ds img { display: block; height: 132px; width: 88px; image-rendering: pixelated; border: 3px solid var(--frame); border-radius: 4px; background: var(--frame); }
-.arrow { color: var(--muted); font-size: 18px; }
-.one { display: block; position: relative; padding: 0; border: 0; background: none; cursor: default; }
-button.one { cursor: pointer; }
-.one img, .one .none { display: block; height: 132px; width: 176px; border-radius: 4px; }
-.one img { image-rendering: pixelated; border: 3px solid var(--done); background: var(--frame); }
-.one .none { border: 2px dashed var(--line); display: grid; place-items: center; text-align: center; padding: 8px; font-size: 13px; color: var(--muted); }
-.one .page { position: absolute; right: 6px; bottom: 6px; font: 500 11px var(--mono); color: #fff; background: rgba(0, 0, 0, 0.62); border-radius: 3px; padding: 1px 5px; }
-.text { display: grid; gap: 6px; min-width: 0; }
-.title { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
-.title h4 { font-size: 16.5px; line-height: 1.25; }
-.chip { font: 700 11.5px var(--body); letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 8px; border-radius: 3px; }
-.chip.s-done { color: var(--done); background: var(--done-bg); }
-.chip.s-doing { color: var(--doing); background: var(--doing-bg); }
-.chip.s-deciding { color: var(--deciding); background: var(--deciding-bg); }
-.chip.s-planned, .chip.s-skip { color: var(--planned); background: var(--planned-bg); }
-.kind { font: 500 11.5px var(--mono); color: var(--muted); }
-.desc { font-size: 14.5px; line-height: 1.45; }
-.desc .lbl { font-weight: 700; color: var(--muted); }
-.cap { font-size: 13.5px; color: var(--muted); }
-.empty, .status { color: var(--muted); font-size: 14px; }
-footer { color: var(--muted); font-size: 13px; }
-@media (max-width: 640px) {
-  .filters, .jump { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
-  .filters button, .jump a { white-space: nowrap; flex: none; }
-}
-@media (max-width: 420px) {
-  .ds img { height: 108px; width: 72px; }
-  .one img, .one .none { height: 108px; width: 144px; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .card.flash { transition: box-shadow 0.6s; }
-}
+.jump a.next { color: var(--accent); border-color: var(--accent); }
+.filters button { font: 600 13px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+.filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
+.filters button:focus-visible, .jump a:focus-visible, .sections a:focus-visible, a.commit:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+#log { display: grid; gap: 22px; }
+.release { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; display: grid; gap: 14px; scroll-margin-top: 16px; }
+.release.next { border: 2px dashed var(--accent); background: var(--accent-soft); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.head h2 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; }
+.head h2 small { font-size: 0.55em; color: var(--muted); margin-right: 2px; }
+.release.next .head h2 { color: var(--accent); font-size: 26px; }
+.head time, .head .note { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.head .tally { margin-left: auto; font-size: 13px; color: var(--muted); }
+.kind { display: grid; gap: 6px; }
+.kind h4 { margin: 0; justify-self: start; font: 700 12px var(--body); letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 8px; border-radius: 3px; }
+.k-added h4 { color: var(--added); background: var(--added-bg); }
+.k-changed h4 { color: var(--changed); background: var(--changed-bg); }
+.k-fixed h4 { color: var(--fixed); background: var(--fixed-bg); }
+.k-removed h4 { color: var(--removed); background: var(--removed-bg); }
+.kind ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.kind li { min-width: 0; }
+.commit { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; margin-left: 6px; white-space: nowrap; }
+a.commit { border-bottom: 1px dotted var(--muted); }
+a.commit:hover { color: var(--accent); border-color: var(--accent); }
+.empty { color: var(--muted); font-size: 14px; }
+.status { font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">pokeheartgold-x · Windows</div>
-    <h1>HeartGold on One Screen</h1>
-    <p class="lede">Pokémon HeartGold running natively on Windows, being made playable on a single touchscreen, the way the
-    Game Boy Advance games are played: every screen the DS splits over its two screens is drawn again for one. This page
-    follows that work, screen by screen.</p>
-    <div class="meter" aria-live="polite">
-      <div class="big"><span id="done-n">-</span> <small>of <span id="total-n">-</span> screens done</small></div>
-      <div class="bar" id="bar" role="img" aria-label="Progress"></div>
-      <div class="facts" id="facts"></div>
+    <div class="eyebrow">pokeheartgold-x · Windows and Android</div>
+    <h1>HeartGold Port Changelog</h1>
+    <p class="lede">Pokémon HeartGold running natively on Windows and Android, the whole game playable on one screen. First, what the port brings compared to the DS game; then every change, version by version.</p>
+    <div class="facts" aria-live="polite">
+      <span>Current version <b id="current">-</b></span>
+      <span><b id="next-count">0</b> unreleased</span>
+      <span><b id="total">0</b> changes in all</span>
     </div>
+    <nav class="sections" aria-label="On this page">
+      <a href="#added">What's added</a>
+      <a href="#changelog">Changelog</a>
+      <a class="out" href="one-screen/">One screen, screen by screen &rarr;</a>
+    </nav>
   </header>
 
-  <section class="part" aria-labelledby="how">
-    <h2 class="part-title" id="how">How it works</h2>
-    <div class="how" style="margin-top: 14px">
-      <div><h3>One picture at a time</h3><p>The window shows one of the DS's two screens: the map and the battles from the top one,
-        the menus and apps from the bottom one. The screen you look at is always the one you can touch.</p></div>
-      <div><h3>Menus as buttons</h3><p>The start menu, every YES/NO, the scripts' choices and the battle's commands and moves
-        become buttons drawn on the top screen in the look of HeartGold's bottom-screen buttons, for touch, D-pad or mouse.</p></div>
-      <div><h3>The top screen comes along</h3><p>What the other screen held is brought over: an item's description, a held
-        item, whose name you're typing, the clock, a place's name. Pages the DS showed side by side become pages you turn.</p></div>
-      <div><h3>The other screen, any time</h3><p>Holding Space shows the other DS screen, for whatever isn't drawn again yet.</p></div>
+  <section class="part" aria-labelledby="added">
+    <h2 class="part-title" id="added">What's added to HeartGold</h2>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>One screen <span class="where">MENU › ONE SCREEN</span></h3>
+        <p>The DS splits HeartGold over two screens. Here every screen of the game is drawn again for one, the way the Game Boy Advance games are played: on a phone held sideways, or in a window.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/os-menu.png" alt="Cherrygrove City with the start menu as a column of buttons on the right: POKéDEX, POKéMON, BAG, POKéGEAR, the trainer's name, SAVE, OPTIONS, EXIT" width="512" height="384" loading="lazy"><figcaption><b>Menus as buttons</b>The start menu, every YES/NO and the scripts' choices float over the picture, in the look of HeartGold's touch screen.</figcaption></figure>
+        <figure class="card"><img src="img/os-battle.png" alt="A wild Sentret in battle with Cyndaquil, FIGHT, BAG, POKéMON and RUN beside the words What will CYNDAQUIL do?" width="512" height="384" loading="lazy"><figcaption><b>Battles</b>FIGHT, BAG, POKéMON and RUN beside the battle's words; the moves with their PP and types.</figcaption></figure>
+        <figure class="card"><img src="img/os-starter.png" alt="Elm's three Poké Balls, Totodile in a round bubble over the one chosen, the words TOTODILE, the Water-type Pokémon, is in this Poké Ball!" width="512" height="384" loading="lazy"><figcaption><b>The top screen comes along</b>What the other screen showed is brought over: here the starter in a bubble over its ball, with Elm's words.</figcaption></figure>
+        <figure class="card"><img src="img/os-pc.png" alt="A PC box with Pikachu chosen, its picture, level and type in a panel beside the box" width="512" height="384" loading="lazy"><figcaption><b>The PC</b>The boxes with the chosen Pokémon beside them, as the top screen had it.</figcaption></figure>
+        <figure class="card"><img src="img/os-pokegear.png" alt="The Pokégear's map of Johto zoomed on Route 29, the clock at the top, the Pokégear's buttons along the bottom" width="512" height="384" loading="lazy"><figcaption><b>The Pokégear</b>The map, the phone and the radio with the clock above them.</figcaption></figure>
+        <figure class="card"><img src="img/os-voltorb.png" alt="Voltorb Flip: the board of cards with each row's and column's points and Voltorbs, the memo button and the coins on the right" width="512" height="384" loading="lazy"><figcaption><b>The games too</b>Voltorb Flip, the Pokéathlon, the scratch cards and the Alph puzzles, all on one screen.</figcaption></figure>
+      </div>
+      <p class="more">Also: holding Space shows the other DS screen; the D-pad moves a pen for the screens you draw on (the signature, the scratch cards, the Alph puzzles, Ball Capsule seals); a touch stays with the picture it began on. Every screen of the game, as the DS showed it and as it looks on one screen, is on <a href="one-screen/">One screen, screen by screen</a>.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>On the phone <span class="where">MENU › TOUCH BUTTONS</span></h3>
+        <p>Touch buttons beside the picture, made your own.</p>
+      </div>
+      <div class="cards wide">
+        <figure class="card"><img src="img/phone-battle.png" alt="The phone screen: a battle in the middle, a cross D-pad, L, SELECT and MENU on the left, R, START, X, Y, A, B and fast-forward on the right, 60 FPS in the corner" width="960" height="432" loading="lazy"><figcaption><b>Touch buttons</b>A cross D-pad or a round pad with 4 or 8 directions, the DS's buttons, the MENU and fast-forward, with a little vibration for each press.</figcaption></figure>
+        <figure class="card"><img src="img/phone-menu.png" alt="The MENU over the game: play together, screens, one screen, fast-forward, FF speed, FPS counter, touch buttons" width="960" height="432" loading="lazy"><figcaption><b>The MENU</b>Playing together, one screen or two, fast-forward and its speed, the FPS counter and the touch buttons.</figcaption></figure>
+        <figure class="card"><img src="img/phone-editor.png" alt="The touch button editor over a battle: the A button framed after being moved, the toolbar with opacity, the D-pad's kind, vibration and size" width="960" height="432" loading="lazy"><figcaption><b>Your layout</b>Move each button, make it bigger or smaller, and set how see-through they are and how strong the vibration is.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head">
+        <h3>The DS's other parts <span class="where">Link window (F2)</span></h3>
+        <p>What the DS had besides its screens: the wireless, the Pokéwalker, the GBA slot and the microphone.</p>
+      </div>
+      <div class="cards">
+        <figure class="card"><img src="img/ds-unionroom.png" alt="The Union Room: another player in the green room, the list of GREET, DRAW, BATTLE, TRADE, RECORDS, SPIN and CANCEL" width="512" height="384" loading="lazy"><figcaption><b>The wireless</b>The Union Room's trades and battles with players on the same Wi-Fi, or online with a code, without opening ports.</figcaption></figure>
+        <figure class="card"><img src="img/ds-walker.png" alt="Choosing the Refreshing Field route for a stroll, with Yes and No" width="512" height="384" loading="lazy"><figcaption><b>The Pokéwalker</b>A program of its own on Windows: send a Pokémon on a stroll and bring it back with its steps, watts and what it found.</figcaption></figure>
+        <figure class="card"><img src="img/ds-palpark.png" alt="The migration screen: six Pokémon from a GBA game's box to choose from" width="512" height="384" loading="lazy"><figcaption><b>The GBA slot</b>Pal Park's migration from a GBA game's save on Windows, FireRed for PC's included.</figcaption></figure>
+        <figure class="card"><img src="img/ds-mic.png" alt="Chatot in a frame: Press the Next button, then speak into the microphone." width="512" height="384" loading="lazy"><figcaption><b>The microphone</b>Chatot's Chatter learns what you say into the PC's microphone.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="also">
+      <div>
+        <h3>The program</h3>
+        <ul>
+          <li>Windows (32 and 64-bit) and Android</li>
+          <li>Fast-forward at x1.5, x2, x3, x4 or as fast as it goes, the music speeding up with it</li>
+          <li>The FPS counter</li>
+          <li>Both screens too: one above the other, side by side, or one big (F10)</li>
+          <li>Settings, the touch buttons and the friends kept next to the save</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Playing together</h3>
+        <ul>
+          <li>The Union Room: greeting, trading, battling, drawing, the records</li>
+          <li>Online codes to join a friend, a friend list (F2)</li>
+          <li>Nintendo Wi-Fi fails as it does on a DS today, with the game's own message</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="part" aria-labelledby="screens">
-    <h2 class="part-title" id="screens">Every screen</h2>
-    <div class="toolbar" style="margin-top: 12px">
-      <div class="filters" role="group" aria-label="Show screens by status" id="filters"></div>
-      <nav class="jump" id="jump" aria-label="Areas"></nav>
+  <section class="part" aria-labelledby="changelog">
+    <h2 class="part-title" id="changelog">Changelog</h2>
+    <div class="toolbar">
+      <nav class="jump" id="jump" aria-label="Versions"></nav>
+      <div class="filters" role="group" aria-label="Show changes of a kind" id="filters">
+        <button type="button" id="f-all" data-kind="all" aria-pressed="true">All</button>
+        <button type="button" id="f-added" data-kind="added" aria-pressed="false">Added</button>
+        <button type="button" id="f-changed" data-kind="changed" aria-pressed="false">Changed</button>
+        <button type="button" id="f-fixed" data-kind="fixed" aria-pressed="false">Fixed</button>
+        <button type="button" id="f-removed" data-kind="removed" aria-pressed="false">Removed</button>
+      </div>
     </div>
-    <main id="areas" style="margin-top: 18px">
-      <p class="empty">Loading the screens. Each one appears here as the DS showed it and as it looks on one screen.</p>
+    <main id="log">
+      <p class="empty">Loading the changes. Each version appears here with its date and what it brought.</p>
     </main>
+    <p class="status" id="status"></p>
   </section>
-
-  <footer>Pictures: the port's own screenshots. On the left of each screen, both DS screens; on the right, the one screen.</footer>
 </div>
 
 <script>
-const STATUSES = [["done", "Done"], ["doing", "In progress"], ["deciding", "Being decided"], ["planned", "Planned"], ["skip", "Left as is"]];
-const STATUS_NAME = Object.fromEntries(STATUSES);
-const KIND = { top: "the top screen only", bottom: "the bottom screen only", both: "both screens merged" };
+const KINDS = [["added", "Added"], ["changed", "Changed"], ["fixed", "Fixed"], ["removed", "Removed"]];
+const REPO = "";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let data = null, filter = "all", jumped = false;
-try { filter = localStorage.getItem("onescreen-filter") || "all"; } catch (e) {}
+const versions = {}, changes = {};
+let filter = "all", jumped = false;
+try { filter = localStorage.getItem("changelog-filter") || "all"; } catch (e) {}
 
 function el(tag, attrs, children) {
   const e = document.createElement(tag);
@@ -201,125 +244,99 @@ function niceDate(iso) {
   return m ? Number(m[3]) + " " + MONTHS[Number(m[2]) - 1] + " " + m[1] : "";
 }
 
-const count = (list, status) => list.filter(s => s.status === status).length;
-
-// The one-screen picture: the first result, a button turning to the next when there are more
-function onePicture(s) {
-  if (!s.results.length) {
-    const text = s.status === "deciding" ? "Being decided" : s.status === "doing" ? "In progress" : "Not done yet";
-    return el("div", { class: "one" }, [el("div", { class: "none", text })]);
-  }
-  let i = 0;
-  const img = el("img", { src: "img/one/" + s.results[0].file, alt: s.name + " on one screen: " + s.results[0].caption, width: "256", height: "192", loading: "lazy" });
-  if (s.results.length === 1) return el("div", { class: "one" }, [img]);
-  const page = el("span", { class: "page", text: "1/" + s.results.length });
-  const button = el("button", { type: "button", class: "one", "aria-label": "Next picture of " + s.name + " (1 of " + s.results.length + ")" }, [img, page]);
-  button.addEventListener("click", () => {
-    i = (i + 1) % s.results.length;
-    img.src = "img/one/" + s.results[i].file;
-    img.alt = s.name + " on one screen: " + s.results[i].caption;
-    page.textContent = (i + 1) + "/" + s.results.length;
-    button.setAttribute("aria-label", "Next picture of " + s.name + " (" + (i + 1) + " of " + s.results.length + ")");
-    const cap = button.closest(".card").querySelector(".cap");
-    if (cap) cap.textContent = s.results[i].caption;
-  });
-  return button;
+// A change's commits (one hash, or several separated by commas): links to the repository, or
+// plain text where it can't be opened (REPO empty)
+function commitLink(hashes) {
+  const list = String(hashes || "").split(/[\s,]+/).filter(Boolean);
+  if (!list.length) return null;
+  return el("span", { class: "commits" }, list.map(h => REPO
+    ? el("a", { class: "commit", href: REPO + h, target: "_blank", rel: "noopener", text: h })
+    : el("span", { class: "commit", text: h })));
 }
 
-function card(s) {
-  const pics = el("div", { class: "pics" }, [
-    el("figure", { class: "ds" }, [
-      el("img", { src: "img/ds/" + s.id + ".png", alt: s.name + " on the DS: top screen, " + s.top + "; bottom screen, " + s.bottom, width: "256", height: "384", loading: "lazy" }),
-      el("figcaption", { text: "DS" }),
-    ]),
-    el("span", { class: "arrow", "aria-hidden": "true", text: "→" }),
-    el("figure", {}, [onePicture(s), el("figcaption", { text: "One screen" })]),
-  ]);
-  const finished = s.status === "done" || s.status === "doing";
-  const desc = finished && s.changed
-    ? el("p", { class: "desc", text: s.changed })
-    : el("p", { class: "desc" }, [el("span", { class: "lbl", text: finished ? "As planned: " : "Plan: " }), document.createTextNode(s.plan)]);
-  const text = el("div", { class: "text" }, [
-    el("div", { class: "title" }, [el("h4", { text: s.name }), el("span", { class: "chip s-" + s.status, text: STATUS_NAME[s.status] || s.status })]),
-    s.kind ? el("div", { class: "kind", text: "Needs " + KIND[s.kind] }) : null,
-    desc,
-    s.results.length ? el("p", { class: "cap", text: s.results[0].caption }) : null,
-  ]);
-  return el("article", { class: "card", id: s.id }, [pics, text]);
+function anchor(version) {
+  return version === "next" ? "unreleased" : "v" + version;
 }
 
 function render() {
-  const screens = data.screens;
-  const total = screens.length, done = count(screens, "done");
-  document.getElementById("done-n").textContent = done;
-  document.getElementById("total-n").textContent = total;
-  const bar = document.getElementById("bar");
-  bar.textContent = "";
-  for (const st of ["done", "doing", "deciding"]) {
-    const n = count(screens, st);
-    if (n) bar.appendChild(el("span", { class: "s-" + st, style: "width:" + (100 * n / total) + "%" }));
-  }
-  bar.setAttribute("aria-label", done + " of " + total + " screens done, " + count(screens, "doing") + " in progress, " + count(screens, "deciding") + " being decided");
-  const facts = document.getElementById("facts");
-  facts.textContent = "";
-  for (const [st, label] of STATUSES) {
-    const n = count(screens, st);
-    if (n) facts.appendChild(el("span", {}, [el("b", { text: String(n) }), document.createTextNode(" " + label.toLowerCase())]));
-  }
-  facts.appendChild(el("span", { text: "Updated " + niceDate(data.updated) }));
+  const log = document.getElementById("log");
+  const all = Object.values(changes);
+  const byVersion = {};
+  for (const c of all) (byVersion[c.version] = byVersion[c.version] || []).push(c);
+  const order = Object.values(versions).sort((a, b) => (b.order || 0) - (a.order || 0));
+  const next = byVersion.next || [];
 
-  const filters = document.getElementById("filters");
-  filters.textContent = "";
-  for (const [st, label] of [["all", "All"]].concat(STATUSES)) {
-    const n = st === "all" ? total : count(screens, st);
-    if (!n) continue;
-    const b = el("button", { type: "button", "aria-pressed": String(filter === st), "data-status": st }, [
-      st === "all" ? null : el("span", { class: "dot", style: "background: var(--" + (st === "skip" ? "planned" : st) + ")" }),
-      document.createTextNode(label), el("span", { class: "n", text: String(n) })]);
-    filters.appendChild(b);
-  }
+  document.getElementById("current").textContent = order.length ? "v" + order[0].version : "-";
+  document.getElementById("next-count").textContent = next.length;
+  document.getElementById("total").textContent = all.length;
+  for (const b of document.querySelectorAll("#filters button")) b.setAttribute("aria-pressed", String(b.dataset.kind === filter));
 
-  const areas = document.getElementById("areas"), jump = document.getElementById("jump");
-  areas.textContent = "";
+  const sections = [];
+  if (next.length) sections.push({ version: "next", items: next });
+  for (const v of order) sections.push({ version: v.version, date: v.date, commit: v.commit, items: byVersion[v.version] || [] });
+
+  const jump = document.getElementById("jump");
   jump.textContent = "";
-  for (const g of data.groups) {
-    const all = screens.filter(s => s.group === g.id);
-    const shown = all.filter(s => filter === "all" || s.status === filter);
-    if (!shown.length) continue;
-    jump.appendChild(el("a", { href: "#area-" + g.id, text: g.name }));
-    areas.appendChild(el("section", { class: "area", id: "area-" + g.id, "aria-label": g.name }, [
-      el("div", { class: "area-head" }, [
-        el("h3", {}, [document.createTextNode(g.name), el("span", { class: "count", text: count(all, "done") + " of " + all.length + " done" })]),
-        el("p", { text: g.blurb }),
-      ]),
-      el("div", { class: "cards" }, shown.map(card)),
-    ]));
+  for (const s of sections)
+    jump.appendChild(el("a", { href: "#" + anchor(s.version), class: s.version === "next" ? "next" : "", text: s.version === "next" ? "Unreleased" : "v" + s.version }));
+
+  log.textContent = "";
+  if (!sections.length) {
+    log.appendChild(el("p", { class: "empty", text: "No changes recorded yet." }));
+    return;
   }
-  if (!areas.children.length) areas.appendChild(el("p", { class: "empty", text: "No screen has this status. Pick All." }));
+  for (const s of sections) {
+    const isNext = s.version === "next";
+    const shown = s.items.filter(c => filter === "all" || c.kind === filter).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const counts = KINDS.map(([k, label]) => [s.items.filter(c => c.kind === k).length, label.toLowerCase()]).filter(([n]) => n);
+    const head = el("div", { class: "head" }, [
+      isNext ? el("h2", { text: "Unreleased" }) : el("h2", {}, [el("small", { text: "v" }), document.createTextNode(s.version)]),
+      isNext ? el("span", { class: "note", text: "goes into the next version" }) : (s.date ? el("time", { datetime: s.date, text: niceDate(s.date) }) : null),
+      isNext ? null : commitLink(s.commit),
+      el("span", { class: "tally", text: counts.map(([n, l]) => n + " " + l).join(" · ") }),
+    ]);
+    const section = el("section", { class: "release" + (isNext ? " next" : ""), id: anchor(s.version), "aria-label": isNext ? "Unreleased" : "Version " + s.version }, [head]);
+    if (!shown.length) section.appendChild(el("p", { class: "empty", text: "Nothing of this kind in this version." }));
+    for (const [k, label] of KINDS) {
+      const items = shown.filter(c => c.kind === k);
+      if (!items.length) continue;
+      section.appendChild(el("div", { class: "kind k-" + k }, [
+        el("h4", { text: label }),
+        el("ul", {}, items.map(c => el("li", {}, [
+          c.area ? el("span", { class: "area", text: c.area + ": " }) : null,
+          document.createTextNode(c.text || ""),
+          commitLink(c.commit),
+        ]))),
+      ]));
+    }
+    log.appendChild(section);
+  }
   if (!jumped && /^#[A-Za-z0-9._~-]+$/.test(location.hash)) {
     const target = document.getElementById(location.hash.slice(1));
-    if (target) {
-      jumped = true;
-      target.scrollIntoView();
-      target.classList.add("flash");
-      setTimeout(() => target.classList.remove("flash"), 1600);
-    }
+    if (target) { jumped = true; target.scrollIntoView(); }
   }
 }
 
 document.getElementById("filters").addEventListener("click", e => {
   const b = e.target.closest("button");
-  if (!b || !data) return;
-  filter = b.dataset.status;
-  try { localStorage.setItem("onescreen-filter", filter); } catch (err) {}
+  if (!b) return;
+  filter = b.dataset.kind;
+  try { localStorage.setItem("changelog-filter", filter); } catch (err) {}
   render();
 });
 
-fetch("progress.json", { cache: "no-cache" })
+render();
+document.getElementById("log").replaceChildren(el("p", { class: "empty", text: "Loading the changes. Each version appears here with its date and what it brought." }));
+
+fetch("changelog.json", { cache: "no-cache" })
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d => { data = d; if (filter !== "all" && !d.screens.some(s => s.status === filter)) filter = "all"; render(); })
+  .then(data => {
+    for (const v of data.versions) versions[v.id] = v;
+    for (const c of data.changes) changes[c.id] = c;
+    render();
+  })
   .catch(() => {
-    document.getElementById("areas").replaceChildren(el("p", { class: "empty", text: "Couldn't load the screens: reload the page." }));
+    document.getElementById("log").replaceChildren(el("p", { class: "empty", text: "Couldn't load the changes: reload the page." }));
   });
 </script>
 </body>
