@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "b4c6399ac",
+   "date": "2026-10-28",
+   "order": 113,
+   "version": "1.13",
+   "id": "1.13"
+  },
+  {
    "commit": "2fb6218c1",
    "date": "2026-10-26",
    "order": 112,
@@ -733,6 +740,60 @@
    "text": "Playing together, the other players' following Pokémon walk behind them on your map too, shiny or not, as they do in their game.",
    "version": "1.12",
    "id": "c081"
+  },
+  {
+   "commit": "75c0c544e",
+   "date": "2026-10-26",
+   "kind": "added",
+   "order": 1,
+   "text": "In battles on the map, a wild Pokémon you've already caught has a Poké Ball by its name, and a trainer's Pokémon show as a row of balls, grey once fainted, in every look.",
+   "version": "1.13",
+   "id": "c082"
+  },
+  {
+   "commit": "1763c02ba",
+   "date": "2026-10-26",
+   "kind": "fixed",
+   "order": 2,
+   "text": "People and item balls at the edge of the view could come back one square off after a battle on the map moved the camera (Silph Co's item balls); they stay on their squares now.",
+   "version": "1.13",
+   "id": "c083"
+  },
+  {
+   "commit": "4457ae9c7",
+   "date": "2026-10-28",
+   "kind": "fixed",
+   "order": 3,
+   "text": "After a win or a buy in the Game Corner+ (a Voltorb Flip round, a Derby race, the shop, the egg machine), the music stayed paused, and walking out of the Game Corner left the screen black for good.",
+   "version": "1.13",
+   "id": "c084"
+  },
+  {
+   "commit": "8c3d3670c",
+   "date": "2026-10-28",
+   "kind": "fixed",
+   "order": 4,
+   "text": "L and R work on the Game Corner+ screens: Voltorb Flip's marks, the prize shop's L/R and reroll, and the egg machine's ten eggs opened the HELP screen out of sight instead.",
+   "version": "1.13",
+   "id": "c085"
+  },
+  {
+   "commit": "2af63c315",
+   "date": "2026-10-28",
+   "kind": "fixed",
+   "order": 5,
+   "text": "The Game Corner+ screens' help lines fit on the screen (they were cut off at the bottom, and the shop's at the right).",
+   "version": "1.13",
+   "id": "c086"
+  },
+  {
+   "commit": "13d3584e2",
+   "date": "2026-10-28",
+   "kind": "fixed",
+   "order": 6,
+   "text": "Voltorb Flip's numbers sit clear of the edges: the line boxes' Voltorb count no longer runs past the box, and the round's coins no longer touch THIS ROUND.",
+   "version": "1.13",
+   "id": "c087"
   }
  ]
 }
