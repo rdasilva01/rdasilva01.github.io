@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "6b0bd3539",
+   "date": "2026-10-28",
+   "order": 113.1,
+   "version": "1.13.1",
+   "id": "1.13.1"
+  },
+  {
    "commit": "b4c6399ac",
    "date": "2026-10-28",
    "order": 113,
@@ -794,6 +801,24 @@
    "text": "Voltorb Flip's numbers sit clear of the edges: the line boxes' Voltorb count no longer runs past the box, and the round's coins no longer touch THIS ROUND.",
    "version": "1.13",
    "id": "c087"
+  },
+  {
+   "commit": "ecdf699d3",
+   "date": "2026-10-28",
+   "kind": "changed",
+   "order": 1,
+   "text": "The Game Corner+ games are rebalanced: games of skill pay a good player about what the slots give, games of luck give the bets back on average (Who's That Pokémon 4 coins an answer, Stat Showdown x1.3, the Shell Game's easy rounds x1.25, Plinko and Card Flip fair, the Derby's house 3% and odds up to x50).",
+   "version": "1.13.1",
+   "id": "c088"
+  },
+  {
+   "commit": "71a9b7332",
+   "date": "2026-10-28",
+   "kind": "fixed",
+   "order": 2,
+   "text": "The names over the Game Corner's machines sit inside their boxes (they hung a few pixels low).",
+   "version": "1.13.1",
+   "id": "c089"
   }
  ]
 }
