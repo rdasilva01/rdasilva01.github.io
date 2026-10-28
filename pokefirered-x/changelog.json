@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "ebec6a5e9",
+   "date": "2026-10-28",
+   "order": 116,
+   "version": "1.16",
+   "id": "1.16"
+  },
+  {
    "commit": "4a3da334a",
    "date": "2026-10-28",
    "order": 115,
@@ -869,6 +876,42 @@
    "text": "Settings > Extras > EXP. SHARE for all: USE the EXP. SHARE in the bag to turn it on or off. On, as in the new games, every Pokémon that fought gets all the EXP. and the rest of your team half, in every kind of battle.",
    "version": "1.15",
    "id": "c093"
+  },
+  {
+   "commit": "1590ebb0b",
+   "date": "2026-10-28",
+   "id": "c094",
+   "kind": "added",
+   "order": 1,
+   "text": "Game Corner+: Poké Plinko has an auto mode. START drops balls of the bet you chose as fast as they can go, until START, B or too few coins.",
+   "version": "1.16"
+  },
+  {
+   "commit": "0b2d6f194",
+   "date": "2026-10-28",
+   "id": "c095",
+   "kind": "added",
+   "order": 2,
+   "text": "Game Corner+: the slot machines have an auto mode. SELECT plays by itself at the max bet (3 coins) as fast as the machine goes, a win counted out at once; SELECT or B stop it, and so do fewer than 3 coins.",
+   "version": "1.16"
+  },
+  {
+   "commit": "f9ac9689a",
+   "date": "2026-10-28",
+   "id": "c096",
+   "kind": "changed",
+   "order": 3,
+   "text": "Game Corner+: the Shell Game pays x1.5 a right pick in its first three rounds (the first two paid x1.25), x2 after.",
+   "version": "1.16"
+  },
+  {
+   "commit": "0c86d1964",
+   "date": "2026-10-28",
+   "id": "c097",
+   "kind": "fixed",
+   "order": 4,
+   "text": "Game Corner+: Voltorb Flip's levels follow HeartGold: level 1 each time you sit down at the machine, and after a loss the level drops to the number of coin cards you flipped (the Voltorb no longer counts as one).",
+   "version": "1.16"
   }
  ]
 }
