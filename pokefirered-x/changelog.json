@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "80f2f83fa",
+   "date": "2026-10-28",
+   "order": 116.1,
+   "version": "1.16.1",
+   "id": "1.16.1"
+  },
+  {
    "commit": "ebec6a5e9",
    "date": "2026-10-28",
    "order": 116,
@@ -912,6 +919,15 @@
    "order": 4,
    "text": "Game Corner+: Voltorb Flip's levels follow HeartGold: level 1 each time you sit down at the machine, and after a loss the level drops to the number of coin cards you flipped (the Voltorb no longer counts as one).",
    "version": "1.16"
+  },
+  {
+   "commit": "e07a7fd53",
+   "date": "2026-10-28",
+   "id": "c098",
+   "kind": "changed",
+   "order": 1,
+   "text": "Game Corner+: Poké Plinko's edges pay x21 (were x16), so it wins about what the slot machines do (1.8 coins a second on auto at bet 10) instead of just giving your bets back.",
+   "version": "1.16.1"
   }
  ]
 }
