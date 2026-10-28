@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "a82471e2b",
+   "date": "2026-10-28",
+   "order": 114,
+   "version": "1.14",
+   "id": "1.14"
+  },
+  {
    "commit": "6b0bd3539",
    "date": "2026-10-28",
    "order": 113.1,
@@ -819,6 +826,24 @@
    "text": "The names over the Game Corner's machines sit inside their boxes (they hung a few pixels low).",
    "version": "1.13.1",
    "id": "c089"
+  },
+  {
+   "commit": "061a3ca5c",
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 2,
+   "text": "The girl at the left of the Game Corner's counter buys the Pokémon in your PC for money: box by box, each with her price (stronger, rarer, higher-level, better-IV Pokémon are worth more, and a shiny one is worth 50,000 more than any other); held items go back to the bag.",
+   "version": "1.14",
+   "id": "c090"
+  },
+  {
+   "commit": "78c61c4b7",
+   "date": "2026-10-28",
+   "kind": "added",
+   "order": 1,
+   "text": "Hitmontop Roulette in the Game Corner (the right wall's two lower machines): a casino's European roulette with HITMONTOP spinning round the wheel for the ball, every casino bet at its odds, and the last 60 numbers with how often each kind came.",
+   "version": "1.14",
+   "id": "c091"
   }
  ]
 }
