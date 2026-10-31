@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "209a01fa1",
+   "date": "2026-10-31",
+   "order": 101,
+   "version": "1.1",
+   "id": "1.1"
+  },
+  {
    "commit": "88f3fd6ed",
    "date": "2026-10-28",
    "order": 100,
@@ -141,6 +148,24 @@
    "text": "Settings, the touch buttons and the friends kept in an .ini next to the save.",
    "version": "1.0",
    "id": "c016"
+  },
+  {
+   "commit": "c44fcae21, 8ded86821",
+   "date": "2026-10-31",
+   "kind": "fixed",
+   "order": 1,
+   "text": "The field running very slowly on some phones (4 or 5 frames a second outside, against 25 to 30 in a battle).",
+   "version": "1.1",
+   "id": "c017"
+  },
+  {
+   "commit": "12bb59ad2",
+   "date": "2026-10-31",
+   "kind": "added",
+   "order": 2,
+   "text": "MENU › FPS COUNTER › DETAILS: a line under the counter with each frame's work in parts (the game, 3D, 2D, the picture, the sound), to see what makes a phone slow.",
+   "version": "1.1",
+   "id": "c018"
   }
  ]
 }
