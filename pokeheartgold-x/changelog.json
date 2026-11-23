@@ -1,6 +1,13 @@
 {
  "versions": [
   {
+   "commit": "cf318b540",
+   "date": "2026-11-23",
+   "order": 102,
+   "version": "1.2",
+   "id": "1.2"
+  },
+  {
    "commit": "209a01fa1",
    "date": "2026-10-31",
    "order": 101,
@@ -166,6 +173,24 @@
    "text": "MENU › FPS COUNTER › DETAILS: a line under the counter with each frame's work in parts (the game, 3D, 2D, the picture, the sound), to see what makes a phone slow.",
    "version": "1.1",
    "id": "c018"
+  },
+  {
+   "commit": "6c4ed161d",
+   "date": "2026-11-21",
+   "kind": "added",
+   "order": 1,
+   "text": "MENU › FRAME SKIP (AUTO at first): a device that falls behind skips drawing some frames, so the game keeps its speed; battles' openings and other transitions no longer crawl on slow phones.",
+   "version": "1.2",
+   "id": "c019"
+  },
+  {
+   "commit": "12bd0f181",
+   "date": "2026-11-21",
+   "kind": "added",
+   "order": 2,
+   "text": "Android: after a crash, the next start offers to share a report of what was happening.",
+   "version": "1.2",
+   "id": "c020"
   }
  ]
 }
